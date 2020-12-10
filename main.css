@@ -1,0 +1,52 @@
+.tree-bg {
+  position: absolute;
+  z-index: -1;
+}
+
+.tree > .node {
+  width: 100%;
+}
+
+.node {
+  text-align: center;
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.leaf {
+  width: 45%;
+  display: inline-block;
+}
+
+.data {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: table;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  margin: 10px auto;
+}
+
+.current > .data {
+  color: red;
+}
+
+.value-for-comparison {
+  color: blue;
+}
+
+ul, li
+{
+  display: inline-block;
+}
+
+li
+{
+  border: solid 1px white;
+  padding: 5px;
+  margin: 5px;
+  background-color: #DDDDB7;
+}
