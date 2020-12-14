@@ -11,12 +11,87 @@
         <script src="is_bst.js"></script>
     </head>
     <body>
-				<h1>Binary Search Trees</h1>
+		<h1>Binary Search Trees</h1>
 
-        <p>A <b>binary search tree</b> ...</p>
+        <p><b>Introduction to Binary Trees: </b> A binary tree is a tree in which each node has exactly two children, either of which may be empty. For example, the following is a binary tree: </p>
+		<img src=https://s3.ap-south-1.amazonaws.com/s3.studytonight.com/curious/uploads/pictures/1551968508-58156.png style="height:200px;">
+		<p> Note that some of the nodes above are drawn with <b>only one child or no children at all.</b> In these cases, one or both children are empty. Note that we always draw one child to the left and one child to the right. As a result, if one child is empty, we can always tell which child is empty and which child is not. <b>We call the two children the left child and the right child.</b>
+			We can implement a single node of a binary tree as a data structure and use it to store data. The implementation is simple, as follows:</p>
 
-        <p>A <i>binary search tree</i> ...</p>
+		<code>class Node: <br>
+				def __init__(self, val): <br>
+					self.l_child = None <br>
+					self.r_child = None <br>
+					self.data = val </code>
+		
+		<p> In a binary tree, the <b>only invariant is that each node has a value, a left child, and a right child.</b> </p>
+		<p><b>Introduction to Binary Search Trees: </b> 
+			In a binary <b>search</b> tree, there is an additional invariant. A binary search tree is ordered, so there are two factors that must hold: <br>
+			<b>A.</b> All values in the tree are unique <br>
+			<b>B.</b> Each node value is greater than all values in its left child <br>
+			<b>C.</b> Each node value is lesser than all values in its right child <br>
+			For example, here is a binary search tree: <br> 
+			<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1200px-Binary_search_tree.svg.png style="height:200px;">
+		</p>
 
+		<p><b>Why are binary search trees important? </b> The reason binary-search trees are important is that the following operations can be implemented efficiently using a BST: <b>insert a key value, determine whether a key value is in the tree, remove a key value from the tree.</b> </p>
+
+		<!-- IS BST -->
+		<p><b> Understanding the function: <u>Is Valid BST</u> </b> Understanding whether a given tree is a Binary Search Tree (BST) involves ensuring that the required invariants hold. <br>
+			Utilize the tool below to understand how the isBST function would work, then fill in the function in the specified area. </p>
+			 <nav>
+					 <ul>
+						<li><button id="isbst--move-left">Move Left</button></li>
+						<li><button id="isbst--move-right">Move Right</button></li>
+						<li><button id="isbst--move-up">Move Up</button></li>
+						<li><button id="isbst--at-leaf">At Leaf Node</button></li>
+						<li><button id="isbst--reset">Reset</button></li>
+						<li><button id="isbst--return-true">Return True - IS BST</button></li>
+						<li><button id="isbst--return-false">Return False - IS NOT BST</button></li>
+					 </ul>
+			 </nav>
+
+			 <canvas id="isbst--tree-bg" class="tree-bg">
+			 </canvas>
+
+			 <section id="isbst--tree" class="tree">
+			 </section>
+
+		<h3 id="isbst--instruction"></h3>
+		<button class="next" id="isbst--next-tree">Next Tree</button>
+		<p>Write your code here: <br></p>
+		<textarea id="isbst function" style="height:300px; width:500px;"></textarea>
+		<button id="runValid"> Run Code </button>
+
+		<!-- INSERT -->
+		<p><b> Understanding the function: <u>Insert in a BST</u> </b> Understanding how to insert into a given Binary Search Tree (BST) involves finding the correct spot for the new value. <br> Utilize the tool below to understand how the insert into BST function would work, then fill in the function in the specified area.</p>
+			 <nav>
+					 <ul>
+						<li><button id="insert--move-left">Move Left</button></li>
+						<li><button id="insert--move-right">Move Right</button></li>
+						<li><button id="insert--move-up">Move Up</button></li>
+						<li><button id="insert--at-leaf">At Leaf Node</button></li>
+						<li><button id="insert--reset">Reset</button></li>
+						<li><button id="insert--insert-right">Insert Right</button></li>
+						<li><button id="insert--insert-left">Insert Left</button></li>
+					 </ul>
+			 </nav>
+
+			 <canvas id="insert--tree-bg" class="tree-bg">
+			 </canvas>
+
+			 <section id="insert--tree" class="tree">
+			 </section>
+
+		<h3 id="insert--instruction"></h3>
+		<button class="next" id="insert--next-tree">Next Tree</button>
+		<p>Write your code here: <br></p>
+		<textarea id="insert function" style="height:300px; width:500px;"></textarea>
+		<button id="runInsert"> Run Code </button>
+
+		<!-- SEARCH -->
+		<p><b> Understanding the function: <u>Search in a BST</u> </b> Understanding how to search in a Binary Search Tree (BST) involves knowing how to efficiently traverse the tree given its invariants. <br>
+			   Utilize the tool below to understand how the search in BST function would work, then fill in the function in the specified area. </p>
 				<nav>
 						<ul>
 								<li><button id="search--move-left">Move Left</button></li>
@@ -34,8 +109,11 @@
 				<section id="search--tree" class="tree">
 				</section>
 
-      <h3 id="search--instruction"></h3>
+	  <h3 id="search--instruction"></h3>
+	  <button class="next" id="search--next-tree">Next Tree</button>
+	  <p>Write your code here: <br></p>
+	  <textarea id="search function" style="height:300px; width:500px;"></textarea>
+	  <button id="runSearch"> Run Code </button>
 
-      <button class="next" id="search--next-tree">Next Tree</button>
     </body>
 </html>
