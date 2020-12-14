@@ -411,7 +411,7 @@ function drawBackground(canvas, relative) {
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  for (let data of document.querySelectorAll(".data")) {
+  for (let data of document.querySelectorAll("#search--tree .data")) {
     const myCenter = center(data, relative);
 
     const leftNode = data.parentElement.children[1];
@@ -438,7 +438,7 @@ function drawBackground(canvas, relative) {
   }
 }
 
-window.onload = function() {
+window.addEventListener("load", function() {
   // after we're done creating everything
   let trees = [tree0, tree1, tree2, tree3, not_tree0, not_tree1, not_tree2, not_tree3];
   let index = getRandomInt(8);
@@ -471,7 +471,7 @@ window.onload = function() {
   let found = document.getElementById("search--found");
   let next = document.getElementById("search--next-tree");
 
-  for (let data of document.querySelectorAll(".data")) {
+  for (let data of document.querySelectorAll("#search--tree .data")) {
     (function(data) {
       data.addEventListener("click", function() {
         if (state === COMPARE_STATE) {
@@ -484,7 +484,7 @@ window.onload = function() {
             secondComparedData.classList.add("value-for-comparison");
 
             // TODO: this is where we actually have both values to compare
-            const currentData = document.querySelector(".current > .data");
+            const currentData = document.querySelector("#search--tree .current > .data");
             const currentValue = parseInt(currentData.innerHTML);
             const firstComparedValue = parseInt(firstComparedData.innerHTML);
             const secondComparedValue = parseInt(secondComparedData.innerHTML);
@@ -531,13 +531,13 @@ window.onload = function() {
 
   reset.addEventListener("click", function () {
     log("Resetting the Log")
-    let current = document.querySelector(".current");
+    let current = document.querySelector("#search--tree .current");
     current.classList.remove("current");
     root.classList.add("current");
   });
 
   moveLeft.addEventListener("click", function() {
-    let current = document.querySelector(".current");
+    let current = document.querySelector("#search--tree .current");
     if (!current.children[1].classList.contains("leaf")) {
       log("Moved Left");
       current.classList.remove("current");
@@ -546,7 +546,7 @@ window.onload = function() {
   });
 
   moveRight.addEventListener("click", function() {
-    let current = document.querySelector(".current");
+    let current = document.querySelector("#search--tree .current");
     if (!current.children[2].classList.contains("leaf")){
       log("Moved Right");
       current.classList.remove("current");
@@ -555,7 +555,7 @@ window.onload = function() {
   });
 
   moveUp.addEventListener("click", function() {
-    let current = document.querySelector(".current");
+    let current = document.querySelector("#search--tree .current");
     if (current.parentElement.id != "tree") {
       log("Moved Up");
       current.classList.remove("current");
@@ -563,6 +563,6 @@ window.onload = function() {
     }
   });
 
-}
+});
 
 })();
