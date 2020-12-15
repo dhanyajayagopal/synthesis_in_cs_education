@@ -464,6 +464,8 @@ window.addEventListener("load", function() {
   let insertRight = document.getElementById("insert--insert-right");
   let insertLeft = document.getElementById("insert--insert-left");
   let next = document.getElementById("insert--next-tree");
+
+  let run = document.getElementById("runInsert");
   
   for (let data of document.querySelectorAll("#insert--tree .data")) {
     (function(data) {
@@ -561,6 +563,10 @@ window.addEventListener("load", function() {
       current.classList.remove("current");
       current.parentElement.classList.add("current");
     }
+  });
+
+  run.addEventListener("click", function() {
+    written_function = document.getElementById("insert function").innerText;
   });
   
 });

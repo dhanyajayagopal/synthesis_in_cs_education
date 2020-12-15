@@ -15,6 +15,7 @@ const COMPARE_STATE = 1;
 let state = DEFAULT_STATE;
 let firstComparedData = null;
 var synthesis_log = [];
+var written_function = "";
 
 // at some point, create list and have log append to that list
 // and when restart is clicked, clear the list
@@ -469,6 +470,8 @@ window.addEventListener("load", function() {
   let returnTrue = document.getElementById("isbst--return-true");
   let returnFalse = document.getElementById("isbst--return-false");
   let next = document.getElementById("isbst--next-tree");
+
+  let run = document.getElementById("runValid");
   
   for (let data of document.querySelectorAll("#isbst--tree .data")) {
     (function(data) {
@@ -572,6 +575,10 @@ window.addEventListener("load", function() {
       current.classList.remove("current");
       current.parentElement.classList.add("current");
     }
+  });
+
+  run.addEventListener("click", function() {
+    written_function = document.getElementById("isbst function").innerText;
   });
   
 });
