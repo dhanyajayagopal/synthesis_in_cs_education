@@ -1,6 +1,5 @@
 from http.server import *
 import subprocess
-import time
 
 VALID_COMMANDS = [
     "synthesize-is-bst",
@@ -61,9 +60,9 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         command = self.path[1:]
         user_input = self.get_body()
+        if command not in VALID_COMMANDS:
+            self.respond_not_found()
         try:
-            if command not in VALID_COMMANDS:
-                self.respond_not_found()
             output = subprocess.check_output(
                 ["./" + command],
                 input=user_input,
