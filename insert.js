@@ -450,7 +450,7 @@ window.addEventListener("load", function() {
     drawBackground(canvas, { x : root.offsetLeft, y : root.offsetTop });
   }
   
-  window.onresize = redraw;
+  window.addEventListener("resize", redraw);
   
   redraw();
   
