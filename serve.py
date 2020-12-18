@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 from http.server import *
 import subprocess
+import json
 
-VALID_COMMANDS = [
+ENDPOINTS = [
     "synthesize-is-bst",
     "synthesize-insert",
     "synthesize-search",
@@ -47,7 +50,10 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def get_body(self):
-        content_len = int(self.headers.get('Content-Length'))
+        content_len_header = self.headers.get("Content-Length")
+        content_len = 0
+        if content_len_header is not None:
+            content_len = int(content_len_header)
         return self.rfile.read(content_len)
 
     # Handlers
@@ -60,19 +66,28 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         command = self.path[1:]
         user_input = self.get_body()
-        if command not in VALID_COMMANDS:
+        if command not in ENDPOINTS:
             self.respond_not_found()
         try:
-            output = subprocess.check_output(
+            output_bytes = subprocess.check_output(
                 ["./" + command],
                 input=user_input,
                 timeout=TIMEOUT
             )
-            self.respond_ok_bytes('{ "code": 0, "response": "' + output + '"}')
+            output = output_bytes.decode("utf-8")
+            self.respond_ok(json.dumps({
+                "code": 0,
+                "result": output
+            }))
+        except subprocess.TimeoutExpired:
+            self.respond_ok(json.dumps({
+                "code": 1
+            }))
         except subprocess.CalledProcessError as cpe:
             self.respond_server_error()
-        except subprocess.TimeoutExpired:
-            self.respond_ok('{ "code": 1 }')
+        except Exception as e:
+            print("Something unknown happened:", e)
+            self.respond_server_error()
 
 def run():
     server_address = ('', PORT)

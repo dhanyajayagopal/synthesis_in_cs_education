@@ -5,10 +5,10 @@
         <meta charset="UTF-8">
         <title>Binary Search Trees</title>
         <link rel="stylesheet" href="main.css">
+        <script src="main.js"></script>
         <script src="search.js"></script>
         <script src="insert.js"></script>
         <script src="is_bst.js"></script>
-        <script src="interface.js"></script>
     </head>
     <body>
     <h1>Binary Search Trees</h1>
@@ -149,7 +149,7 @@
         <div class="tree">
         </div>
 
-        <button class="next">
+        <button class="next-tree">
           Next Tree
         </button>
       </div>
@@ -157,7 +157,7 @@
       <div class="code-ui">
         <p>Write your code here:</p>
 
-        <code># Returns true if the given tree is a binary search tree
+        <code class="header"># Returns true if the given tree is a binary search tree
 def isBST(node):
     return (isBSTUtil(node, INT_MIN, INT_MAX))
 
@@ -166,12 +166,17 @@ def isBST(node):
 def isBSTUtil(node, mini, maxi):
 </code>
 
-        <textarea>
+        <textarea class="input">
     # Write your code here.</textarea>
 
         <button class="run">
           Run Code
         </button>
+
+        <h3>Output</h3>
+
+        <code class="output">
+        </code>
       </div>
     </section>
 
@@ -193,6 +198,8 @@ def isBSTUtil(node, mini, maxi):
           Use the buttons below to simulate how you think the
           <code>insertBST</code> function should work on the displayed tree.
         </p>
+
+        <p><b>Task:</b> <span class="instruction"></p>
 
         <nav>
            <ul>
@@ -240,7 +247,7 @@ def isBSTUtil(node, mini, maxi):
          <section class="tree">
          </section>
 
-         <button class="next">
+         <button class="next-tree">
            Next Tree
          </button>
       </div>
@@ -248,17 +255,22 @@ def isBSTUtil(node, mini, maxi):
       <div class="code-ui">
         <p>Write your code here:</p>
 
-        <code># Inserts a new node with the given key
+        <code class="header"># Inserts a new node with the given key
 def insert(root, key):
 </code>
       </div>
 
-        <textarea>
+        <textarea class="input">
     # Write your code here.</textarea>
 
         <button class="run">
           Run Code
         </button>
+
+        <h3>Output</h3>
+
+        <code class="output">
+        </code>
       </div>
     </section>
 
@@ -280,6 +292,8 @@ def insert(root, key):
           Use the buttons below to simulate how you think the
           <code>searchBST</code> function should work on the displayed tree.
         </p>
+
+        <p><b>Task:</b> <span class="instruction"></p>
 
         <nav>
           <ul>
@@ -322,7 +336,7 @@ def insert(root, key):
         <section class="tree">
         </section>
 
-        <button class="next">
+        <button class="next-tree">
           Next Tree
         </button>
       </div>
@@ -330,17 +344,22 @@ def insert(root, key):
       <div class="code-ui">
         <p>Write your code here:</p>
 
-        <code># Searches for a node with the given key
+        <code class="header"># Searches for a node with the given key
 def search(root, key):
 </code>
       </div>
 
-        <textarea>
+        <textarea class="input">
     # Write your code here.</textarea>
 
         <button class="run">
           Run Code
         </button>
+
+        <h3>Output</h3>
+
+        <code class="output">
+        </code>
       </div>
     </section>
   </body>

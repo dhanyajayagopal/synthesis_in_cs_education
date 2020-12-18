@@ -2,6 +2,12 @@ code {
   white-space: pre;
 }
 
+textarea {
+  display: block;
+  width: 500px;
+  height: 300px;
+}
+
 .tree-bg {
   position: absolute;
   z-index: -1;
@@ -42,7 +48,7 @@ code {
   color: blue;
 }
 
-ul, li
+nav li
 {
   display: inline-block;
 }
