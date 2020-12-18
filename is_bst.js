@@ -376,6 +376,11 @@ window.addEventListener("load", function() {
   let returnTrue = widget.querySelector(".return-true");
   let returnFalse = widget.querySelector(".return-false");
   let next = widget.querySelector(".next-tree");
+  let cm = new CodeMirror.fromTextArea(document.getElementById("editor--isbst"),
+  {
+    lineNumbers: true,
+    mode: "python"
+  });
 
   for (let data of widget.querySelectorAll(".data")) {
     (function(data) {

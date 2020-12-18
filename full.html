@@ -9,6 +9,9 @@
         <script src="search.js"></script>
         <script src="insert.js"></script>
         <script src="is_bst.js"></script>
+        <script src="codemirror-5.58.3/lib/codemirror.js"></script>
+        <script src="codemirror-5.58.3/mode/python/python.js"></script>
+        <link rel="stylesheet" href="codemirror-5.58.3/lib/codemirror.css">
     </head>
     <body>
     <h1>Binary Search Trees</h1>
@@ -154,20 +157,20 @@
         </button>
       </div>
 
+      <br>
+
       <div class="code-ui">
-        <p>Write your code here:</p>
-
-        <code class="header"># Returns true if the given tree is a binary search tree
+        <code class="header"></code>
+        <textarea id="editor--isbst" class="input">
 def isBST(node):
-    return (isBSTUtil(node, INT_MIN, INT_MAX))
+  return (isBSTUtil(node, INT_MIN, INT_MAX))
 
-# Returns true if the given tree is a BST
-# and its value is &gt;= mini and &lt;= maxi
+#Returns true if the given tree is a BST and its value is &gt;= mini and &lt;= maxi
 def isBSTUtil(node, mini, maxi):
-</code>
+  #Your code here
+        </textarea>
 
-        <textarea class="input">
-    # Write your code here.</textarea>
+        <br>
 
         <button class="run">
           Run Code
@@ -252,16 +255,17 @@ def isBSTUtil(node, mini, maxi):
          </button>
       </div>
 
+      <br>
+
       <div class="code-ui">
-        <p>Write your code here:</p>
-
-        <code class="header"># Inserts a new node with the given key
+        <code class="header"></code>
+        <textarea id="editor--insert" class="input">
+#Inserts a new node with the given key
 def insert(root, key):
-</code>
-      </div>
+  #Write your code here
+        </textarea>
 
-        <textarea class="input">
-    # Write your code here.</textarea>
+        <br>
 
         <button class="run">
           Run Code
@@ -341,16 +345,17 @@ def insert(root, key):
         </button>
       </div>
 
+      <br>
+
       <div class="code-ui">
-        <p>Write your code here:</p>
-
-        <code class="header"># Searches for a node with the given key
+        <code class="header"></code>
+        <textarea id="editor--search" class="input">
+#Searches for a node with the given key
 def search(root, key):
-</code>
-      </div>
+  #Write your code here
+        </textarea>
 
-        <textarea class="input">
-    # Write your code here.</textarea>
+        <br>
 
         <button class="run">
           Run Code

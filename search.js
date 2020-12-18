@@ -365,6 +365,11 @@ window.addEventListener("load", function() {
   let reset = widget.querySelector(".reset");
   let found = widget.querySelector(".found");
   let next = widget.querySelector(".next-tree");
+  let cm = new CodeMirror.fromTextArea(document.getElementById("editor--search"),
+  {
+    lineNumbers: true,
+    mode: "python"
+  });
 
   next.addEventListener("click", function() {
     log("New Tree");
