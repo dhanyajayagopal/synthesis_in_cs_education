@@ -120,5 +120,35 @@ window.addEventListener("load", function() {
       })
       .catch(handleError);
     });
+
+    // is BST 
+    var isbst_synthbutton = document.getElementById("synth_isbst")
+
+    // search 
+    let search_synthbutton = document.getElementById("synth_search")
+    search_synthbutton.addEventListener("click,", function() {
+      var log = synthesis_log_search;
+      var traces = [];
+      for (act of log) {
+        trace = {"key": searchVal, "root.val": currentSearchRootVal, "root": 1, "None": 0, "action": act}
+        traces.push(trace);
+      }
+        fetch("http://localhost:9090/synthesize-search", {
+          method: "POST",
+          body: traces,
+        })
+        .then(handleHttpResponse)
+        .then(serverResponse => {
+          if (serverResponse.code === SUCCESS) {
+            output.innerHTML = serverResponse.result;
+          } else if (serverResponse.code === TIMEOUT) {
+            output.innerHTML = "Evaluation timed out."
+          }
+        })
+        .catch(handleError);
+    });
   }
+
+  
+
 });

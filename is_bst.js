@@ -10,7 +10,7 @@ const COMPARE_STATE = 1;
 let state = DEFAULT_STATE;
 let firstComparedData = null;
 
-var synthesis_log = [];
+var synthesis_log = []; // change to is_bst synthesis log & move it to the top.
 var written_function = "";
 
 function log(message) {

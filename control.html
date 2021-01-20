@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Binary Search Trees</title>
+        <link rel="stylesheet" href="main.css">
+        <script src="main.js"></script>
+        <script src="search.js"></script>
+        <script src="insert.js"></script>
+        <script src="is_bst.js"></script>
+        <script src="codemirror-5.58.3/lib/codemirror.js"></script>
+        <script src="codemirror-5.58.3/mode/python/python.js"></script>
+        <link rel="stylesheet" href="codemirror-5.58.3/lib/codemirror.css">
+    </head>
+    <body>
+    <h1>Binary Search Trees</h1>
+
+    <section id="intro">
+      <h2>Introduction to Binary Trees</h2>
+
+      <p>
+        A binary tree is a tree in which each node has exactly two children,
+        either of which may be empty. For example, the following is a binary
+        tree:
+      </p>
+
+      <img src=https://s3.ap-south-1.amazonaws.com/s3.studytonight.com/curious/uploads/pictures/1551968508-58156.png
+           style="height:200px;">
+
+      <p>
+        Note that some of the nodes above are drawn with
+        <b>only one child or no children at all</b>.
+        In these cases, one or both children are empty. Note that we always draw
+        one child to the left and one child to the right. As a result, if one
+        child is empty, we can always tell which child is empty and which child
+        is not.
+        <b>We call the two children the left child and the right child.</b>
+        We can implement a single node of a binary tree as a data structure and
+        use it to store data. The implementation is as follows:</p>
+
+      <code>class Node:
+      def __init__(self, val):
+          self.l_child = None
+          self.r_child = None
+          self.data = val</code>
+
+      <p>
+        In a binary tree, the
+        <b>only invariant is that each node has a value, a left child, and a
+          right child.</b>
+      </p>
+
+      <h2>Introduction to Binary Search Trees (BSTs)</h2>
+
+      <p>
+        In a binary <i>search</i> tree (BST), there is an additional invariant.
+        A binary search tree is ordered, so there are three factors that must
+        hold:
+      </p>
+
+      <ol>
+        <li>All values in the tree are unique.</li>
+        <li>Each node value is greater than all values in its left child.</li>
+        <li>Each node value is less than all values in its right child.</li>
+      </ol>
+
+      <p>
+        For example, here is a binary search tree:
+      </p>
+        <img src=https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1200px-Binary_search_tree.svg.png
+             style="height:200px;">
+
+      <h2>Why are binary search trees important?</h2>
+
+      <p>
+        The reason binary search trees are important is that the following
+        operations can be implemented efficiently using a BST:
+      </p>
+
+      <ul>
+        <li>Insert a value into the tree.</li>
+        <li>Determine whether a value is in the tree.</li>
+        <li>Remove a value from the tree.</li>
+      </ul>
+    </section>
+
+    <section id="is-bst">
+      <h2>Checking If a BST is Valid</h2>
+
+      <p>
+        Understanding whether a given tree is a binary search tree involves
+        ensuring that the required invariants hold.
+      </p>
+
+      <p>
+        Write code below to check if a BST is valid. Run your code on a few sample inputs to see your outputs.
+      </p>
+
+
+      <div class="code-ui">
+        <code class="header"></code>
+        <textarea id="editor--isbst" class="input">
+def isBST(node):
+  return (isBSTUtil(node, INT_MIN, INT_MAX))
+
+#Returns true if the given tree is a BST and its value is &gt;= mini and &lt;= maxi
+def isBSTUtil(node, mini, maxi):
+  #Your code here
+        </textarea>
+
+        <br>
+
+        <button class="run">
+          Run Code
+        </button>
+
+        <h3>Output</h3>
+
+        <code class="output">
+        </code>
+      </div>
+    </section>
+
+    <section id="insert">
+      <h2>Inserting Into a BST</h2>
+
+      <p>
+        Understanding how to insert into a given binary search tree involves
+        finding the correct spot for the new value.
+      </p>
+
+      <p>
+        Write code below to insert a specified key into a BST. Run your code on a few sample inputs to see your outputs.
+      </p>
+
+      <div class="code-ui">
+        <code class="header"></code>
+        <textarea id="editor--insert" class="input">
+#Inserts a new node with the given key
+def insert(root, key):
+  #Write your code here
+        </textarea>
+
+        <br>
+
+        <button class="run">
+          Run Code
+        </button>
+
+        <h3>Output</h3>
+
+        <code class="output">
+        </code>
+      </div>
+    </section>
+
+    <section id="search">
+      <h2>Search in a BST</h2>
+
+      <p>
+        Understanding how to search in a binary search tree involves knowing how
+        to efficiently traverse the tree given its invariants.
+      </p>
+
+      <p>
+        Write code below to search for a specified key in a BST. Run your code on a few sample inputs to see your outputs.
+      </p>
+
+      
+      <div class="code-ui">
+        <code class="header"></code>
+        <textarea id="editor--search" class="input">
+#Searches for a node with the given key
+def search(root, key):
+  #Write your code here
+        </textarea>
+
+        <br>
+
+        <button class="run">
+          Run Code
+        </button>
+
+        <h3>Output</h3>
+
+        <code class="output">
+        </code>
+      </div>
+    </section>
+  </body>
+</html>

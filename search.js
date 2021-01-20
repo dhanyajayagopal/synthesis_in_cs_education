@@ -1,10 +1,12 @@
+var synthesis_log_search = [];
+var searchVal = 0;
+var currentSearchRootVal = 0;
 (function() {
 
-var synthesis_log = [];
 
 function log(message) {
   console.log(message);
-  synthesis_log.push(message);
+  synthesis_log_search.push(message);
 }
 
 let tree0 =
@@ -335,7 +337,7 @@ window.addEventListener("load", function() {
   let index = getRandomInt(8);
   let root = generateTreeHTML(trees[index]);
   let searches = [4, 14, 76, 6, 7, 1, 69, 15];
-  let searchVal = searches[index];
+  searchVal = searches[index];
 
   // Load trees
 
@@ -384,10 +386,12 @@ window.addEventListener("load", function() {
   });
 
   found.addEventListener("click", function() {
+    currentSearchRootVal = widget.querySelector(".current").data;
     log("Found Node")
   });
 
   reset.addEventListener("click", function () {
+    currentSearchRootVal = widget.querySelector(".current").data;
     log("Resetting the Log")
     let current = widget.querySelector(".current");
     current.classList.remove("current");
@@ -395,6 +399,7 @@ window.addEventListener("load", function() {
   });
 
   moveLeft.addEventListener("click", function() {
+    currentSearchRootVal = widget.querySelector(".current").data;
     let current = widget.querySelector(".current");
     if (!current.children[1].classList.contains("leaf")) {
       log("Moved Left");
@@ -404,6 +409,7 @@ window.addEventListener("load", function() {
   });
 
   moveRight.addEventListener("click", function() {
+    currentSearchRootVal = widget.querySelector(".current").data;
     let current = widget.querySelector(".current");
     if (!current.children[2].classList.contains("leaf")){
       log("Moved Right");
@@ -413,6 +419,7 @@ window.addEventListener("load", function() {
   });
 
   moveUp.addEventListener("click", function() {
+    currentSearchRootVal = widget.querySelector(".current").data;
     let current = widget.querySelector(".current");
     if (!current.parentElement.classList.contains("tree")) {
       log("Moved Up");
