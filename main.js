@@ -136,14 +136,15 @@ window.addEventListener("load", function() {
     }
     fetch("http://localhost:9090/synthesize-search", {
       method: "POST",
-      body: traces,
+      body: JSON.stringify(traces),
     })
     .then(handleHttpResponse)
     .then(serverResponse => {
+      // TODO (just alert result for now)
       if (serverResponse.code === SUCCESS) {
-        output.innerHTML = serverResponse.result;
+        window.alert(serverResponse.result);
       } else if (serverResponse.code === TIMEOUT) {
-        output.innerHTML = "Evaluation timed out."
+        window.alert("Evaluation timed out.");
       }
     })
     .catch(handleError);
