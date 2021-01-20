@@ -1,3 +1,21 @@
+body {
+  width: 800px;
+  margin: auto;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+img {
+  display: block;
+  margin: auto;
+}
+
+.CodeMirror {
+  border: 1px solid #CCCCCC;
+}
+
 code {
   white-space: pre;
 }
@@ -6,6 +24,10 @@ textarea {
   display: block;
   width: 500px;
   height: 300px;
+}
+
+.tree {
+  font-family: "Times New Roman", serif;
 }
 
 .tree-bg {
