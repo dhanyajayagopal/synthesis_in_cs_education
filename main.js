@@ -95,8 +95,9 @@ function handleError(error) {
 // Common handlers
 
 window.addEventListener("load", function() {
-  for (let runButton of document.querySelectorAll(".run")) {
-    const codeUi = runButton.parentElement;
+  // calling eval for insert code
+    let insert_runButton = document.getElementById("run_insert");
+    const codeUi = insert_runButton.parentElement;
 
     const header = codeUi.querySelector(".header")
     const headerText = header.innerHTML;
@@ -104,9 +105,9 @@ window.addEventListener("load", function() {
     const input = codeUi.querySelector(".input");
     const output = codeUi.querySelector(".output");
 
-    runButton.addEventListener("click", function() {
+    insert_runButton.addEventListener("click", function() {
       const code = headerText + input.value;
-      fetch("http://localhost:9090/eval", {
+      fetch("http://localhost:9090/eval_insert", {
         method: "POST",
         body: code,
       })
@@ -120,10 +121,61 @@ window.addEventListener("load", function() {
       })
       .catch(handleError);
     });
-  }
 
-  // is BST
-  // var isbst_synthbutton = document.getElementById("synth_isbst");
+
+    // calling eval for search code
+    let search_runButton = document.getElementById("run_search");
+    const codeUi1 = search_runButton.parentElement;
+
+    const header1 = codeUi1.querySelector(".header")
+    const headerText1 = header1.innerHTML;
+
+    const input1 = codeUi1.querySelector(".input");
+    const output1 = codeUi1.querySelector(".output");
+
+    search_runButton.addEventListener("click", function() {
+      const code = headerText + input.value;
+      fetch("http://localhost:9090/eval_search", {
+        method: "POST",
+        body: code,
+      })
+      .then(handleHttpResponse)
+      .then(serverResponse => {
+        if (serverResponse.code === SUCCESS) {
+          output.innerHTML = serverResponse.result;
+        } else if (serverResponse.code === TIMEOUT) {
+          output.innerHTML = "Evaluation timed out."
+        }
+      })
+      .catch(handleError);
+    });
+
+
+
+  // insert
+  let insert_synthbutton = document.getElementById("synth_insert");
+  insert_synthbutton.addEventListener("click", function() {
+    var log = synthesis_log_search;
+    var traces = [];
+    for (act of log) {
+      trace = {"key": searchVal, "root.val": currentSearchRootVal, "root": 1, "None": 0, "action": act}
+      traces.push(trace);
+    }
+    fetch("http://localhost:9090/insert_synth.py", {
+      method: "POST",
+      body: JSON.stringify(traces),
+    })
+    .then(handleHttpResponse)
+    .then(serverResponse => {
+      // TODO (just alert result for now)
+      if (serverResponse.code === SUCCESS) {
+        window.alert(serverResponse.result);
+      } else if (serverResponse.code === TIMEOUT) {
+        window.alert("Evaluation timed out.");
+      }
+    })
+    .catch(handleError);
+  });
 
   // search
   let search_synthbutton = document.getElementById("synth_search");
@@ -134,7 +186,7 @@ window.addEventListener("load", function() {
       trace = {"key": searchVal, "root.val": currentSearchRootVal, "root": 1, "None": 0, "action": act}
       traces.push(trace);
     }
-    fetch("http://localhost:9090/synthesize-search", {
+    fetch("http://localhost:9090/search_synth.py", {
       method: "POST",
       body: JSON.stringify(traces),
     })

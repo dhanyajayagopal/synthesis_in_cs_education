@@ -330,6 +330,52 @@ let not_tree3 =
         },
     } //INSERT 16
 
+    list1 = [4, 7, 13, 15, 19, 23, 34, 56, 71]
+    insert = 5
+
+    let test1 = 
+      { "data": 19,
+        "left": 
+        { "data": 7,
+          "left": 
+          { "data": 4,
+            "left": null,
+            "right": null
+          },
+          "right":
+          { "data": 13,
+            "left": null,
+            "right": 
+            { "data": 15,
+              "left": null,
+              "right": null
+            }
+          }
+        },
+        "right": 
+        { "data": 34,
+          "left": 
+          { "data": 4,
+            "left": 
+            { "data": 23,
+              "left": null,
+              "right": null
+            },
+            "right": null
+          },
+          "right": null
+         },
+         "right":
+         { "data": 56,
+           "left": null,
+           "right":
+           { "data": 71,
+            "left": null,
+            "right": null
+          }
+        }
+      }
+
 window.addEventListener("load", function() {
   // Set up trees
 
@@ -373,6 +419,14 @@ window.addEventListener("load", function() {
     lineNumbers: true,
     mode: "python"
   });
+
+  input = document.querySelector(".tree-test-insert-1");
+  root = generateTreeHTML(test1);
+  input.appendChild(root);
+
+  input1 = document.querySelector(".tree-test-insert-2");
+  root1 = generateTreeHTML(test1);
+  input1.appendChild(root1);
 
   next.addEventListener("click", function() {
     log("New Tree");

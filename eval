@@ -1,8 +1,0 @@
-#!/usr/bin/env python3
-
-import sys
-
-try:
-    exec(sys.stdin.read())
-except SyntaxError as e:
-    print("Syntax error:", e, end="")
