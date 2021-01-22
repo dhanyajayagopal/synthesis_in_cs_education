@@ -126,7 +126,6 @@ window.addEventListener("load", function() {
 
     insert_runButton.addEventListener("click", function() {
       const code = headerText + insert_cm.getValue();
-      window.alert(code);
       fetch("http://localhost:9090/eval-insert", {
         method: "POST",
         body: code,
