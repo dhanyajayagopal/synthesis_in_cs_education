@@ -6,14 +6,25 @@ class Node:
     def __init__(self, d):
         self.left = None
         self.right = None
-        self.data = None
+        self.data = d
+
+def node_to_json(node):
+    if node == None:
+        return "null"
+    return '{"data": ' \
+              + str(node.data) \
+              + ', "left": ' \
+              + node_to_json(node.left) \
+              + ', "right": ' \
+              + node_to_json(node.right) \
+              + '}'
 
 def sortedArrayToBST(arr): 
     if not arr: 
         return None
   
     # find middle 
-    mid = (len(arr)) / 2
+    mid = (len(arr)) // 2
       
     # make the middle element the root 
     root = Node(arr[mid]) 
@@ -28,10 +39,11 @@ def sortedArrayToBST(arr):
     return root 
 
 try:
-    code = exec(sys.stdin.read())
+    code = sys.stdin.read()
+    exec(code) # defines 'insert'
     # Test Case 1
     list1 = [3, 13, 23, 45, 54, 71, 89, 93, 101]
-    root1 = sortedArrayToBST(list)
+    root1 = sortedArrayToBST(list1)
     insert1 = 30
 
     # Test Case 2
@@ -39,8 +51,8 @@ try:
     root2 = sortedArrayToBST(list2)
     insert2 = 2
 
-    output1 = code(root1, insert1)
-    output2 = code(root2, insert2)
+    print(node_to_json(insert(root1, insert1)))
+    print(node_to_json(insert(root2, insert2)))
 
 except SyntaxError as e:
     print("Syntax error:", e, end="")

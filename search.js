@@ -413,11 +413,6 @@ window.addEventListener("load", function() {
   let reset = widget.querySelector(".reset");
   let found = widget.querySelector(".found");
   let next = widget.querySelector(".next-tree");
-  let cm = new CodeMirror.fromTextArea(document.getElementById("editor--search"),
-  {
-    lineNumbers: true,
-    mode: "python"
-  });
 
   input = document.querySelector(".tree-test-search-1");
   root = generateTreeHTML(test1);

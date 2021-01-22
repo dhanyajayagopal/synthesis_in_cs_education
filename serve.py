@@ -5,10 +5,12 @@ import subprocess
 import json
 
 ENDPOINTS = [
-    "synthesize-is-bst",
+    "eval-insert",
+    "eval-search",
+    # "eval-is-bst",
     "synthesize-insert",
     "synthesize-search",
-    "eval"
+    # "synthesize-is-bst",
 ]
 
 PORT = 9090

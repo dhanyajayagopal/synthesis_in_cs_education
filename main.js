@@ -95,6 +95,26 @@ function handleError(error) {
 // Common handlers
 
 window.addEventListener("load", function() {
+    // CodeMirror
+
+    let insert_cm = new CodeMirror.fromTextArea(document.getElementById("editor--insert"),
+    {
+      lineNumbers: true,
+      mode: "python"
+    });
+
+    let search_cm = new CodeMirror.fromTextArea(document.getElementById("editor--search"),
+    {
+      lineNumbers: true,
+      mode: "python"
+    });
+
+    let cm = new CodeMirror.fromTextArea(document.getElementById("editor--isbst"),
+    {
+      lineNumbers: true,
+      mode: "python"
+    });
+
   // calling eval for insert code
     let insert_runButton = document.getElementById("run_insert");
     const codeUi = insert_runButton.parentElement;
@@ -102,12 +122,12 @@ window.addEventListener("load", function() {
     const header = codeUi.querySelector(".header")
     const headerText = header.innerHTML;
 
-    const input = codeUi.querySelector(".input");
     const output = codeUi.querySelector(".output");
 
     insert_runButton.addEventListener("click", function() {
-      const code = headerText + input.value;
-      fetch("http://localhost:9090/eval_insert", {
+      const code = headerText + insert_cm.getValue();
+      window.alert(code);
+      fetch("http://localhost:9090/eval-insert", {
         method: "POST",
         body: code,
       })
@@ -134,8 +154,8 @@ window.addEventListener("load", function() {
     const output1 = codeUi1.querySelector(".output");
 
     search_runButton.addEventListener("click", function() {
-      const code = headerText + input.value;
-      fetch("http://localhost:9090/eval_search", {
+      const code = headerText + search_cm.getValue();
+      fetch("http://localhost:9090/eval-search", {
         method: "POST",
         body: code,
       })
@@ -161,7 +181,7 @@ window.addEventListener("load", function() {
       trace = {"key": searchVal, "root.val": currentSearchRootVal, "root": 1, "None": 0, "action": act}
       traces.push(trace);
     }
-    fetch("http://localhost:9090/insert_synth.py", {
+    fetch("http://localhost:9090/synthesize-insert", {
       method: "POST",
       body: JSON.stringify(traces),
     })
@@ -186,7 +206,7 @@ window.addEventListener("load", function() {
       trace = {"key": searchVal, "root.val": currentSearchRootVal, "root": 1, "None": 0, "action": act}
       traces.push(trace);
     }
-    fetch("http://localhost:9090/search_synth.py", {
+    fetch("http://localhost:9090/synthesize-search", {
       method: "POST",
       body: JSON.stringify(traces),
     })

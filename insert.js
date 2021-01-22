@@ -414,11 +414,6 @@ window.addEventListener("load", function() {
   let insertRight = widget.querySelector(".insert-right");
   let insertLeft = widget.querySelector(".insert-left");
   let next = widget.querySelector(".next-tree");
-  let cm = new CodeMirror.fromTextArea(document.getElementById("editor--insert"),
-  {
-    lineNumbers: true,
-    mode: "python"
-  });
 
   input = document.querySelector(".tree-test-insert-1");
   root = generateTreeHTML(test1);
