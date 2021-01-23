@@ -117,3 +117,17 @@ button
   box-shadow:none;
   border-radius:0em;
 }
+
+/* Experimental groups */
+
+#control .hide-control {
+  display: none !important;
+}
+
+#half .hide-half {
+  display: none !important;
+}
+
+#full .hide-full {
+  display: none !important;
+}
