@@ -69,6 +69,7 @@
       </ul>
     </section>
 
+    <!--
     <section id="is-bst">
       <h2>Checking If a BST is Valid</h2>
 
@@ -238,8 +239,8 @@ def isBSTUtil(node, mini, maxi):
          <canvas class="tree-bg">
          </canvas>
 
-         <section class="tree">
-         </section>
+         <div class="tree">
+         </div>
 
          <button class="next-tree">
            Next Tree
@@ -252,36 +253,60 @@ def isBSTUtil(node, mini, maxi):
       </div>
 
       <p>
-        Implement the <code>insert</code> function.
+        Implement the <code>insert</code> function. You can click the Run button
+        below to run your code on some sample inputs.
       </p>
 
       <div class="code-ui">
         <code class="header"></code>
         <textarea id="editor--insert" class="input">
-#Inserts a new node with the given key
+# Inserts a new node with the given key
 def insert(root, key):
-  #Write your code here
+  # Write your code here
+  return root
         </textarea>
 
-        <br>
-
         <button id="run_insert" class="run">
-          Run Code on Inputs Below on Inputs Below
+          Run Code on Inputs Below
         </button>
 
-        <h5>Input 1</h5>
-        <div class="tree-test-insert-1">
-        </div>
-        <h5>Input 2</h5>
-        <div class="tree-test-insert-2">
-        </div>
+        <table>
+          <tr>
+            <th>Tree</th>
+            <th>Key</th>
+            <th>Output of Your <code>insert</code> Function</th>
+          </tr>
+          <tr>
+            <td>
+              <canvas class="tree-bg"></canvas>
+              <div class="tree tree-test-insert-1"></div>
+            </td>
+            <td>
+              4
+            </td>
+            <td>
+              <code class="output">
+              </code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tree tree-test-insert-2"></div>
+            </td>
+            <td>
+              5
+            </td>
+            <td>
+              <code class="output">
+              </code>
+            </td>
+          </tr>
+        </table>
 
-        <h3>Output</h3>
-
-        <code class="output">
-        </code>
       </div>
     </section>
+
+    -->
 
     <section id="search">
       <h2>Search in a BST</h2>
@@ -291,18 +316,21 @@ def insert(root, key):
         to efficiently traverse the tree given its invariants.
       </p>
 
-      <div class="synthesis-ui hide-control">
+      <div class="hide-control">
         <p>
-          Use the tool below to understand how the search in BST function would
-          work, then fill in the function in the specified area.
+          First, use the buttons below to demonstrate how to complete the
+          given task. Click the "Next Tree" button to provide additional
+          demonstrations.
+        </p>
+
+        <p class="hide-half">
+          Once you have successfully completed a demonstration, click the
+          "Demonstration Finished" button.
         </p>
 
         <p>
-          Use the buttons below to simulate how you think the
-          <code>searchBST</code> function should work on the displayed tree.
+          <b>Task:</b> Search for <span class="search-val"></span> in the BST.
         </p>
-
-        <p><b>Task:</b> <span class="instruction"></p>
 
         <nav>
           <ul>
@@ -342,49 +370,47 @@ def insert(root, key):
         <canvas class="tree-bg">
         </canvas>
 
-        <section class="tree">
-        </section>
+        <div class="tree">
+        </div>
 
         <button class="next-tree">
           Next Tree
         </button>
 
-        <div class="hide-half hide-control">
-          <p>Click the button below if you have successfully completed the function demonstration on the interactive tool above.</p>
-          <button id="synth_search" class="synth">Demonstration Finished</button>
-        </div>
+        <button class="hide-half synthesize">
+          Demonstration Finished
+        </button>
+
+        <p class="hide-control">
+          When you're done, implement the <code>search</code> function.
+          You can click the Run button below to run your code on some sample
+          inputs.
+        </p>
       </div>
 
-      <p>
-        Implement the <code>search</code> function.
+      <p class="hide-full hide-half">
+        Implement the <code>search</code> function.  You can click the Run
+        button below to run your code on some sample inputs.
       </p>
 
-      <div class="code-ui">
-        <code class="header"></code>
-        <textarea id="editor--search" class="input">
-#Searches for a node with the given key
+      <textarea>
+# Searches for a node with the given key
 def search(root, key):
-  #Write your code here
-        </textarea>
+  # Write your code here
+  return root
+      </textarea>
 
-        <br>
+      <button class="run">
+        Run Code on Inputs Below on Inputs Below
+      </button>
 
-        <button id="run_search" class="run">
-          Run Code on Inputs Below on Inputs Below
-        </button>
-        
-        <h5>Input 1</h5>
-        <div class="tree-test-search-1">
-        </div>
-        <h5>Input 1</h5>
-        <div class="tree-test-search-2">
-        </div>
-
-        <h3>Output</h3>
-
-        <code class="output">
-        </code>
-      </div>
+      <table class="io">
+        <tr>
+          <th>Tree</th>
+          <th>Key</th>
+          <th>Output of Your <code>insert</code> Function</th>
+        </tr>
+      </table>
     </section>
   </body>
 </html>

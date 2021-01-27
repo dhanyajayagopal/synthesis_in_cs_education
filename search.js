@@ -1,12 +1,10 @@
-var synthesis_log_search = [];
-var searchVal = 0;
-var currentSearchRootVal = 0;
-(function() {
-
+(function(SearchUI) {
+"use strict";
 
 function log(message) {
   console.log(message);
-  synthesis_log_search.push(message);
+  TRACES["search"].push(message);
+  LOGS["search"].push(message);
 }
 
 let tree0 =
@@ -330,10 +328,9 @@ let not_tree3 =
         },
     } // SEARCH 15
 
-    list1 = [4, 7, 13, 15, 19, 23, 34, 56, 71]
-    search1 = 13
+    const search1 = 13
 
-    let test1 = 
+    const test1 = 
       { "data": 19,
         "left": 
         { "data": 7,
@@ -376,80 +373,59 @@ let not_tree3 =
         }
       }
 
-window.addEventListener("load", function() {
-  // Set up trees
+const trees = [tree0, tree1, tree2, tree3, not_tree0, not_tree1, not_tree2, not_tree3];
+const searches = [4, 14, 76, 6, 7, 1, 69, 15];
 
-  let trees = [tree0, tree1, tree2, tree3, not_tree0, not_tree1, not_tree2, not_tree3];
-  let index = getRandomInt(8);
-  let root = generateTreeHTML(trees[index]);
-  let searches = [4, 14, 76, 6, 7, 1, 69, 15];
-  searchVal = searches[index];
+const sampleInputs = [[test1, search1], [tree0, 4], [tree1, 14]];
 
-  // Load trees
-
-  let widget = document.querySelector("#search .synthesis-ui");
-  widget.querySelector(".tree").appendChild(root);
-  widget.querySelector(".instruction").innerHTML = "Search for " + searchVal + " in the BST.";
-  root.classList.add("current");
-
-  // Draw lines between nodes
-
-  const canvas = widget.querySelector(".tree-bg");
-
-  function redraw() {
-    drawBackground(widget, canvas, { x : root.offsetLeft, y : root.offsetTop });
+SearchUI.load = function(section) {
+  function queryClass(name) {
+    return section.querySelector("." + name);
   }
 
-  window.addEventListener("resize", redraw);
+  function queryClassAll(name) {
+    return section.querySelectorAll("." + name);
+  }
 
-  redraw();
+  const treeElement = queryClass("tree");
 
-  // Handle events
+  // Choose a tree
 
-  let moveLeft = widget.querySelector(".move-left");
-  let moveRight = widget.querySelector(".move-right");
-  let moveUp = widget.querySelector(".move-up");
-  let atLeaf = widget.querySelector(".at-leaf");
-  let reset = widget.querySelector(".reset");
-  let found = widget.querySelector(".found");
-  let next = widget.querySelector(".next-tree");
+  const index = getRandomInt(8);
+  const tree = trees[index];
+  const searchVal = searches[index];
 
-  input = document.querySelector(".tree-test-search-1");
-  root = generateTreeHTML(test1);
-  input.appendChild(root);
+  // Load the tree
 
-  input1 = document.querySelector(".tree-test-search-2");
-  root1 = generateTreeHTML(test1);
-  input1.appendChild(root1);
+  Tree.load(treeElement, tree);
+  const root = treeElement.children[0];
+  root.classList.add("current");
 
-  next.addEventListener("click", function() {
+  // Update search value in HTML
+
+  for (let searchValElement of queryClassAll("search-val")) {
+    searchValElement.textContent = searchVal;
+  }
+
+  // Demonstration controls
+
+  queryClass("next-tree").addEventListener("click", function() {
     log("New Tree");
-    widget.querySelector(".tree").removeChild(root);
-    index = getRandomInt(8);
-    root = generateTreeHTML(trees[index]);
-    widget.querySelector(".tree").appendChild(root);
-    searchVal = searches[index];
-    widget.querySelector(".instruction").innerHTML = "Search for " + searchVal + " in the BST."
-    root.classList.add("current");
-    redraw();
+    SearchUI.load(section);
   });
 
-  found.addEventListener("click", function() {
-    currentSearchRootVal = widget.querySelector(".current").data;
+  queryClass("found").addEventListener("click", function() {
     log("Found Node")
   });
 
-  reset.addEventListener("click", function () {
-    currentSearchRootVal = widget.querySelector(".current").data;
+  queryClass("reset").addEventListener("click", function () {
     log("Resetting the Log")
-    let current = widget.querySelector(".current");
-    current.classList.remove("current");
+    queryClass("current").classList.remove("current");
     root.classList.add("current");
   });
 
-  moveLeft.addEventListener("click", function() {
-    currentSearchRootVal = widget.querySelector(".current").data;
-    let current = widget.querySelector(".current");
+  queryClass("move-left").addEventListener("click", function() {
+    const current = queryClass("current");
     if (!current.children[1].classList.contains("leaf")) {
       log("Moved Left");
       current.classList.remove("current");
@@ -457,9 +433,8 @@ window.addEventListener("load", function() {
     }
   });
 
-  moveRight.addEventListener("click", function() {
-    currentSearchRootVal = widget.querySelector(".current").data;
-    let current = widget.querySelector(".current");
+  queryClass("move-right").addEventListener("click", function() {
+    const current = queryClass("current");
     if (!current.children[2].classList.contains("leaf")){
       log("Moved Right");
       current.classList.remove("current");
@@ -467,15 +442,43 @@ window.addEventListener("load", function() {
     }
   });
 
-  moveUp.addEventListener("click", function() {
-    currentSearchRootVal = widget.querySelector(".current").data;
-    let current = widget.querySelector(".current");
+  queryClass("move-up").addEventListener("click", function() {
+    const current = queryClass("current");
     if (!current.parentElement.classList.contains("tree")) {
       log("Moved Up");
       current.classList.remove("current");
       current.parentElement.classList.add("current");
     }
   });
-});
 
-})();
+  // Sample inputs
+
+  const table = queryClass("io");
+
+  for (const sampleInput of sampleInputs) {
+    const row = document.createElement("tr");
+
+    const col1 = document.createElement("td");
+    const treeBg = document.createElement("canvas");
+    treeBg.classList.add("tree-bg");
+    col1.appendChild(treeBg);
+    const treeElement = document.createElement("div");
+    treeElement.classList.add("tree");
+    col1.appendChild(treeElement);
+    row.appendChild(col1);
+
+    const col2 = document.createElement("td");
+    col2.textContent = sampleInput[1];
+    row.appendChild(col2);
+
+    const col3 = document.createElement("td");
+    col3.textContent = "TODO";
+    row.appendChild(col3);
+
+    table.appendChild(row);
+
+    Tree.load(treeElement, sampleInput[0]);
+  }
+};
+
+})(window.SearchUI = window.SearchUI || {});

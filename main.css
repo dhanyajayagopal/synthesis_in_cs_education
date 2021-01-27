@@ -7,6 +7,28 @@ body {
   line-height: 1.4;
 }
 
+table {
+  width: 100%;
+  text-align: center;
+}
+
+td {
+  border: 1px solid black;
+  position: relative;
+}
+
+td:first-child {
+  width: 300px;
+}
+
+td > div {
+  width: 100%;
+}
+
+td .tree-bg {
+  left: 0;
+}
+
 img {
   display: block;
   margin: auto;

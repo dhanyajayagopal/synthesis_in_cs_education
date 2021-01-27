@@ -1,12 +1,9 @@
-(function(){
+(function(InsertExercise) {
 
-var synthesis_log = [];
-
-// at some point, create list and have log append to that list
-// and when restart is clicked, clear the list
 function log(message) {
   console.log(message);
-  synthesis_log.push(message);
+  TRACES["insert"].push(message);
+  LOGS["insert"].push(message);
 }
 
 let tree0 =
@@ -376,11 +373,17 @@ let not_tree3 =
         }
       }
 
+const trees = [tree0, tree1, tree2, tree3, not_tree0, not_tree1, not_tree2, not_tree3];
+const inserts = [6, 2, 43, 14, 9, 0, 73, 16];
+
+function reload() {
+	const index = getRandomInt(8);
+
+}
+
 window.addEventListener("load", function() {
   // Set up trees
 
-  let trees = [tree0, tree1, tree2, tree3, not_tree0, not_tree1, not_tree2, not_tree3];
-  let inserts = [6, 2, 43, 14, 9, 0, 73, 16];
   let index = getRandomInt(8);
   let root = generateTreeHTML(trees[index]);
   let insertVal = inserts[index];
@@ -415,9 +418,10 @@ window.addEventListener("load", function() {
   let insertLeft = widget.querySelector(".insert-left");
   let next = widget.querySelector(".next-tree");
 
-  input = document.querySelector(".tree-test-insert-1");
-  root = generateTreeHTML(test1);
-  input.appendChild(root);
+  //input = document.querySelector(".tree-test-insert-1");
+  //root = generateTreeHTML(test1);
+  //input.appendChild(root);
+  window.test1=test1;
 
   input1 = document.querySelector(".tree-test-insert-2");
   root1 = generateTreeHTML(test1);
