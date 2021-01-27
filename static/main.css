@@ -13,6 +13,19 @@ table {
   text-align: center;
 }
 
+h3 {
+  font-size: 1em;
+}
+
+td .log {
+  text-align: left;
+  padding: 0 10px;
+}
+
+td .log p {
+  margin-left: 10px;
+}
+
 td {
   border: 1px solid black;
   position: relative;

@@ -25,9 +25,9 @@ Search.load = function(section) {
 
   // Choose a tree
 
-  const index = getRandomInt(8);
-  const tree = Search.allInputs[index][0];
-  const searchVal = Search.allInputs[index][1];
+  const randomInput = randomChoice(Search.allInputs);
+  const tree = randomInput[0];
+  const searchVal = randomInput[1];
 
   // Load the tree
 
@@ -37,8 +37,8 @@ Search.load = function(section) {
 
   // Update search value in HTML
 
-  for (let searchValElement of queryClassAll("search-val")) {
-    searchValElement.textContent = searchVal;
+  for (const el of queryClassAll("search-val")) {
+    el.textContent = searchVal;
   }
 
   // Demonstration controls
@@ -93,12 +93,12 @@ Search.load = function(section) {
     const row = document.createElement("tr");
 
     const col1 = document.createElement("td");
-    const treeBg = document.createElement("canvas");
-    treeBg.classList.add("tree-bg");
-    col1.appendChild(treeBg);
-    const treeElement = document.createElement("div");
-    treeElement.classList.add("tree");
-    col1.appendChild(treeElement);
+    const inputTreeBg = document.createElement("canvas");
+    inputTreeBg.classList.add("tree-bg");
+    col1.appendChild(inputTreeBg);
+    const inputTreeElement = document.createElement("div");
+    inputTreeElement.classList.add("tree");
+    col1.appendChild(inputTreeElement);
     row.appendChild(col1);
 
     const col2 = document.createElement("td");
@@ -110,7 +110,7 @@ Search.load = function(section) {
 
     table.appendChild(row);
 
-    Tree.load(treeElement, testInput[0]);
+    Tree.load(inputTreeElement, testInput[0]);
   }
 };
 

@@ -7,16 +7,21 @@
     <head>
         <meta charset="UTF-8">
         <title>Binary Search Trees</title>
-        <link rel="stylesheet" href="main.css">
-        <script src="tree.js"></script>
-        <script src="search-inputs.js"></script>
-        <script src="search.js"></script>
-        <!-- <script src="insert.js"></script>
-        <script src="is_bst.js"></script> -->
-        <script src="main.js"></script>
+
         <script src="codemirror-5.58.3/lib/codemirror.js"></script>
         <script src="codemirror-5.58.3/mode/python/python.js"></script>
         <link rel="stylesheet" href="codemirror-5.58.3/lib/codemirror.css">
+
+        <link rel="stylesheet" href="main.css">
+
+        <script src="tree.js"></script>
+        <script src="search-inputs.js"></script>
+        <script src="search.js"></script>
+        <script src="insert-inputs.js"></script>
+        <script src="insert.js"></script>
+        <!-- <script src="is-bst-inputs.js"></script> -->
+        <!-- <script src="is-bst.js"></script> -->
+        <script src="main.js"></script>
     </head>
     <body id="full">
     <h1>Binary Search Trees</h1>
@@ -90,7 +95,6 @@
       </ul>
     </section>
 
-    <!--
     <section id="is-bst">
       <h2>Checking If a BST is Valid</h2>
 
@@ -196,139 +200,6 @@ def isBSTUtil(node, mini, maxi):
       </div>
     </section>
 
-    <section id="insert">
-      <h2>Inserting Into a BST</h2>
-
-      <p>
-        Understanding how to insert into a given binary search tree involves
-        finding the correct spot for the new value.
-      </p>
-
-      <div class="synthesis-ui hide-control">
-        <p>
-          Use the tool below to understand how the insert into BST function would
-          work, then fill in the function in the specified area.
-        </p>
-
-        <p>
-          Use the buttons below to simulate how you think the
-          <code>insertBST</code> function should work on the displayed tree.
-        </p>
-
-        <p><b>Task:</b> <span class="instruction"></p>
-
-        <nav>
-           <ul>
-              <li>
-                <button class="move-left">
-                  Move Left
-                </button>
-              </li>
-              <li>
-                <button class="move-right">
-                  Move Right
-                </button>
-              </li>
-              <li>
-                <button class="move-up">
-                  Move Up
-                </button>
-              </li>
-              <li>
-                <button class="at-leaf">
-                  At Leaf Node
-                </button>
-              </li>
-              <li>
-                <button class="insert-right">
-                  Insert Right
-                </button>
-              </li>
-              <li>
-                <button class="insert-left">
-                  Insert Left
-                </button>
-              </li>
-              <li>
-                <button class="reset">
-                  Reset
-                </button>
-              </li>
-           </ul>
-         </nav>
-
-         <canvas class="tree-bg">
-         </canvas>
-
-         <div class="tree">
-         </div>
-
-         <button class="next-tree">
-           Next Tree
-         </button>
-
-          <div class="hide-half hide-control">
-            <p>Click the button below if you have successfully completed the function demonstration on the interactive tool above.</p>
-            <button id="synth_insert" class="synth">Demonstration Finished</button>
-          </div>
-      </div>
-
-      <p>
-        Implement the <code>insert</code> function. You can click the Run button
-        below to run your code on some sample inputs.
-      </p>
-
-      <div class="code-ui">
-        <code class="header"></code>
-        <textarea id="editor--insert" class="input">
-# Inserts a new node with the given key
-def insert(root, key):
-  # Write your code here
-  return root
-        </textarea>
-
-        <button id="run_insert" class="run">
-          Run Code on Inputs Below
-        </button>
-
-        <table>
-          <tr>
-            <th>Tree</th>
-            <th>Key</th>
-            <th>Output of Your <code>insert</code> Function</th>
-          </tr>
-          <tr>
-            <td>
-              <canvas class="tree-bg"></canvas>
-              <div class="tree tree-test-insert-1"></div>
-            </td>
-            <td>
-              4
-            </td>
-            <td>
-              <code class="output">
-              </code>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="tree tree-test-insert-2"></div>
-            </td>
-            <td>
-              5
-            </td>
-            <td>
-              <code class="output">
-              </code>
-            </td>
-          </tr>
-        </table>
-
-      </div>
-    </section>
-
-    -->
-
     <section id="search">
       <h2>Search in a BST</h2>
 
@@ -423,6 +294,116 @@ def search(root, key):
 
       <button class="run">
         Run Code on Inputs Below on Inputs Below
+      </button>
+
+      <table class="io">
+        <tr>
+          <th>Tree</th>
+          <th>Key</th>
+          <th>Output of Your <code>search</code> Function</th>
+        </tr>
+      </table>
+    </section>
+
+    <section id="insert">
+      <h2>Inserting Into a BST</h2>
+
+      <p>
+        Understanding how to insert into a given binary search tree involves
+        finding the correct spot for the new value.
+      </p>
+
+      <div class="hide-control">
+        <p>
+          First, use the buttons below to demonstrate how to complete the
+          given task. Click the "Next Tree" button to provide additional
+          demonstrations.
+        </p>
+
+        <p class="hide-half">
+          Once you have successfully completed a demonstration, click the
+          "Demonstration Finished" button.
+        </p>
+
+        <p>
+          <b>Task:</b> Inser <span class="insert-val"></span> in the BST.
+        </p>
+
+        <nav>
+           <ul>
+              <li>
+                <button class="move-left">
+                  Move Left
+                </button>
+              </li>
+              <li>
+                <button class="move-right">
+                  Move Right
+                </button>
+              </li>
+              <li>
+                <button class="move-up">
+                  Move Up
+                </button>
+              </li>
+              <li>
+                <button class="at-leaf">
+                  At Leaf Node
+                </button>
+              </li>
+              <li>
+                <button class="insert-right">
+                  Insert Right
+                </button>
+              </li>
+              <li>
+                <button class="insert-left">
+                  Insert Left
+                </button>
+              </li>
+              <li>
+                <button class="reset">
+                  Reset
+                </button>
+              </li>
+           </ul>
+         </nav>
+
+         <canvas class="tree-bg">
+         </canvas>
+
+         <div class="tree">
+         </div>
+
+         <button class="next">
+           Next Tree
+         </button>
+
+        <button class="hide-half synthesize">
+          Demonstration Finished
+        </button>
+
+        <p class="hide-control">
+          When you're done, implement the <code>insert</code> function.
+          You can click the Run button below to run your code on some sample
+          inputs.
+        </p>
+      </div>
+
+      <p class="hide-full hide-half">
+        Implement the <code>insert</code> function. You can click the Run
+        button below to run your code on some sample inputs.
+      </p>
+
+      <textarea>
+# Inserts a new node with the given key
+def insert(root, key):
+  # Write your code here
+  return root
+      </textarea>
+
+      <button class="run">
+        Run Code on Inputs Below
       </button>
 
       <table class="io">

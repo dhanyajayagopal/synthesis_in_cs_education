@@ -2,6 +2,7 @@
 
 const exerciseModules =
   { search: Search
+  , insert: Insert
   // , "insert":
   //     { "module": InsertUI
   //     , "log": []
@@ -16,8 +17,8 @@ const exerciseModules =
 
 // Library functions
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+function randomChoice(xs) {
+  return xs[Math.floor(Math.random() * xs.length)];
 }
 
 // HTTP helpers
@@ -43,20 +44,47 @@ function handleError(error) {
 
 // Common handlers
 
-function format(kind, s) {
+function loadWithFormat(kind, outer, inner) {
   if (kind == "text") {
-    return s;
+    outer.textContent = inner;
   } else if (kind == "code") {
-    return "<code>" + s + "</code>";
+    outer.innerHTML = "<code>" + inner + "</code>";
   } else if (kind == "tree") {
-    return Tree.toHtml(s);
+    outer.textContent = "";
+
+    const treeBg = document.createElement("canvas");
+    treeBg.classList.add("tree-bg");
+    outer.appendChild(treeBg);
+
+    const treeElement = document.createElement("div");
+    treeElement.classList.add("tree");
+    outer.appendChild(treeElement);
+
+    Tree.load(outer.children[1], inner);
   }
 }
 
-function fillOutputs(tableElement, outputs, kind) {
+function fillOutputs(tableElement, outputs, kind, prints) {
   for (let i = 1; i < tableElement.children.length; i++) {
-    tableElement.children[i].children[2].innerHTML =
-      format(kind, outputs[i - 1]);
+    const cell = tableElement.children[i].children[2];
+    loadWithFormat(kind, cell, outputs[i - 1]);
+
+    if (prints[i - 1] != "") {
+      const logEl = document.createElement("div");
+      logEl.classList.add("log");
+
+      const logHeader = document.createElement("h3");
+      logHeader.textContent = "Your Print Statements";
+      logEl.appendChild(logHeader);
+
+      for (const line of prints[i - 1].split(/\n/)) {
+        const lineEl = document.createElement("p");
+        lineEl.textContent = line;
+        logEl.appendChild(lineEl);
+      }
+
+      cell.appendChild(logEl);
+    }
   }
 }
 
@@ -113,7 +141,8 @@ window.addEventListener("load", function() {
             fillOutputs(
               ioTable,
               resultJson.outputs,
-              resultJson.kind
+              resultJson.kind,
+              resultJson.prints
             );
           } else {
             window.alert("Python Error\n\n" + resultJson.error);

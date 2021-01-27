@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
+import runner
 from node import *
-
-import sys
-import json
 
 def bool_to_js(b):
     if not isinstance(b, bool):
@@ -14,17 +12,7 @@ def bool_to_js(b):
     else:
         return "false"
 
-try:
-    body = json.loads(sys.stdin.read())
+def run_function(testInput, search):
+    return bool_to_js(search(node_from_js(testInput[0]), int(testInput[1])))
 
-    exec(body["code"]) # defines 'search'
-
-    outputs = [
-        bool_to_js(search(node_from_js(ti[0]), int(ti[1])))
-        for ti in body["testInputs"]
-    ]
-
-    print('{ "code": 0, "outputs": [' + ','.join(outputs) + '], "kind": "code" }')
-
-except Exception as e:
-    print('{ "code": 1, "error": ' + json.dumps(str(e)) + '}')
+runner.run(run_function, "search", "code")

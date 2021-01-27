@@ -1,38 +1,23 @@
 #!/usr/bin/env python3
 
+from runner import *
 from node import *
 
-import sys
-import json
-
 def node_to_js(node):
-    if not isinstance(b, Node) and node != None:
+    if not isinstance(node, Node) and node is not None:
         raise TypeError("Output of 'search' must be a Node (or None).")
 
     if node == None:
         return "null"
     return '{"data": ' \
-              + str(node.data) \
+              + str(node.val) \
               + ', "left": ' \
               + node_to_js(node.left) \
               + ', "right": ' \
               + node_to_js(node.right) \
               + '}'
 
-try:
-    body = json.loads(sys.stdin.read())
+def run_function(testInput, insert):
+    return node_to_js(insert(node_from_js(testInput[0]), int(testInput[1])))
 
-    exec(body["code"]) # defines 'insert'
-
-    outputs = [
-        node_to_js(search(node_from_js(ti[0]), int(ti[1])))
-        for ti in body["testInputs"]
-    ]
-
-    print('{ "outputs": [' + ','.join(outputs) + '], "kind": "tree" }')
-
-except SyntaxError as e:
-    print("Syntax error:", e, end="")
-
-except TypeError as e:
-    print("Type error:", e, end="")
+run(run_function, "insert", "tree")

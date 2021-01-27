@@ -1,7 +1,7 @@
-(function(Search) {
+(function(Insert) {
   "use strict";
 
-  Search.allInputs = [
+  Insert.allInputs = [
     [{
       "data": 5,
       "left": {
@@ -22,7 +22,7 @@
         "left": null,
         "right": null
       },
-    }, 4],
+    }, 6],
 
     [{
       "data": 8,
@@ -60,7 +60,7 @@
           "right": null
         }
       },
-    }, 14],
+    }, 2],
 
     [{
       "data": 50,
@@ -106,7 +106,7 @@
         },
         "right": null
       },
-    }, 76],
+    }, 43],
 
     [{
       "data": 7,
@@ -160,7 +160,7 @@
           },
         },
       },
-    }, 6],
+    }, 14],
 
     [{
       "data": 5,
@@ -182,7 +182,7 @@
         "left": null,
         "right": null
       },
-    }, 7],
+    }, 9],
 
     [{
       "data": 8,
@@ -220,7 +220,7 @@
           "right": null
         }
       },
-    }, 1],
+    }, 0],
 
     [{
       "data": 50,
@@ -266,7 +266,8 @@
         },
         "right": null
       },
-    }, 69],
+    }, 73],
+
 
     [{
       "data": 7,
@@ -320,10 +321,10 @@
           },
         },
       },
-    }, 15]
+    }, 16]
   ];
 
-  Search.testInputs = [
+  Insert.testInputs = [
     [{
       "data": 19,
       "left": {
@@ -365,7 +366,7 @@
           "right": null
         }
       }
-    }, 13]
-  ];
+    }, 5]
+  ]
 
-})(window.Search = window.Search || {});
+})(window.Insert = window.Insert || {});
