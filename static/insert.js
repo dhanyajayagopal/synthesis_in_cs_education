@@ -43,7 +43,7 @@ Insert.load = function(section) {
 
   // Demonstration controls
 
-  queryClass("next").addEventListener("click", function() {
+  queryClass("next-tree").addEventListener("click", function() {
     log("New Tree");
     Insert.load(section);
   });
