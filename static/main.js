@@ -43,9 +43,20 @@ function handleError(error) {
 
 // Common handlers
 
-function fillOutputs(tableElement, outputs) {
+function format(kind, s) {
+  if (kind == "text") {
+    return s;
+  } else if (kind == "code") {
+    return "<code>" + s + "</code>";
+  } else if (kind == "tree") {
+    return Tree.toHtml(s);
+  }
+}
+
+function fillOutputs(tableElement, outputs, kind) {
   for (let i = 1; i < tableElement.children.length; i++) {
-    tableElement.children[i].children[2].textContent = outputs[i - 1];
+    tableElement.children[i].children[2].innerHTML =
+      format(kind, outputs[i - 1]);
   }
 }
 
@@ -96,13 +107,28 @@ window.addEventListener("load", function() {
       })
       .then(handleHttpResponse)
       .then(serverResponse => {
-        if (serverResponse.code === SUCCESS) {
-          fillOutputs(ioTable, JSON.parse(serverResponse.result));
-        } else if (serverResponse.code === TIMEOUT) {
+        if (serverResponse.code === 0) {
+          const resultJson = JSON.parse(serverResponse.result);
+          if (resultJson.code === 0) {
+            fillOutputs(
+              ioTable,
+              resultJson.outputs,
+              resultJson.kind
+            );
+          } else {
+            window.alert("Python Error\n\n" + resultJson.error);
+            fillOutputs(
+              ioTable,
+              Array(exerciseModule.testInputs.length).fill(""),
+              "text"
+            );
+          }
+        } else if (serverResponse.code === 1) {
           fillOutputs(
             ioTable,
-            Array(exerciseModule.testInputs.length).fill("Evaluation timed out.")
-          )
+            Array(exerciseModule.testInputs.length).fill("Evaluation timed out."),
+            "text"
+          );
         }
       })
       .catch(handleError);

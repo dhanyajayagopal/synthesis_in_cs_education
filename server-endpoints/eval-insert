@@ -29,7 +29,7 @@ try:
         for ti in body["testInputs"]
     ]
 
-    print("[" + ",".join(outputs) + "]")
+    print('{ "outputs": [' + ','.join(outputs) + '], "kind": "tree" }')
 
 except SyntaxError as e:
     print("Syntax error:", e, end="")

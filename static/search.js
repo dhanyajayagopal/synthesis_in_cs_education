@@ -106,7 +106,6 @@ Search.load = function(section) {
     row.appendChild(col2);
 
     const col3 = document.createElement("td");
-    col3.textContent = "TODO";
     row.appendChild(col3);
 
     table.appendChild(row);

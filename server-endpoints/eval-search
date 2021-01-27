@@ -24,10 +24,7 @@ try:
         for ti in body["testInputs"]
     ]
 
-    print("[" + ",".join(outputs) + "]")
+    print('{ "code": 0, "outputs": [' + ','.join(outputs) + '], "kind": "code" }')
 
-except SyntaxError as e:
-    print("Syntax error:", e, end="")
-
-except TypeError as e:
-    print("Type error:", e, end="")
+except Exception as e:
+    print('{ "code": 1, "error": ' + json.dumps(str(e)) + '}')
