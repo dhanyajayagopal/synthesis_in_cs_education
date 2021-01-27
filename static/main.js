@@ -97,7 +97,6 @@ window.addEventListener("load", function() {
       .then(handleHttpResponse)
       .then(serverResponse => {
         if (serverResponse.code === SUCCESS) {
-          window.alert(serverResponse.result)
           fillOutputs(ioTable, JSON.parse(serverResponse.result));
         } else if (serverResponse.code === TIMEOUT) {
           fillOutputs(

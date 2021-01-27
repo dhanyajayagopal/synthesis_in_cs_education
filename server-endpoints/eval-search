@@ -19,8 +19,6 @@ try:
 
     exec(body["code"]) # defines 'search'
 
-    sys.stderr.write(str(body["testInputs"][0]) + "\n")
-
     outputs = [
         bool_to_js(search(node_from_js(ti[0]), int(ti[1])))
         for ti in body["testInputs"]

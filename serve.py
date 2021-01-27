@@ -72,7 +72,7 @@ class Handler(BaseHTTPRequestHandler):
             self.respond_not_found()
         try:
             output_bytes = subprocess.check_output(
-                ["./" + command],
+                ["./server-endpoints/" + command],
                 input=user_input,
                 timeout=TIMEOUT
             )
