@@ -1,58 +1,38 @@
 #!/usr/bin/env python3
 
+from node import *
+
 import sys
+import json
 
-class Node:
-    def __init__(self, d):
-        self.left = None
-        self.right = None
-        self.data = d
+def node_to_js(node):
+    if not isinstance(b, Node) and node != None:
+        raise TypeError("Output of 'search' must be a Node (or None).")
 
-def node_to_json(node):
     if node == None:
         return "null"
     return '{"data": ' \
               + str(node.data) \
               + ', "left": ' \
-              + node_to_json(node.left) \
+              + node_to_js(node.left) \
               + ', "right": ' \
-              + node_to_json(node.right) \
+              + node_to_js(node.right) \
               + '}'
 
-def sortedArrayToBST(arr): 
-    if not arr: 
-        return None
-  
-    # find middle 
-    mid = (len(arr)) // 2
-      
-    # make the middle element the root 
-    root = Node(arr[mid]) 
-      
-    # left subtree of root has all 
-    # values <arr[mid] 
-    root.left = sortedArrayToBST(arr[:mid]) 
-      
-    # right subtree of root has all  
-    # values >arr[mid] 
-    root.right = sortedArrayToBST(arr[mid+1:]) 
-    return root 
-
 try:
-    code = sys.stdin.read()
-    exec(code) # defines 'insert'
-    # Test Case 1
-    list1 = [3, 13, 23, 45, 54, 71, 89, 93, 101]
-    root1 = sortedArrayToBST(list1)
-    insert1 = 30
+    body = json.loads(sys.stdin.read())
 
-    # Test Case 2
-    list2 = [1, 3, 4, 6, 7, 8, 12, 32, 39]
-    root2 = sortedArrayToBST(list2)
-    insert2 = 2
+    exec(body["code"]) # defines 'insert'
 
-    print(node_to_json(insert(root1, insert1)))
-    print(node_to_json(insert(root2, insert2)))
+    outputs = [
+        node_to_js(search(node_from_js(ti[0]), int(ti[1])))
+        for ti in body["testInputs"]
+    ]
+
+    print("[" + ",".join(outputs) + "]")
 
 except SyntaxError as e:
     print("Syntax error:", e, end="")
+
+except TypeError as e:
+    print("Type error:", e, end="")

@@ -1,10 +1,13 @@
-(function(SearchUI) {
+(function(Search) {
 "use strict";
+
+Search.log = [];
+Search.traces = [];
 
 function log(message) {
   console.log(message);
-  TRACES["search"].push(message);
-  LOGS["search"].push(message);
+  Search.log.push(message);
+  Search.traces.push(message);
 }
 
 let tree0 =
@@ -376,9 +379,9 @@ let not_tree3 =
 const trees = [tree0, tree1, tree2, tree3, not_tree0, not_tree1, not_tree2, not_tree3];
 const searches = [4, 14, 76, 6, 7, 1, 69, 15];
 
-const sampleInputs = [[test1, search1], [tree0, 4], [tree1, 14]];
+Search.testInputs = [[test1, search1], [tree0, 4], [tree1, 14]];
 
-SearchUI.load = function(section) {
+Search.load = function(section) {
   function queryClass(name) {
     return section.querySelector("." + name);
   }
@@ -386,6 +389,8 @@ SearchUI.load = function(section) {
   function queryClassAll(name) {
     return section.querySelectorAll("." + name);
   }
+
+  // Select tree
 
   const treeElement = queryClass("tree");
 
@@ -411,7 +416,7 @@ SearchUI.load = function(section) {
 
   queryClass("next-tree").addEventListener("click", function() {
     log("New Tree");
-    SearchUI.load(section);
+    Search.load(section);
   });
 
   queryClass("found").addEventListener("click", function() {
@@ -455,7 +460,7 @@ SearchUI.load = function(section) {
 
   const table = queryClass("io");
 
-  for (const sampleInput of sampleInputs) {
+  for (const testInput of Search.testInputs) {
     const row = document.createElement("tr");
 
     const col1 = document.createElement("td");
@@ -468,7 +473,7 @@ SearchUI.load = function(section) {
     row.appendChild(col1);
 
     const col2 = document.createElement("td");
-    col2.textContent = sampleInput[1];
+    col2.textContent = testInput[1];
     row.appendChild(col2);
 
     const col3 = document.createElement("td");
@@ -477,8 +482,8 @@ SearchUI.load = function(section) {
 
     table.appendChild(row);
 
-    Tree.load(treeElement, sampleInput[0]);
+    Tree.load(treeElement, testInput[0]);
   }
 };
 
-})(window.SearchUI = window.SearchUI || {});
+})(window.Search = window.Search || {});

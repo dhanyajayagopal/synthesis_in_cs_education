@@ -1,11 +1,7 @@
 "use strict";
 
-const EXERCISES =
-  { "search":
-      { "module": SearchUI
-      , "log": []
-      , "trace": []
-      }
+const exerciseModules =
+  { search: Search
   // , "insert":
   //     { "module": InsertUI
   //     , "log": []
@@ -16,7 +12,7 @@ const EXERCISES =
   //     , "log": []
   //     , "trace": []
   //     }
-  }
+  };
 
 // Library functions
 
@@ -42,16 +38,19 @@ function handleHttpResponse(httpResponse) {
 }
 
 function handleError(error) {
-  window.alert(
-    "An error has occurred. Please inform the investigator.\n\n"
-      + error
-  );
+  console.error(error);
 }
 
 // Common handlers
 
+function fillOutputs(tableElement, outputs) {
+  for (let i = 1; i < tableElement.children.length; i++) {
+    tableElement.children[i].children[2].textContent = outputs[i - 1];
+  }
+}
+
 window.addEventListener("load", function() {
-  for (const [exerciseName, exerciseData] of Object.entries(EXERCISES)) {
+  for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
     const section = document.getElementById(exerciseName);
 
     // Synthesis UI
@@ -61,7 +60,7 @@ window.addEventListener("load", function() {
     synthesize.addEventListener("click", function() {
       fetch("http://localhost:9090/synthesize-" + exerciseName, {
         method: "POST",
-        body: JSON.stringify(exerciseData.traces),
+        body: JSON.stringify(exerciseModule.traces),
       })
       .then(handleHttpResponse)
       .then(serverResponse => {
@@ -85,27 +84,33 @@ window.addEventListener("load", function() {
     );
 
     const run = section.querySelector(".run");
-    const output = section.querySelector(".output");
+    const ioTable = section.querySelector(".io");
 
     run.addEventListener("click", function() {
-      const code = cm.getValue();
       fetch("http://localhost:9090/eval-" + exerciseName, {
         method: "POST",
-        body: code,
+        body: JSON.stringify({
+          code: cm.getValue(),
+          testInputs: exerciseModule.testInputs
+        })
       })
       .then(handleHttpResponse)
       .then(serverResponse => {
         if (serverResponse.code === SUCCESS) {
-          output.innerHTML = serverResponse.result;
+          window.alert(serverResponse.result)
+          fillOutputs(ioTable, JSON.parse(serverResponse.result));
         } else if (serverResponse.code === TIMEOUT) {
-          output.innerHTML = "Evaluation timed out."
+          fillOutputs(
+            ioTable,
+            Array(exerciseModule.testInputs.length).fill("Evaluation timed out.")
+          )
         }
       })
       .catch(handleError);
     });
 
-    // Individualized UI handling
+    // Individualized UI and test case handling
 
-    exerciseData.module.load(section);
+    exerciseModule.load(section);
   }
 });
