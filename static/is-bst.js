@@ -10,16 +10,6 @@ function log(message) {
   IsBst.traces.push(message);
 }
 
-// UI states
-
-const DEFAULT_STATE = 0;
-const COMPARE_STATE = 1;
-
-// Mutable state
-
-let state = DEFAULT_STATE;
-let firstComparedData = null;
-
 IsBst.load = function(section) {
   function queryClass(name) {
     return section.querySelector("." + name);
@@ -43,19 +33,17 @@ IsBst.load = function(section) {
   const root = treeElement.children[0];
   root.classList.add("current");
 
-  // Demonstration controls TODO
-  /*
+  // Demonstration controls
 
-  let moveLeft = widget.querySelector(".move-left");
-  let moveRight = widget.querySelector(".move-right");
-  let moveUp = widget.querySelector(".move-up");
-  let atLeaf = widget.querySelector(".at-leaf");
-  let reset = widget.querySelector(".reset");
-  let returnTrue = widget.querySelector(".return-true");
-  let returnFalse = widget.querySelector(".return-false");
-  let next = widget.querySelector(".next-tree");
+  // UI states
+  const DEFAULT_STATE = 0;
+  const COMPARE_STATE = 1;
 
-  for (let data of widget.querySelectorAll(".data")) {
+  // Mutable state
+  let state = DEFAULT_STATE;
+  let firstComparedData = null;
+
+  for (const data of queryClassAll("data")) {
     (function(data) {
       data.addEventListener("click", function() {
         if (state === COMPARE_STATE) {
@@ -67,7 +55,7 @@ IsBst.load = function(section) {
 
             secondComparedData.classList.add("value-for-comparison");
 
-            const currentData = widget.querySelector(".current > .data");
+            const currentData = section.querySelector(".current > .data");
             const currentValue = parseInt(currentData.innerHTML);
             const firstComparedValue = parseInt(firstComparedData.innerHTML);
             const secondComparedValue = parseInt(secondComparedData.innerHTML);
@@ -94,41 +82,35 @@ IsBst.load = function(section) {
     })(data);
   }
 
-  next.addEventListener("click", function() {
+  queryClass("next-tree").addEventListener("click", function() {
     log("New Tree");
-    widget.querySelector(".tree").removeChild(root);
-    index = getRandomInt(8);
-    root = generateTreeHTML(trees[index]);
-    widget.querySelector(".tree").appendChild(root);
-    root.classList.add("current");
-    redraw();
+    IsBst.load();
   });
 
-  returnTrue.addEventListener("click", function() {
+  queryClass("return-true").addEventListener("click", function() {
     if (state === DEFAULT_STATE) {
       log("Returned True");
     }
   });
 
-  returnFalse.addEventListener("click", function() {
+  queryClass("return-false").addEventListener("click", function() {
     // TODO check if in correct state
-    log("Returned False")
+    log("Returned False");
   });
 
-  atLeaf.addEventListener("click", function() {
+  queryClass("at-leaf").addEventListener("click", function() {
     // TODO check if in correct state
-    log("Reached leaf node - no new min and max.")
+    log("Reached leaf node - no new min and max.");
   });
 
-  reset.addEventListener("click", function () {
-    log("Resetting the Log")
-    let current = widget.querySelector(".current");
-    current.classList.remove("current");
+  queryClass("reset").addEventListener("click", function () {
+    log("Resetting the Log");
+    queryClass("current").classList.remove("current");
     root.classList.add("current");
   });
 
-  moveLeft.addEventListener("click", function() {
-    let current = widget.querySelector(".current");
+  queryClass("move-left").addEventListener("click", function() {
+    const current = queryClass("current");
     if (!current.children[1].classList.contains("leaf")) {
       state = COMPARE_STATE;
       window.alert("Please select a new min and a new max.")
@@ -138,8 +120,8 @@ IsBst.load = function(section) {
     }
   });
 
-  moveRight.addEventListener("click", function() {
-    let current = widget.querySelector(".current");
+  queryClass("move-right").addEventListener("click", function() {
+    const current = queryClass("current");
     if (!current.children[2].classList.contains("leaf")){
       state = COMPARE_STATE;
       window.alert("Please select a new min and a new max.")
@@ -149,15 +131,14 @@ IsBst.load = function(section) {
     }
   });
 
-  moveUp.addEventListener("click", function() {
-    let current = widget.querySelector(".current");
+  queryClass("move-up").addEventListener("click", function() {
+    const current = queryClass("current");
     if (!current.parentElement.classList.contains("tree")) {
       log("Moved Up");
       current.classList.remove("current");
       current.parentElement.classList.add("current");
     }
   });
-  */
 
   // Sample inputs
 
