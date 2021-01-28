@@ -1,0 +1,4 @@
+- Make demonstration UI prettier
+- Get tracing and logging working properly
+- Write and hook up the synthesizers
+- Edit tutorial text
