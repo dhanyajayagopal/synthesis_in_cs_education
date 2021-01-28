@@ -201,6 +201,10 @@ nav button {
   margin-left: 10px;
 }
 
+.io th {
+  border: 1px solid black;
+}
+
 .io td {
   border: 1px solid black;
   position: relative;
