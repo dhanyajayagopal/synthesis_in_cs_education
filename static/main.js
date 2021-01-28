@@ -57,7 +57,8 @@ function loadWithFormat(kind, outer, inner) {
 
 function fillOutputs(tableElement, outputs, kind, prints) {
   for (let i = 1; i < tableElement.children.length; i++) {
-    const cell = tableElement.children[i].children[2];
+    const row = tableElement.children[i];
+    const cell = row.children[row.children.length - 1];
     loadWithFormat(kind, cell, outputs[i - 1]);
 
     if (prints[i - 1] != "") {
@@ -129,6 +130,7 @@ window.addEventListener("load", function() {
       .then(handleHttpResponse)
       .then(serverResponse => {
         if (serverResponse.code === 0) {
+          console.log(serverResponse);
           const resultJson = JSON.parse(serverResponse.result);
           if (resultJson.code === 0) {
             fillOutputs(

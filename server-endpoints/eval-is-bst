@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
 
-from runner import *
-from node import *
+import runner
+import common
 
-def bool_to_js(b):
-    if not isinstance(b, bool):
-        raise TypeError("Output of 'isBST' must be a boolean.")
+def run_function(testInput, is_bst):
+    return common.bool_to_js(
+        is_bst(common.node_from_js(testInput)),
+        "is_bst"
+    )
 
-    if b:
-        return "true"
-    else:
-        return "false"
-
-def run_function(testInput, insert):
-    return node_to_js(isBST(node_from_js(testInput[0])))
-
-run(run_function, "insert", "tree")
+runner.run(run_function, "is_bst", "code")

@@ -1,23 +1,12 @@
 #!/usr/bin/env python3
 
-from runner import *
-from node import *
-
-def node_to_js(node):
-    if not isinstance(node, Node) and node is not None:
-        raise TypeError("Output of 'search' must be a Node (or None).")
-
-    if node == None:
-        return "null"
-    return '{"data": ' \
-              + str(node.val) \
-              + ', "left": ' \
-              + node_to_js(node.left) \
-              + ', "right": ' \
-              + node_to_js(node.right) \
-              + '}'
+import runner
+import common
 
 def run_function(testInput, insert):
-    return node_to_js(insert(node_from_js(testInput[0]), int(testInput[1])))
+    return common.node_to_js(
+        insert(common.node_from_js(testInput[0]), int(testInput[1])),
+        "insert"
+    )
 
-run(run_function, "insert", "tree")
+runner.run(run_function, "insert", "tree")

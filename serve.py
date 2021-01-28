@@ -7,10 +7,10 @@ import json
 ENDPOINTS = [
     "eval-insert",
     "eval-search",
-    # "eval-is-bst",
+    "eval-is-bst",
     "synthesize-insert",
     "synthesize-search",
-    # "synthesize-is-bst",
+    "synthesize-is-bst"
 ]
 
 PORT = 9090
