@@ -80,7 +80,7 @@ IsBst.init = function(section) {
 
   section.querySelector(".next-tree").addEventListener("click", function() {
     log("New Tree");
-    load();
+    load(section);
   });
 
   section.querySelector(".return-true").addEventListener("click", function() {
