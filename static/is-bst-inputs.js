@@ -1,8 +1,8 @@
-(function(Search) {
-"use strict";
+(function(IsBst) {
+  "use strict";
 
-Search.allInputs = [
-  [{
+IsBst.allInputs = [
+  {
     "data": 5,
     "left": {
       "data": 3,
@@ -22,9 +22,9 @@ Search.allInputs = [
       "left": null,
       "right": null
     },
-  }, 4],
+  },
 
-  [{
+  {
     "data": 8,
     "left": {
       "data": 3,
@@ -60,9 +60,9 @@ Search.allInputs = [
         "right": null
       }
     },
-  }, 14],
+  },
 
-  [{
+  {
     "data": 50,
     "left": {
       "data": 17,
@@ -106,9 +106,9 @@ Search.allInputs = [
       },
       "right": null
     },
-  }, 76],
+  },
 
-  [{
+  {
     "data": 7,
     "left": {
       "data": 5,
@@ -160,9 +160,11 @@ Search.allInputs = [
         },
       },
     },
-  }, 6],
+  },
 
-  [{
+  // NOT BINARY SEARCH TREES
+
+  {
     "data": 5,
     "left": {
       "data": 3,
@@ -172,7 +174,7 @@ Search.allInputs = [
         "right": null
       },
       "right": {
-        "data": 4,
+        "data": 6,
         "left": null,
         "right": null
       }
@@ -182,9 +184,9 @@ Search.allInputs = [
       "left": null,
       "right": null
     },
-  }, 7],
+  },
 
-  [{
+  {
     "data": 8,
     "left": {
       "data": 3,
@@ -194,7 +196,7 @@ Search.allInputs = [
         "right": null
       },
       "right": {
-        "data": 6,
+        "data": 9,
         "left": {
           "data": 4,
           "left": null,
@@ -220,9 +222,9 @@ Search.allInputs = [
         "right": null
       }
     },
-  }, 1],
+  },
 
-  [{
+  {
     "data": 50,
     "left": {
       "data": 17,
@@ -255,7 +257,7 @@ Search.allInputs = [
         "data": 54,
         "left": null,
         "right": {
-          "data": 69,
+          "data": 45,
           "left": {
             "data": 67,
             "left": null,
@@ -266,9 +268,9 @@ Search.allInputs = [
       },
       "right": null
     },
-  }, 69],
+  },
 
-  [{
+  {
     "data": 7,
     "left": {
       "data": 5,
@@ -320,52 +322,126 @@ Search.allInputs = [
         },
       },
     },
-  }, 15]
+  }
 ];
 
-Search.testInputs = [
-  [{
-    "data": 19,
+IsBst.testInputs = [
+  {
+    "data": 5,
     "left": {
-      "data": 7,
+      "data": 3,
       "left": {
-        "data": 4,
+        "data": 2,
         "left": null,
         "right": null
       },
       "right": {
-        "data": 13,
+        "data": 4,
         "left": null,
+        "right": null
+      }
+    },
+    "right": {
+      "data": 7,
+      "left": null,
+      "right": null
+    },
+  },
+  {
+    "data": 8,
+    "left": {
+      "data": 3,
+      "left": {
+        "data": 1,
+        "left": null,
+        "right": null
+      },
+      "right": {
+        "data": 6,
+        "left": {
+          "data": 4,
+          "left": null,
+          "right": null
+        },
         "right": {
-          "data": 15,
+          "data": 7,
           "left": null,
           "right": null
         }
       }
     },
     "right": {
-      "data": 34,
-      "left": {
-        "data": 4,
+      "data": 10,
+      "left": null,
+      "right": {
+        "data": 14,
         "left": {
-          "data": 23,
+          "data": 13,
           "left": null,
           "right": null
         },
         "right": null
-      },
-      "right": null
+      }
     },
-    "right": {
-      "data": 56,
-      "left": null,
+  },
+  {
+    "data": 5,
+    "left": {
+      "data": 3,
+      "left": {
+        "data": 2,
+        "left": null,
+        "right": null
+      },
       "right": {
-        "data": 71,
+        "data": 6,
         "left": null,
         "right": null
       }
-    }
-  }, 13]
+    },
+    "right": {
+      "data": 7,
+      "left": null,
+      "right": null
+    },
+  },
+  {
+    "data": 8,
+    "left": {
+      "data": 3,
+      "left": {
+        "data": 1,
+        "left": null,
+        "right": null
+      },
+      "right": {
+        "data": 9,
+        "left": {
+          "data": 4,
+          "left": null,
+          "right": null
+        },
+        "right": {
+          "data": 7,
+          "left": null,
+          "right": null
+        }
+      }
+    },
+    "right": {
+      "data": 10,
+      "left": null,
+      "right": {
+        "data": 12,
+        "left": {
+          "data": 13,
+          "left": null,
+          "right": null
+        },
+        "right": null
+      }
+    },
+  }
 ];
 
-})(window.Search = window.Search || {});
+})(window.IsBst = window.IsBst || {});

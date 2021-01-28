@@ -1,19 +1,10 @@
 "use strict";
 
 const exerciseModules =
-  { search: Search
-  , insert: Insert
-  // , "insert":
-  //     { "module": InsertUI
-  //     , "log": []
-  //     , "trace": []
-  //     }
-  // , "is-bst":
-  //     { "module": IsBstUI
-  //     , "log": []
-  //     , "trace": []
-  //     }
-  };
+  { "search": Search
+  , "insert": Insert
+  , "is-bst": IsBst
+  }
 
 // Library functions
 
@@ -87,6 +78,8 @@ function fillOutputs(tableElement, outputs, kind, prints) {
     }
   }
 }
+
+// Main
 
 window.addEventListener("load", function() {
   for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
