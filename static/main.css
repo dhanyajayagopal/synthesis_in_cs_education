@@ -126,6 +126,12 @@ button span {
   color: #b42022;
 }
 
+.search-val,
+.insert-val {
+  font-weight: bold;
+  color: #b42022;
+}
+
 nav {
   padding: 0 10px;
 }
