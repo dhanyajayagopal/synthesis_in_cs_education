@@ -130,7 +130,6 @@ window.addEventListener("load", function() {
       .then(handleHttpResponse)
       .then(serverResponse => {
         if (serverResponse.code === 0) {
-          console.log(serverResponse);
           const resultJson = JSON.parse(serverResponse.result);
           if (resultJson.code === 0) {
             fillOutputs(

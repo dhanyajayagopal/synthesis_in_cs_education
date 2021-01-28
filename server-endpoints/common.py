@@ -17,18 +17,18 @@ def node_to_js(node, func_name):
         raise TypeError("Output of '" \
                             + func_name \
                             + "' must be a Node (or None).")
+    if node == None:
+        return "null"
 
     if not isinstance(node.val, int):
         raise TypeError("Node values must be integers.")
 
-    if not isinstance(node.left, Node):
-        raise TypeError("The left subtree of a Node must be a Node.")
+    if not isinstance(node.left, Node) and node.left is not None:
+        raise TypeError("The left subtree of a Node must be a Node (or None).")
 
-    if not isinstance(node.right, Node):
-        raise TypeError("The right subtree of a Node must be a Node.")
+    if not isinstance(node.right, Node) and node.right is not None:
+        raise TypeError("The right subtree of a Node must be a Node (or None).")
 
-    if node == None:
-        return "null"
     return '{"data": ' \
               + str(node.val) \
               + ', "left": ' \
