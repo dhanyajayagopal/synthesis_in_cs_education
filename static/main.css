@@ -49,6 +49,7 @@ button span {
 
 .CodeMirror {
   border: 1px solid #CCCCCC;
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
