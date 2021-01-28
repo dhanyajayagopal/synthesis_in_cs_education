@@ -1,4 +1,5 @@
 - Make demonstration UI prettier
+- Settle on an is-bst demonstration UI
 - Get tracing and logging working properly
 - Write and hook up the synthesizers
 - Edit tutorial text
