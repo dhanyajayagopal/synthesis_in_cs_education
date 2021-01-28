@@ -159,6 +159,6 @@ window.addEventListener("load", function() {
 
     // Individualized UI and test case handling
 
-    exerciseModule.load(section);
+    exerciseModule.init(section);
   }
 });

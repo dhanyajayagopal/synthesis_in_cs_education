@@ -10,18 +10,10 @@ function log(message) {
   IsBst.traces.push(message);
 }
 
-IsBst.load = function(section) {
-  function queryClass(name) {
-    return section.querySelector("." + name);
-  }
-
-  function queryClassAll(name) {
-    return section.querySelectorAll("." + name);
-  }
-
+function load(section) {
   // Select tree element
 
-  const treeElement = queryClass("tree");
+  const treeElement = section.querySelector(".tree");
 
   // Choose a tree
 
@@ -32,6 +24,10 @@ IsBst.load = function(section) {
   Tree.load(treeElement, tree);
   const root = treeElement.children[0];
   root.classList.add("current");
+}
+
+IsBst.init = function(section) {
+  load(section);
 
   // Demonstration controls
 
@@ -43,7 +39,7 @@ IsBst.load = function(section) {
   let state = DEFAULT_STATE;
   let firstComparedData = null;
 
-  for (const data of queryClassAll("data")) {
+  for (const data of section.querySelectorAll(".data")) {
     (function(data) {
       data.addEventListener("click", function() {
         if (state === COMPARE_STATE) {
@@ -82,35 +78,35 @@ IsBst.load = function(section) {
     })(data);
   }
 
-  queryClass("next-tree").addEventListener("click", function() {
+  section.querySelector(".next-tree").addEventListener("click", function() {
     log("New Tree");
-    IsBst.load();
+    load();
   });
 
-  queryClass("return-true").addEventListener("click", function() {
+  section.querySelector(".return-true").addEventListener("click", function() {
     if (state === DEFAULT_STATE) {
       log("Returned True");
     }
   });
 
-  queryClass("return-false").addEventListener("click", function() {
+  section.querySelector(".return-false").addEventListener("click", function() {
     // TODO check if in correct state
     log("Returned False");
   });
 
-  queryClass("at-leaf").addEventListener("click", function() {
+  section.querySelector(".at-leaf").addEventListener("click", function() {
     // TODO check if in correct state
     log("Reached leaf node - no new min and max.");
   });
 
-  queryClass("reset").addEventListener("click", function () {
+  section.querySelector(".reset").addEventListener("click", function () {
     log("Resetting the Log");
-    queryClass("current").classList.remove("current");
+    section.querySelector(".current").classList.remove("current");
     root.classList.add("current");
   });
 
-  queryClass("move-left").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-left").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.children[1].classList.contains("leaf")) {
       state = COMPARE_STATE;
       window.alert("Please select a new min and a new max.")
@@ -120,8 +116,8 @@ IsBst.load = function(section) {
     }
   });
 
-  queryClass("move-right").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-right").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.children[2].classList.contains("leaf")){
       state = COMPARE_STATE;
       window.alert("Please select a new min and a new max.")
@@ -131,8 +127,8 @@ IsBst.load = function(section) {
     }
   });
 
-  queryClass("move-up").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-up").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.parentElement.classList.contains("tree")) {
       log("Moved Up");
       current.classList.remove("current");
@@ -142,7 +138,7 @@ IsBst.load = function(section) {
 
   // Sample inputs
 
-  const table = queryClass("io");
+  const table = section.querySelector(".io");
 
   for (const testInput of IsBst.testInputs) {
     const row = document.createElement("tr");

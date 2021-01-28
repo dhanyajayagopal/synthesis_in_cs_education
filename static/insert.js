@@ -10,18 +10,10 @@ function log(message) {
   Insert.traces.push(message);
 }
 
-Insert.load = function(section) {
-  function queryClass(name) {
-    return section.querySelector("." + name);
-  }
-
-  function queryClassAll(name) {
-    return section.querySelectorAll("." + name);
-  }
-
+function load(section) {
   // Select tree element
 
-  const treeElement = queryClass("tree");
+  const treeElement = section.querySelector(".tree");
 
   // Choose a tree
 
@@ -37,33 +29,37 @@ Insert.load = function(section) {
 
   // Update insert value in HTML
 
-  for (const el of queryClassAll("insert-val")) {
+  for (const el of section.querySelectorAll(".insert-val")) {
     el.textContent = insertVal;
   }
+};
+
+Insert.init = function(section) {
+  load(section);
 
   // Demonstration controls
 
-  queryClass("next-tree").addEventListener("click", function() {
+  section.querySelector(".next-tree").addEventListener("click", function() {
     log("New Tree");
-    Insert.load(section);
+    load(section);
   });
 
-  queryClass("insert-right").addEventListener("click", function() {
+  section.querySelector(".insert-right").addEventListener("click", function() {
     log("Insert as Right Child")
   });
 
-  queryClass("insert-left").addEventListener("click", function() {
+  section.querySelector(".insert-left").addEventListener("click", function() {
     log("Insert as Left Child")
   });
 
-  queryClass("reset").addEventListener("click", function () {
+  section.querySelector(".reset").addEventListener("click", function () {
     log("Resetting the Log")
-    queryClass("current").classList.remove("current");
+    section.querySelector(".current").classList.remove("current");
     root.classList.add("current");
   });
 
-  queryClass("move-left").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-left").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.children[1].classList.contains("leaf")) {
       log("Moved Left");
       current.classList.remove("current");
@@ -71,8 +67,8 @@ Insert.load = function(section) {
     }
   });
 
-  queryClass("move-right").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-right").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.children[2].classList.contains("leaf")){
       log("Moved Right");
       current.classList.remove("current");
@@ -80,8 +76,8 @@ Insert.load = function(section) {
     }
   });
 
-  queryClass("move-up").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-up").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.parentElement.classList.contains("tree")) {
       log("Moved Up");
       current.classList.remove("current");
@@ -91,7 +87,7 @@ Insert.load = function(section) {
 
   // Sample inputs
 
-  const table = queryClass("io");
+  const table = section.querySelector(".io");
 
   for (const testInput of Insert.testInputs) {
     const row = document.createElement("tr");
@@ -116,6 +112,6 @@ Insert.load = function(section) {
 
     Tree.load(inputTreeElement, testInput[0]);
   }
-};
+}
 
 })(window.Insert = window.Insert || {});

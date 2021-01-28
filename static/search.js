@@ -10,18 +10,10 @@ function log(message) {
   Search.traces.push(message);
 }
 
-Search.load = function(section) {
-  function queryClass(name) {
-    return section.querySelector("." + name);
-  }
-
-  function queryClassAll(name) {
-    return section.querySelectorAll("." + name);
-  }
-
+function load(section) {
   // Select tree element
 
-  const treeElement = queryClass("tree");
+  const treeElement = section.querySelector(".tree");
 
   // Choose a tree
 
@@ -37,29 +29,33 @@ Search.load = function(section) {
 
   // Update search value in HTML
 
-  for (const el of queryClassAll("search-val")) {
+  for (const el of section.querySelectorAll(".search-val")) {
     el.textContent = searchVal;
   }
+};
+
+Search.init = function(section) {
+  load(section);
 
   // Demonstration controls
 
-  queryClass("next-tree").addEventListener("click", function() {
+  section.querySelector(".next-tree").addEventListener("click", function() {
     log("New Tree");
-    Search.load(section);
+    load(section);
   });
 
-  queryClass("found").addEventListener("click", function() {
+  section.querySelector(".found").addEventListener("click", function() {
     log("Found Node")
   });
 
-  queryClass("reset").addEventListener("click", function () {
+  section.querySelector(".reset").addEventListener("click", function () {
     log("Resetting the Log")
-    queryClass("current").classList.remove("current");
+    section.querySelector(".current").classList.remove("current");
     root.classList.add("current");
   });
 
-  queryClass("move-left").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-left").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.children[1].classList.contains("leaf")) {
       log("Moved Left");
       current.classList.remove("current");
@@ -67,8 +63,8 @@ Search.load = function(section) {
     }
   });
 
-  queryClass("move-right").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-right").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.children[2].classList.contains("leaf")){
       log("Moved Right");
       current.classList.remove("current");
@@ -76,8 +72,8 @@ Search.load = function(section) {
     }
   });
 
-  queryClass("move-up").addEventListener("click", function() {
-    const current = queryClass("current");
+  section.querySelector(".move-up").addEventListener("click", function() {
+    const current = section.querySelector(".current");
     if (!current.parentElement.classList.contains("tree")) {
       log("Moved Up");
       current.classList.remove("current");
@@ -87,7 +83,7 @@ Search.load = function(section) {
 
   // Sample inputs
 
-  const table = queryClass("io");
+  const table = section.querySelector(".io");
 
   for (const testInput of Search.testInputs) {
     const row = document.createElement("tr");
@@ -112,6 +108,6 @@ Search.load = function(section) {
 
     Tree.load(inputTreeElement, testInput[0]);
   }
-};
+}
 
 })(window.Search = window.Search || {});
