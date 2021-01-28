@@ -255,7 +255,7 @@ Insert.allInputs = [
         "data": 54,
         "left": null,
         "right": {
-          "data": 69,
+          "data": 68,
           "left": {
             "data": 67,
             "left": null,
