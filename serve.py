@@ -5,6 +5,7 @@ import subprocess
 import json
 
 ENDPOINTS = [
+    "log",
     "eval-insert",
     "eval-search",
     "eval-is-bst",

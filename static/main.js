@@ -6,6 +6,8 @@ const exerciseModules =
   , "is-bst": IsBst
   }
 
+const codeMirrors = {};
+
 // Library functions
 
 function randomChoice(xs) {
@@ -80,9 +82,22 @@ function fillOutputs(tableElement, outputs, kind, prints) {
   }
 }
 
+function getApplicationState() {
+  const state = {};
+  for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
+    state[exerciseName] = {};
+    state[exerciseName].log = exerciseModule.log;
+    state[exerciseName].traces = exerciseModule.traces;
+    state[exerciseName].code = codeMirrors[exerciseName].getValue();
+  }
+  return state;
+}
+
 // Main
 
 window.addEventListener("load", function() {
+  // Interaction
+
   for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
     const section = document.getElementById(exerciseName);
 
@@ -109,7 +124,7 @@ window.addEventListener("load", function() {
 
     // Running code
 
-    const cm = CodeMirror.fromTextArea(
+    codeMirrors[exerciseName] = CodeMirror.fromTextArea(
       section.querySelector("textarea"),
       { lineNumbers: true
       , mode: "python"
@@ -123,7 +138,7 @@ window.addEventListener("load", function() {
       fetch("http://localhost:9090/eval-" + exerciseName, {
         method: "POST",
         body: JSON.stringify({
-          code: cm.getValue(),
+          code: codeMirrors[exerciseName].getValue(),
           testInputs: exerciseModule.testInputs
         })
       })
@@ -160,5 +175,25 @@ window.addEventListener("load", function() {
     // Individualized UI and test case handling
 
     exerciseModule.init(section);
+  }
+
+  // Logging
+
+  for (const button of document.querySelectorAll("button")) {
+    button.addEventListener("click", function() {
+      if (button.classList.length < 1) {
+        console.error("Button without class:");
+        console.error(button);
+        return;
+      }
+
+      fetch("http://localhost:9090/log", {
+        method: "POST",
+        body: JSON.stringify({
+          action: button.classList[0],
+          state: getApplicationState()
+        })
+      });
+    });
   }
 });

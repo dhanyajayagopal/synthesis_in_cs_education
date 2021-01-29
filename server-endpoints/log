@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import sys
+import json
+
+from datetime import datetime
+
+body = json.loads(sys.stdin.read())
+
+with open("log.txt", "a") as f:
+    f.write(str(datetime.now()) \
+                + "," \
+                + str(body["action"]) \
+                + "," \
+                + str(body["state"]) \
+                + "\n")
