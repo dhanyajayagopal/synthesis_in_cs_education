@@ -1,5 +1,7 @@
 "use strict";
 
+// Demonstration state
+
 const exerciseModules =
   { "search": Search
   , "insert": Insert
@@ -9,6 +11,8 @@ const exerciseModules =
 const codeMirrors = {};
 
 const traces = {};
+
+const demonstrationCounters = {};
 
 // Library functions
 
@@ -94,6 +98,56 @@ function getApplicationState() {
   return state;
 }
 
+function newDemonstration(exerciseName) {
+  const demonstrationName = document.createElement("span");
+  demonstrationName.textContent =
+    ( "Currently performing Demonstration "
+    + (demonstrationCounters[exerciseName] + 1)
+    + "..."
+    );
+
+  const restartButton = document.createElement("button");
+  restartButton.classList.add("restart");
+  restartButton.textContent = "Restart";
+
+  const latestDemonstration = document.createElement("li");
+  latestDemonstration.appendChild(demonstrationName);
+  latestDemonstration.appendChild(restartButton);
+
+  document
+    .getElementById(exerciseName)
+    .querySelector(".demonstrations ol")
+    .appendChild(latestDemonstration);
+}
+
+function onDemonstrationComplete(exerciseName) {
+  const demonstrationName = document.createElement("span");
+  demonstrationName.textContent =
+    ( "Demonstration "
+    + (demonstrationCounters[exerciseName] + 1)
+    + "(completed)"
+    );
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.textContent = "Delete";
+
+  const completedDemonstration = document.createElement("li");
+  completedDemonstration.appendChild(demonstrationName);
+  completedDemonstration.appendChild(deleteButton);
+
+  const list =
+    document
+      .getElementById(exerciseName)
+      .querySelector(".demonstrations ol");
+  list.removeChild(list.lastChild);
+  list.appendChild(latestDemonstration);
+
+  demonstrationCounters[exerciseName] += 1;
+
+  newDemonstration(exerciseName);
+}
+
 // Main
 
 window.addEventListener("load", function() {
@@ -103,6 +157,9 @@ window.addEventListener("load", function() {
     const section = document.getElementById(exerciseName);
 
     // Synthesis UI
+
+    demonstrationCounters[exerciseName] = 0;
+    newDemonstration(exerciseName);
 
     const synthesize = section.querySelector(".synthesize");
 
@@ -175,7 +232,7 @@ window.addEventListener("load", function() {
 
     // Individualized UI and test case handling
 
-    exerciseModule.init(section);
+    exerciseModule.init(section, onDemonstrationComplete);
   }
 
   // Logging

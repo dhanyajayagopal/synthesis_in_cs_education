@@ -45,6 +45,7 @@ button {
 button span {
   font-weight: normal;
   display: block;
+  font-size: 0.7em;
 }
 
 .CodeMirror {
@@ -141,7 +142,7 @@ nav ul {
   align-items: stretch;
   justify-content: space-between;
 
-  height: 80px;
+  height: 75px;
   padding: 3px;
 
   border: 1px solid #AAAAFF;
@@ -157,6 +158,7 @@ nav li {
 nav button {
   width: 100%;
   height: 100%;
+  font-size: 1em;
 }
 
 .run {
@@ -169,15 +171,68 @@ nav button {
   border-bottom-color: #4ba663;
 }
 
-.synthesize {
+.return {
   background-color: #27c650;
   border-bottom-color: #4ba663;
+  color: #002200;
 }
 
-.reset {
+.delete,
+.restart {
   background-color: #b42022;
   border-bottom-color: #6c0c0d;
   color: #FFFFFF;
+}
+
+/* Info Display */
+
+.info-display {
+  display: flex;
+  margin: 20px 0;
+}
+
+.info-display .tree {
+  width: 600px;
+}
+
+.demonstrations h3 {
+  margin: 0;
+  text-align: center;
+}
+
+.demonstrations ol {
+  margin: 5px 0;
+  padding: 0;
+  border: 1px solid #888888;
+}
+
+.demonstrations ol li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #AAEEAA;
+  padding: 5px 10px;
+  list-style-type: none;
+}
+
+.demonstrations ol li:nth-child(2n) {
+  border-top: 1px solid #888888;
+  border-bottom: 1px solid #888888;
+}
+
+.demonstrations ol li:last-child {
+  background-color: #EEEE88;
+  font-style: italic;
+}
+
+.demonstrations ol li button {
+  flex: 0 0 70px;
+}
+
+.demonstrations .synthesize {
+  width: 100%;
+  font-size: 1em;
 }
 
 /* Input-output table */

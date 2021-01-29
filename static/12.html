@@ -251,35 +251,36 @@ def is_bst(root):
               </button>
             </li>
             <li>
-              <button class="at-leaf">
-                At Leaf Node
+              <button class="return-true finish">
+                Return True
               </button>
             </li>
             <li>
-              <button class="found">
-                Found Node
+              <button class="return-false finish">
+                Return False
               </button>
             </li>
           </ul>
         </nav>
 
-        <canvas class="tree-bg">
-        </canvas>
+        <div class="info-display">
+          <canvas class="tree-bg">
+          </canvas>
 
-        <div class="tree">
+          <div class="tree">
+          </div>
+
+          <div class="demonstrations">
+            <h3>Your Demonstrations</h3>
+
+            <ol>
+            </ol>
+
+            <button class="synthesize hide-half">
+              Generate Code Based on Completed Demonstrations
+            </button>
+          </div>
         </div>
-
-        <button class="next-tree">
-          Next Tree
-        </button>
-
-        <button class="synthesize hide-half">
-          Demonstration Finished
-        </button>
-
-        <button class="reset">
-          Reset
-        </button>
 
         <p>
           When you're done, implement the <code>search</code> function.
