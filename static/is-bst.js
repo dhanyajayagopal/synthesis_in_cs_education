@@ -1,13 +1,11 @@
 (function(IsBst) {
 "use strict";
 
-IsBst.log = [];
-IsBst.traces = [];
+IsBst.currentTrace = [];
 
 function log(message) {
   console.log(message);
-  IsBst.log.push(message);
-  IsBst.traces.push(message);
+  IsBst.currentTrace.push(message);
 }
 
 function load(section) {

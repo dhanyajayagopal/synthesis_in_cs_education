@@ -1,13 +1,11 @@
 (function(Search) {
 "use strict";
 
-Search.log = [];
-Search.traces = [];
+Search.currentTrace = [];
 
 function log(message) {
   console.log(message);
-  Search.log.push(message);
-  Search.traces.push(message);
+  Search.currentTrace.push(message);
 }
 
 function load(section) {

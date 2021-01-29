@@ -1,13 +1,11 @@
 (function(Insert) {
 "use strict";
 
-Insert.log = [];
-Insert.traces = [];
+Insert.currentTrace = [];
 
 function log(message) {
   console.log(message);
-  Insert.log.push(message);
-  Insert.traces.push(message);
+  Insert.currentTrace.push(message);
 }
 
 function load(section) {

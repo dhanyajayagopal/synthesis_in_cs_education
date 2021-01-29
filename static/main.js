@@ -8,6 +8,8 @@ const exerciseModules =
 
 const codeMirrors = {};
 
+const traces = {};
+
 // Library functions
 
 function randomChoice(xs) {
@@ -86,8 +88,7 @@ function getApplicationState() {
   const state = {};
   for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
     state[exerciseName] = {};
-    state[exerciseName].log = exerciseModule.log;
-    state[exerciseName].traces = exerciseModule.traces;
+    state[exerciseName].currentTrace = exerciseModule.currentTrace;
     state[exerciseName].code = codeMirrors[exerciseName].getValue();
   }
   return state;
@@ -108,7 +109,7 @@ window.addEventListener("load", function() {
     synthesize.addEventListener("click", function() {
       fetch("http://localhost:9090/synthesize-" + exerciseName, {
         method: "POST",
-        body: JSON.stringify(exerciseModule.traces),
+        body: JSON.stringify(traces[exerciseName]),
       })
       .then(handleHttpResponse)
       .then(serverResponse => {
