@@ -37,23 +37,12 @@ Insert.init = function(section) {
 
   // Demonstration controls
 
-  section.querySelector(".next-tree").addEventListener("click", function() {
-    log("New Tree");
-    load(section);
-  });
-
   section.querySelector(".insert-right").addEventListener("click", function() {
     log("Insert as Right Child")
   });
 
   section.querySelector(".insert-left").addEventListener("click", function() {
     log("Insert as Left Child")
-  });
-
-  section.querySelector(".reset").addEventListener("click", function () {
-    log("Resetting the Log")
-    section.querySelector(".current").classList.remove("current");
-    root.classList.add("current");
   });
 
   section.querySelector(".move-left").addEventListener("click", function() {

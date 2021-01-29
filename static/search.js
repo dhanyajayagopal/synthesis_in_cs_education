@@ -32,24 +32,17 @@ function load(section) {
   }
 };
 
-Search.init = function(section) {
+Search.init = function(section, onDemonstrationComplete) {
   load(section);
 
   // Demonstration controls
 
-  section.querySelector(".next-tree").addEventListener("click", function() {
-    log("New Tree");
-    load(section);
+  section.querySelector(".return-true").addEventListener("click", function() {
+    log("Return True")
   });
 
-  section.querySelector(".found").addEventListener("click", function() {
-    log("Found Node")
-  });
-
-  section.querySelector(".reset").addEventListener("click", function () {
-    log("Resetting the Log")
-    section.querySelector(".current").classList.remove("current");
-    root.classList.add("current");
+  section.querySelector(".return-false").addEventListener("click", function() {
+    log("Return False")
   });
 
   section.querySelector(".move-left").addEventListener("click", function() {

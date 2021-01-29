@@ -76,11 +76,6 @@ IsBst.init = function(section) {
     })(data);
   }
 
-  section.querySelector(".next-tree").addEventListener("click", function() {
-    log("New Tree");
-    load(section);
-  });
-
   section.querySelector(".return-true").addEventListener("click", function() {
     if (state === DEFAULT_STATE) {
       log("Returned True");
@@ -95,12 +90,6 @@ IsBst.init = function(section) {
   section.querySelector(".at-leaf").addEventListener("click", function() {
     // TODO check if in correct state
     log("Reached leaf node - no new min and max.");
-  });
-
-  section.querySelector(".reset").addEventListener("click", function () {
-    log("Resetting the Log");
-    section.querySelector(".current").classList.remove("current");
-    root.classList.add("current");
   });
 
   section.querySelector(".move-left").addEventListener("click", function() {
