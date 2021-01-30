@@ -191,32 +191,6 @@ window.addEventListener("load", function() {
   for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
     const section = document.getElementById(exerciseName);
 
-    // Synthesis UI
-
-    const synthesize = section.querySelector(".synthesize");
-
-    synthesize.addEventListener("click", function() {
-      fetch("http://localhost:9090/synthesize-" + exerciseName, {
-        method: "POST",
-        body: JSON.stringify(Object.values(traces[exerciseName])),
-      })
-      .then(handleHttpResponse)
-      .then(serverResponse => {
-        // TODO (just alert result for now)
-        if (serverResponse.code === SUCCESS) {
-          window.alert(serverResponse.result);
-        } else if (serverResponse.code === TIMEOUT) {
-          window.alert("Evaluation timed out.");
-        }
-      })
-      .catch(handleError);
-    });
-
-    // Demonstration handling
-
-    traces[exerciseName] = {};
-    appendLatestDemonstrationHTML(exerciseName);
-
     // Running code
 
     codeMirrors[exerciseName] = CodeMirror.fromTextArea(
@@ -266,6 +240,32 @@ window.addEventListener("load", function() {
       })
       .catch(handleError);
     });
+
+    // Synthesis UI
+
+    const synthesize = section.querySelector(".synthesize");
+
+    synthesize.addEventListener("click", function() {
+      fetch("http://localhost:9090/synthesize-" + exerciseName, {
+        method: "POST",
+        body: JSON.stringify(Object.values(traces[exerciseName])),
+      })
+      .then(handleHttpResponse)
+      .then(serverResponse => {
+        // TODO (just alert result for now)
+        if (serverResponse.code === SUCCESS) {
+          codeMirrors[exerciseName].setValue(serverResponse.result);
+        } else if (serverResponse.code === TIMEOUT) {
+          window.alert("Evaluation timed out, please try a different set of demonstrations.");
+        }
+      })
+      .catch(handleError);
+    });
+
+    // Demonstration handling
+
+    traces[exerciseName] = {};
+    appendLatestDemonstrationHTML(exerciseName);
 
     // Individualized UI and test case handling
 

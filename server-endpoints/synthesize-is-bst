@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+
+import sys
+
+# TODO For now, just echo out the input
+print(sys.stdin.read())
