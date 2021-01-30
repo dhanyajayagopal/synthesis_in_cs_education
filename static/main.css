@@ -119,7 +119,7 @@ button span {
 .task {
   border: 1px solid #b42022;
   border-radius: 5px;
-  margin: 10px;
+  margin: 10px 0;
   padding: 10px;
 }
 
@@ -131,10 +131,6 @@ button span {
 .insert-val {
   font-weight: bold;
   color: #b42022;
-}
-
-nav {
-  padding: 0 10px;
 }
 
 nav ul {
