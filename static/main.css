@@ -171,7 +171,7 @@ nav button {
   border-bottom-color: #4ba663;
 }
 
-.return {
+.finish {
   background-color: #27c650;
   border-bottom-color: #4ba663;
   color: #002200;
@@ -204,6 +204,7 @@ nav button {
   margin: 5px 0;
   padding: 0;
   border: 1px solid #888888;
+  border-bottom: none;
 }
 
 .demonstrations ol li {
@@ -214,10 +215,6 @@ nav button {
   background-color: #AAEEAA;
   padding: 5px 10px;
   list-style-type: none;
-}
-
-.demonstrations ol li:nth-child(2n) {
-  border-top: 1px solid #888888;
   border-bottom: 1px solid #888888;
 }
 

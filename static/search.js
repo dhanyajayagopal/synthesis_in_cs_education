@@ -1,23 +1,31 @@
 (function(Search) {
 "use strict";
 
-Search.currentTrace = [];
+let section = undefined;
+let currentIndex = undefined;
+let currentTrace = undefined;
 
 function log(message) {
   console.log(message);
-  Search.currentTrace.push(message);
+  currentTrace.push(message);
 }
 
-function load(section) {
+function load(newTree) {
+  // Reset trace
+
+  currentTrace = [];
+
   // Select tree element
 
   const treeElement = section.querySelector(".tree");
 
   // Choose a tree
 
-  const randomInput = randomChoice(Search.allInputs);
-  const tree = randomInput[0];
-  const searchVal = randomInput[1];
+  if (newTree) {
+    currentIndex = newRandInt(Search.allInputs.length, currentIndex)
+  }
+  const tree = Search.allInputs[currentIndex][0];
+  const searchVal = Search.allInputs[currentIndex][1];
 
   // Load the tree
 
@@ -32,17 +40,27 @@ function load(section) {
   }
 };
 
-Search.init = function(section, onDemonstrationComplete) {
-  load(section);
+Search.restart = function() {
+  load(false);
+}
+
+Search.init = function(sec, onDemonstrationComplete) {
+  section = sec;
+
+  load(true);
 
   // Demonstration controls
 
   section.querySelector(".return-true").addEventListener("click", function() {
     log("Return True")
+    onDemonstrationComplete(currentTrace);
+    load(true);
   });
 
   section.querySelector(".return-false").addEventListener("click", function() {
     log("Return False")
+    onDemonstrationComplete(currentTrace);
+    load(true);
   });
 
   section.querySelector(".move-left").addEventListener("click", function() {

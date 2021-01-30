@@ -1,21 +1,30 @@
 (function(IsBst) {
 "use strict";
 
-IsBst.currentTrace = [];
+let section = undefined;
+let currentIndex = undefined;
+let currentTrace = undefined;
 
 function log(message) {
   console.log(message);
-  IsBst.currentTrace.push(message);
+  currentTrace.push(message);
 }
 
-function load(section) {
+function load(newTree) {
+  // Reset trace
+
+  currentTrace = [];
+
   // Select tree element
 
   const treeElement = section.querySelector(".tree");
 
   // Choose a tree
 
-  const tree = randomChoice(IsBst.allInputs);
+  if (newTree) {
+    currentIndex = newRandInt(IsBst.allInputs.length, currentIndex);
+  }
+  const tree = IsBst.allInputs[currentIndex];
 
   // Load the tree
 
@@ -24,8 +33,14 @@ function load(section) {
   root.classList.add("current");
 }
 
-IsBst.init = function(section) {
-  load(section);
+IsBst.restart = function() {
+  load(false);
+}
+
+IsBst.init = function(sec, onDemonstrationComplete) {
+  section = sec;
+
+  load(true);
 
   // Demonstration controls
 
@@ -79,12 +94,16 @@ IsBst.init = function(section) {
   section.querySelector(".return-true").addEventListener("click", function() {
     if (state === DEFAULT_STATE) {
       log("Returned True");
+      onDemonstrationComplete(currentTrace);
+      load(true);
     }
   });
 
   section.querySelector(".return-false").addEventListener("click", function() {
     // TODO check if in correct state
     log("Returned False");
+    onDemonstrationComplete(currentTrace);
+    load(true);
   });
 
   section.querySelector(".at-leaf").addEventListener("click", function() {

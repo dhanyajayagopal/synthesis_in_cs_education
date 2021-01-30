@@ -1,23 +1,27 @@
 (function(Insert) {
 "use strict";
 
-Insert.currentTrace = [];
+let section = undefined;
+let currentIndex = undefined;
+let currentTrace = undefined;
 
 function log(message) {
   console.log(message);
-  Insert.currentTrace.push(message);
+  currentTrace.push(message);
 }
 
-function load(section) {
+function load(newTree) {
   // Select tree element
 
   const treeElement = section.querySelector(".tree");
 
   // Choose a tree
 
-  const randomInput = randomChoice(Insert.allInputs);
-  const tree = randomInput[0];
-  const insertVal = randomInput[1];
+  if (newTree) {
+    currentIndex = newRandInt(Insert.allInputs.length, currentIndex);
+  }
+  const tree = Insert.allInputs[currentIndex][0];
+  const insertVal = Insert.allInputs[currentIndex][1];
 
   // Load the tree
 
@@ -32,17 +36,27 @@ function load(section) {
   }
 };
 
-Insert.init = function(section) {
-  load(section);
+Insert.restart = function() {
+  load(false);
+}
+
+Insert.init = function(sec, onDemonstrationComplete) {
+  section = sec;
+
+  load(true);
 
   // Demonstration controls
 
   section.querySelector(".insert-right").addEventListener("click", function() {
     log("Insert as Right Child")
+    onDemonstrationComplete(currentTrace);
+    load(true);
   });
 
   section.querySelector(".insert-left").addEventListener("click", function() {
     log("Insert as Left Child")
+    onDemonstrationComplete(currentTrace);
+    load(true);
   });
 
   section.querySelector(".move-left").addEventListener("click", function() {

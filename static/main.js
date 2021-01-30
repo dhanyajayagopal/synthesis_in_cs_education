@@ -12,12 +12,20 @@ const codeMirrors = {};
 
 const traces = {};
 
-const demonstrationCounters = {};
-
 // Library functions
 
-function randomChoice(xs) {
-  return xs[Math.floor(Math.random() * xs.length)];
+// Returns a random integer in [0, n).
+function randInt(n) {
+  return Math.floor(Math.random() * n);
+}
+
+// Returns a random integer in [0, n) \ x.
+function newRandInt(n, x) {
+  let candidate = x;
+  while (candidate === x) {
+    candidate = randInt(n);
+  }
+  return candidate;
 }
 
 // HTTP helpers
@@ -98,11 +106,46 @@ function getApplicationState() {
   return state;
 }
 
-function newDemonstration(exerciseName) {
+function currentCounter(exerciseName) {
+  return Math.max(-1, ...Object.keys(traces[exerciseName])) + 1;
+}
+
+function appendCompletedDemonstrationHTML(exerciseName) {
+  const counter = currentCounter(exerciseName);
+
+  const demonstrationName = document.createElement("span");
+  demonstrationName.textContent =
+    ( "Demonstration "
+    + (counter + 1)
+    + " (completed)"
+    );
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.textContent = "Delete";
+
+  const completedDemonstration = document.createElement("li");
+  completedDemonstration.appendChild(demonstrationName);
+  completedDemonstration.appendChild(deleteButton);
+
+  document
+    .getElementById(exerciseName)
+    .querySelector(".demonstrations ol")
+    .appendChild(completedDemonstration);
+
+  deleteButton.addEventListener("click", function() {
+    completedDemonstration.parentElement.removeChild(completedDemonstration);
+    delete traces[exerciseName][counter];
+  });
+}
+
+function appendLatestDemonstrationHTML(exerciseName) {
+  const counter = currentCounter(exerciseName);
+
   const demonstrationName = document.createElement("span");
   demonstrationName.textContent =
     ( "Currently performing Demonstration "
-    + (demonstrationCounters[exerciseName] + 1)
+    + (counter + 1)
     + "..."
     );
 
@@ -118,34 +161,26 @@ function newDemonstration(exerciseName) {
     .getElementById(exerciseName)
     .querySelector(".demonstrations ol")
     .appendChild(latestDemonstration);
+
+  restartButton.addEventListener("click", function() {
+    exerciseModules[exerciseName].restart();
+  });
 }
 
-function onDemonstrationComplete(exerciseName) {
-  const demonstrationName = document.createElement("span");
-  demonstrationName.textContent =
-    ( "Demonstration "
-    + (demonstrationCounters[exerciseName] + 1)
-    + "(completed)"
-    );
-
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete");
-  deleteButton.textContent = "Delete";
-
-  const completedDemonstration = document.createElement("li");
-  completedDemonstration.appendChild(demonstrationName);
-  completedDemonstration.appendChild(deleteButton);
+function onDemonstrationComplete(exerciseName, trace) {
+  const counter = currentCounter(exerciseName);
 
   const list =
     document
       .getElementById(exerciseName)
-      .querySelector(".demonstrations ol");
+      .querySelector(".demonstrations ol")
   list.removeChild(list.lastChild);
-  list.appendChild(latestDemonstration);
 
-  demonstrationCounters[exerciseName] += 1;
+  appendCompletedDemonstrationHTML(exerciseName);
 
-  newDemonstration(exerciseName);
+  traces[exerciseName][counter] = trace;
+
+  appendLatestDemonstrationHTML(exerciseName);
 }
 
 // Main
@@ -158,15 +193,12 @@ window.addEventListener("load", function() {
 
     // Synthesis UI
 
-    demonstrationCounters[exerciseName] = 0;
-    newDemonstration(exerciseName);
-
     const synthesize = section.querySelector(".synthesize");
 
     synthesize.addEventListener("click", function() {
       fetch("http://localhost:9090/synthesize-" + exerciseName, {
         method: "POST",
-        body: JSON.stringify(traces[exerciseName]),
+        body: JSON.stringify(Object.values(traces[exerciseName])),
       })
       .then(handleHttpResponse)
       .then(serverResponse => {
@@ -179,6 +211,11 @@ window.addEventListener("load", function() {
       })
       .catch(handleError);
     });
+
+    // Demonstration handling
+
+    traces[exerciseName] = {};
+    appendLatestDemonstrationHTML(exerciseName);
 
     // Running code
 
@@ -232,7 +269,10 @@ window.addEventListener("load", function() {
 
     // Individualized UI and test case handling
 
-    exerciseModule.init(section, onDemonstrationComplete);
+    exerciseModule.init(
+      section,
+      trace => onDemonstrationComplete(exerciseName, trace)
+    );
   }
 
   // Logging
