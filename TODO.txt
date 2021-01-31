@@ -5,4 +5,3 @@
       logging
 - Write and hook up the synthesizers
 - Edit tutorial text
-- Figure out server situation
