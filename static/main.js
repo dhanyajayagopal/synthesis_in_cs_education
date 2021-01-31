@@ -1,5 +1,21 @@
 "use strict";
 
+const debug = true;
+
+// URL Handling
+
+const ngrokUrl =
+  debug
+    ? ""
+    : window.prompt("Please enter the code the researcher has provided you.");
+
+function makeUrl(url) {
+  if (debug) {
+    return "http://localhost:9090/" + url;
+  }
+  return "http://" + ngrokUrl + ".ngrok.io/";
+}
+
 // Demonstration state
 
 const exerciseModules =
@@ -204,7 +220,7 @@ window.addEventListener("load", function() {
     const ioTable = section.querySelector(".io");
 
     run.addEventListener("click", function() {
-      fetch("http://localhost:9090/eval-" + exerciseName, {
+      fetch(makeUrl("eval-" + exerciseName), {
         method: "POST",
         body: JSON.stringify({
           code: codeMirrors[exerciseName].getValue(),
@@ -246,7 +262,7 @@ window.addEventListener("load", function() {
     const synthesize = section.querySelector(".synthesize");
 
     synthesize.addEventListener("click", function() {
-      fetch("http://localhost:9090/synthesize-" + exerciseName, {
+      fetch(makeUrl("synthesize-" + exerciseName), {
         method: "POST",
         body: JSON.stringify(Object.values(traces[exerciseName])),
       })
@@ -285,7 +301,7 @@ window.addEventListener("load", function() {
         return;
       }
 
-      fetch("http://localhost:9090/log", {
+      fetch(makeUrl("log"), {
         method: "POST",
         body: JSON.stringify({
           action: button.classList[0],
