@@ -1,4 +1,9 @@
-- Make demonstration UI prettier
-- Write and hook up the synthesizers
-- Edit tutorial text
-- Allow IO examples to be editable for key
+Dhanya:
+  - Explain algorithm in prose for user
+  - Make examples only have depth 3
+  - Come up with some negative examples for search()
+
+Justin:
+  - Make demonstration UI prettier
+  - Edit tutorial text
+  - Allow IO examples to be editable for key
