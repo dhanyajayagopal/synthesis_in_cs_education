@@ -70,10 +70,6 @@ button span {
 
 /* Trees */
 
-.tree {
-  font-family: "Times New Roman", serif;
-}
-
 .tree-bg {
   position: absolute;
   z-index: -1;
@@ -96,7 +92,7 @@ button span {
 }
 
 .data {
-  background-color: white;
+  background-color: #EEEEEE;
   border: 1px solid black;
   border-radius: 50%;
   width: 30px;
@@ -107,10 +103,23 @@ button span {
 }
 
 .current > .data {
+  border-color: red;
   color: red;
+  background-color: #FFEEEE;
+  border-width: 2px;
+  font-weight: bold;
+  line-height: 26px;
+}
+
+.slot > .data {
+  background-color: white;
+  border-style: dashed;
+  width: 15px;
+  height: 15px;
 }
 
 .value-for-comparison {
+  border-color: blue;
   color: blue;
 }
 
@@ -131,6 +140,12 @@ button span {
 .insert-val {
   font-weight: bold;
   color: #b42022;
+}
+
+button .insert-val {
+  display: inline;
+  color: inherit;
+  font: inherit;
 }
 
 nav ul {
@@ -188,7 +203,7 @@ nav button {
 }
 
 .info-display .tree {
-  width: 600px;
+  flex: 0 0 520px;
 }
 
 .demonstrations h3 {

@@ -8,26 +8,42 @@ function center(node, relative) {
   }
 }
 
-Tree.toHtml = function recur(tree) {
+Tree.toHtml = function recur(tree, selectableLeaves) {
   if (tree === null) {
-    const empty = document.createElement("div");
-    empty.classList.add("leaf");
-    return empty;
-  }
+    if (selectableLeaves) {
+      const data = document.createElement("div");
+      data.classList.add("data");
 
-  const root = document.createElement("div");
-  root.classList.add("node");
+      const leftLeaf = document.createElement("div");
+      leftLeaf.classList.add("leaf");
+
+      const rightLeaf = document.createElement("div");
+      rightLeaf.classList.add("leaf");
+
+      const slot = document.createElement("div");
+      slot.classList.add("node")
+      slot.classList.add("slot");
+      slot.appendChild(data);
+      slot.appendChild(leftLeaf);
+      slot.appendChild(rightLeaf);
+
+      return slot;
+    } else {
+      const empty = document.createElement("leaf");
+      empty.classList.add("leaf");
+      return empty;
+    }
+  }
 
   const data = document.createElement("div");
   data.classList.add("data");
   data.textContent = tree.data;
+
+  const root = document.createElement("div");
+  root.classList.add("node");
   root.appendChild(data);
-
-  const left = recur(tree.left);
-  const right = recur(tree.right);
-
-  root.appendChild(left);
-  root.appendChild(right);
+  root.appendChild(recur(tree.left, selectableLeaves));
+  root.appendChild(recur(tree.right, selectableLeaves));
 
   return root;
 };
@@ -71,8 +87,8 @@ Tree.drawBackground = function(treeElement) {
   }
 };
 
-Tree.load = function(treeElement, treeData) {
-  const rootElement = Tree.toHtml(treeData);
+Tree.load = function(treeElement, treeData, selectableLeaves) {
+  const rootElement = Tree.toHtml(treeData, selectableLeaves);
   treeElement.textContent = "";
   treeElement.appendChild(rootElement);
   Tree.drawBackground(treeElement);

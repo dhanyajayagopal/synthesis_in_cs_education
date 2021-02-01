@@ -5,9 +5,16 @@ let section = undefined;
 let currentIndex = undefined;
 let currentTrace = undefined;
 
-function log(message) {
-  console.log(message);
-  currentTrace.push(message);
+function log(section, action) {
+  const data = section.querySelector(".current > .data");
+  const root = data.textContent === "" ? -1 : parseInt(data.textContent);
+  const entry = {
+    "action": action,
+    "root": root,
+    "key": Search.allInputs[currentIndex][1],
+  }
+  console.log(entry);
+  currentTrace.push(entry);
 }
 
 function load(newTree) {
@@ -29,7 +36,7 @@ function load(newTree) {
 
   // Load the tree
 
-  Tree.load(treeElement, tree);
+  Tree.load(treeElement, tree, true);
   const root = treeElement.children[0];
   root.classList.add("current");
 
@@ -52,13 +59,13 @@ Search.init = function(sec, onDemonstrationComplete) {
   // Demonstration controls
 
   section.querySelector(".return-true").addEventListener("click", function() {
-    log("Return True")
+    log(section, "return-true")
     onDemonstrationComplete(currentTrace);
     load(true);
   });
 
   section.querySelector(".return-false").addEventListener("click", function() {
-    log("Return False")
+    log(section, "return-false")
     onDemonstrationComplete(currentTrace);
     load(true);
   });
@@ -66,7 +73,7 @@ Search.init = function(sec, onDemonstrationComplete) {
   section.querySelector(".move-left").addEventListener("click", function() {
     const current = section.querySelector(".current");
     if (!current.children[1].classList.contains("leaf")) {
-      log("Moved Left");
+      log(section, "move-left");
       current.classList.remove("current");
       current.children[1].classList.add("current");
     }
@@ -75,18 +82,9 @@ Search.init = function(sec, onDemonstrationComplete) {
   section.querySelector(".move-right").addEventListener("click", function() {
     const current = section.querySelector(".current");
     if (!current.children[2].classList.contains("leaf")){
-      log("Moved Right");
+      log(section, "move-right");
       current.classList.remove("current");
       current.children[2].classList.add("current");
-    }
-  });
-
-  section.querySelector(".move-up").addEventListener("click", function() {
-    const current = section.querySelector(".current");
-    if (!current.parentElement.classList.contains("tree")) {
-      log("Moved Up");
-      current.classList.remove("current");
-      current.parentElement.classList.add("current");
     }
   });
 
@@ -115,7 +113,7 @@ Search.init = function(sec, onDemonstrationComplete) {
 
     table.appendChild(row);
 
-    Tree.load(inputTreeElement, testInput[0]);
+    Tree.load(inputTreeElement, testInput[0], false);
   }
 }
 

@@ -5,12 +5,23 @@ let section = undefined;
 let currentIndex = undefined;
 let currentTrace = undefined;
 
-function log(message) {
-  console.log(message);
-  currentTrace.push(message);
+function log(section, action) {
+  const data = section.querySelector(".current > .data");
+  const root = data.textContent === "" ? -1 : parseInt(data.textContent);
+  const entry = {
+    "action": action,
+    "root": root,
+    "key": Insert.allInputs[currentIndex][1],
+  }
+  console.log(entry);
+  currentTrace.push(entry);
 }
 
 function load(newTree) {
+  // Reset trace
+
+  currentTrace = [];
+
   // Select tree element
 
   const treeElement = section.querySelector(".tree");
@@ -25,7 +36,7 @@ function load(newTree) {
 
   // Load the tree
 
-  Tree.load(treeElement, tree);
+  Tree.load(treeElement, tree, true);
   const root = treeElement.children[0];
   root.classList.add("current");
 
@@ -47,14 +58,8 @@ Insert.init = function(sec, onDemonstrationComplete) {
 
   // Demonstration controls
 
-  section.querySelector(".insert-right").addEventListener("click", function() {
-    log("Insert as Right Child")
-    onDemonstrationComplete(currentTrace);
-    load(true);
-  });
-
-  section.querySelector(".insert-left").addEventListener("click", function() {
-    log("Insert as Left Child")
+  section.querySelector(".insert").addEventListener("click", function() {
+    log(section, "insert")
     onDemonstrationComplete(currentTrace);
     load(true);
   });
@@ -62,7 +67,7 @@ Insert.init = function(sec, onDemonstrationComplete) {
   section.querySelector(".move-left").addEventListener("click", function() {
     const current = section.querySelector(".current");
     if (!current.children[1].classList.contains("leaf")) {
-      log("Moved Left");
+      log(section, "move-left");
       current.classList.remove("current");
       current.children[1].classList.add("current");
     }
@@ -71,18 +76,9 @@ Insert.init = function(sec, onDemonstrationComplete) {
   section.querySelector(".move-right").addEventListener("click", function() {
     const current = section.querySelector(".current");
     if (!current.children[2].classList.contains("leaf")){
-      log("Moved Right");
+      log(section, "move-right");
       current.classList.remove("current");
       current.children[2].classList.add("current");
-    }
-  });
-
-  section.querySelector(".move-up").addEventListener("click", function() {
-    const current = section.querySelector(".current");
-    if (!current.parentElement.classList.contains("tree")) {
-      log("Moved Up");
-      current.classList.remove("current");
-      current.parentElement.classList.add("current");
     }
   });
 
@@ -111,7 +107,7 @@ Insert.init = function(sec, onDemonstrationComplete) {
 
     table.appendChild(row);
 
-    Tree.load(inputTreeElement, testInput[0]);
+    Tree.load(inputTreeElement, testInput[0], false);
   }
 }
 

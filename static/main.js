@@ -21,7 +21,7 @@ function makeUrl(url) {
 const exerciseModules =
   { "search": Search
   , "insert": Insert
-  , "is-bst": IsBst
+  // , "is-bst": IsBst
   }
 
 const codeMirrors = {};
@@ -83,7 +83,7 @@ function loadWithFormat(kind, outer, inner) {
     treeElement.classList.add("tree");
     outer.appendChild(treeElement);
 
-    Tree.load(outer.children[1], inner);
+    Tree.load(outer.children[1], inner, false);
   }
 }
 

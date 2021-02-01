@@ -18,6 +18,9 @@ def indent_lines(indent, lines):
         s += indent_string + line + "\n"
     return s
 
+def flatten(xss):
+    return [x for xs in xss for x in xs]
+
 # Grammar
 
 [
@@ -113,15 +116,18 @@ def fill(traces, action):
 # Output
 
 def make_sketch(filling):
-    s = "def insert(root, key):\n"
+    header = '# Inserts a new node with the value "key" into the given binary search tree ("root").\n# You can assume "key" does not appear in "root".\ndef insert(root, key):\n'
+    if None in filling.values():
+        return header + "    # Could not find code that satisfies your demonstrations.\n    # Try deleting some demonstrations and trying again.\n    return root"
+
+    s = header
     for action in actions:
-        if filling[action] is not None:
-            if filling[action][0] == BoolTrue:
-                return s + indent_lines(1, find(sketch, action))
-            if filling[action][0] == BoolFalse:
-                continue
-            s += "    if " + show(filling[action]) + ":\n"
-            s += indent_lines(2, find(sketch, action))
+        if filling[action][0] == BoolTrue:
+            return s + indent_lines(1, find(sketch, action))
+        if filling[action][0] == BoolFalse:
+            continue
+        s += "    if " + show(filling[action]) + ":\n"
+        s += indent_lines(2, find(sketch, action))
     return s
 
 
@@ -134,7 +140,7 @@ def make_sketch(filling):
 #     {"key": 9, "root": -1, "action": "insert"},
 # ]
 
-traces = json.loads(sys.stdin.read())
+traces = flatten(json.loads(sys.stdin.read()))
 
 filling = { action: fill(traces, action) for action in actions }
 

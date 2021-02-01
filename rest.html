@@ -69,6 +69,7 @@
       </ul>
     </section>
 
+    <!--
     <section id="is-bst">
       <h2>Checking If a BST is Valid</h2>
 
@@ -160,7 +161,7 @@
         button below to run your code on some sample inputs.
       </p>
 
-      <textarea id="editor--isbst" class="input">
+      <textarea>
 # Returns True if the given binary tree ("root") is a binary search tree and its
 # root value is between "minimum" and "maximum", inclusive. Otherwise, returns False.
 def is_bst_helper(root, minimum, maximum):
@@ -183,6 +184,7 @@ def is_bst(root):
         </tr>
       </table>
     </section>
+    -->
 
     <section id="search">
       <h2>Search in a BST</h2>
@@ -218,11 +220,6 @@ def is_bst(root):
             <li>
               <button class="move-right">
                 Move Right
-              </button>
-            </li>
-            <li>
-              <button class="move-up">
-                Move Up
               </button>
             </li>
             <li>
@@ -326,23 +323,8 @@ def search(root, key):
               </button>
             </li>
             <li>
-              <button class="move-up">
-                Move Up
-              </button>
-            </li>
-            <li>
-              <button class="at-leaf">
-                At Leaf Node
-              </button>
-            </li>
-            <li>
-              <button class="insert-right">
-                Insert Right
-              </button>
-            </li>
-            <li>
-              <button class="insert-left">
-                Insert Left
+              <button class="insert finish">
+                Insert <span class="insert-val"></span>
               </button>
             </li>
           </ul>
