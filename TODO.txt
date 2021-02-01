@@ -1,7 +1,4 @@
 - Make demonstration UI prettier
-- Settle on an is-bst demonstration UI
-- Get tracing working properly
-    - We don't actually need a demonstrationlog anymore because of our server
-      logging
 - Write and hook up the synthesizers
 - Edit tutorial text
+- Allow IO examples to be editable for key
