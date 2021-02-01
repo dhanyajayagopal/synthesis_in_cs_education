@@ -69,7 +69,7 @@ function handleError(error) {
 
 function loadWithFormat(kind, outer, inner) {
   if (kind == "text") {
-    outer.textContent = inner;
+    outer.innerHTML = inner;
   } else if (kind == "code") {
     outer.innerHTML = "<code>" + inner + "</code>";
   } else if (kind == "tree") {
@@ -87,10 +87,25 @@ function loadWithFormat(kind, outer, inner) {
   }
 }
 
-function fillOutputs(tableElement, outputs, kind, prints) {
+function fillOutputs(tableElement, inputs, outputs, kind, prints) {
   for (let i = 1; i < tableElement.children.length; i++) {
     const row = tableElement.children[i];
     const cell = row.children[row.children.length - 1];
+
+    if (inputs[i - 1][1] === -1) {
+      loadWithFormat("text", cell, 'No value for &ldquo;key&rdquo; provided.');
+      continue;
+    }
+
+    if (inputs[i - 1][1] === -2) {
+      loadWithFormat(
+        "text",
+        cell,
+        'Invalid input. Please make sure your value for &ldquo;key&rdquo; is a number.'
+      );
+      continue;
+    }
+
     loadWithFormat(kind, cell, outputs[i - 1]);
 
     if (prints[i - 1] != "") {
@@ -234,6 +249,7 @@ window.addEventListener("load", function() {
           if (resultJson.code === 0) {
             fillOutputs(
               ioTable,
+              exerciseModule.testInputs,
               resultJson.outputs,
               resultJson.kind,
               resultJson.prints
@@ -242,6 +258,7 @@ window.addEventListener("load", function() {
             window.alert("Python Error\n\n" + resultJson.error);
             fillOutputs(
               ioTable,
+              exerciseModule.testInputs,
               Array(exerciseModule.testInputs.length).fill(""),
               "text"
             );
@@ -249,6 +266,7 @@ window.addEventListener("load", function() {
         } else if (serverResponse.code === 1) {
           fillOutputs(
             ioTable,
+            exerciseModule.testInputs,
             Array(exerciseModule.testInputs.length).fill("Evaluation timed out."),
             "text"
           );

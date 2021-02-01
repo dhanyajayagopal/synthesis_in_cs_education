@@ -251,6 +251,12 @@ nav button {
   text-align: center;
 }
 
+.io input {
+  width: 50px;
+  font-size: 1em;
+  text-align: center;
+}
+
 .io h3 {
   font-size: 1em;
 }

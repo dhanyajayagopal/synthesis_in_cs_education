@@ -99,7 +99,18 @@ Insert.init = function(sec, onDemonstrationComplete) {
     row.appendChild(col1);
 
     const col2 = document.createElement("td");
-    col2.textContent = testInput[1];
+    const keyBox = document.createElement("input")
+    keyBox.type = "text";
+    keyBox.addEventListener("input", function() {
+      console.log(keyBox);
+      if (keyBox.value.trim() === "") {
+        testInput[1] = -1;
+      } else {
+        const value = parseInt(keyBox.value);
+        testInput[1] = isNaN(value) ? -2 : value;
+      }
+    });
+    col2.appendChild(keyBox);
     row.appendChild(col2);
 
     const col3 = document.createElement("td");

@@ -366,7 +366,7 @@ Insert.testInputs = [
         "right": null
       }
     }
-  }, 5]
+  }, -1]
 ]
 
 })(window.Insert = window.Insert || {});

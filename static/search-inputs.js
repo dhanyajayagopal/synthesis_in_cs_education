@@ -365,7 +365,7 @@ Search.testInputs = [
         "right": null
       }
     }
-  }, 13]
+  }, -1]
 ];
 
 })(window.Search = window.Search || {});
