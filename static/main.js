@@ -21,7 +21,6 @@ function makeUrl(url) {
 const exerciseModules =
   { "search": Search
   , "insert": Insert
-  // , "is-bst": IsBst
   }
 
 const codeMirrors = {};
