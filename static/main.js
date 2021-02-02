@@ -213,6 +213,18 @@ function onDemonstrationComplete(exerciseName, trace) {
   appendLatestDemonstrationHTML(exerciseName);
 }
 
+function logPageChange(page) {
+  console.log(page);
+  fetch(makeUrl("log"), {
+    method: "POST",
+    body: JSON.stringify({
+      group: "page-change",
+      action: page,
+      state: getApplicationState()
+    })
+  });
+}
+
 // Main
 
 window.addEventListener("load", function() {
@@ -306,25 +318,87 @@ window.addEventListener("load", function() {
       section,
       trace => onDemonstrationComplete(exerciseName, trace)
     );
-  }
 
-  // Logging
+    // Logging
 
-  for (const button of document.querySelectorAll("button")) {
-    button.addEventListener("click", function() {
-      if (button.classList.length < 1) {
-        console.error("Button without class:");
-        console.error(button);
-        return;
-      }
+    for (const button of section.querySelectorAll("button:not(.page-control)")) {
+      button.addEventListener("click", function() {
+        if (button.classList.length < 1) {
+          console.error("Button without class:");
+          console.error(button);
+          return;
+        }
 
-      fetch(makeUrl("log"), {
-        method: "POST",
-        body: JSON.stringify({
-          action: button.classList[0],
-          state: getApplicationState()
-        })
+        fetch(makeUrl("log"), {
+          method: "POST",
+          body: JSON.stringify({
+            group: exerciseName,
+            action: button.classList[0],
+            state: getApplicationState()
+          })
+        });
       });
-    });
+    }
   }
+
+  // Page handling
+
+  const task1 = document.getElementById("search");
+  const task2 = document.getElementById("insert");
+
+  const beginTask1 = document.getElementById("begin-task-1");
+  const reviewTask1 = document.getElementById("review-task-1");
+  const finishTask1 = document.getElementById("finish-task-1");
+
+  const returnTask2 = document.getElementById("return-task-2");
+  const finishTask2 = document.getElementById("finish-task-2");
+
+  task1.style.display = "none";
+  task2.style.display = "none";
+
+  beginTask1.style.display = "block";
+  reviewTask1.style.display = "none";
+  finishTask1.style.display = "block";
+
+  returnTask2.style.display = "none";
+  finishTask2.style.display = "block";
+
+  beginTask1.addEventListener("click", function() {
+    logPageChange(1);
+    task1.style.display = "block";
+    beginTask1.style.display = "none";
+  });
+
+  reviewTask1.addEventListener("click", function() {
+    logPageChange(1);
+    task1.style.display = "block";
+    task2.style.display = "none";
+    reviewTask1.style.display = "none";
+    returnTask2.style.display = "block";
+    task1.scrollIntoView();
+  });
+
+  finishTask1.addEventListener("click", function() {
+    logPageChange(2);
+    task1.style.display = "none";
+    task2.style.display = "block";
+    reviewTask1.style.display = "block";
+    finishTask1.style.display = "none";
+    task2.scrollIntoView();
+  });
+
+  returnTask2.addEventListener("click", function() {
+    logPageChange(2);
+    task1.style.display = "none";
+    task2.style.display = "block";
+    reviewTask1.style.display = "block";
+    returnTask2.style.display = "none";
+    task2.scrollIntoView();
+  });
+
+  finishTask2.addEventListener("click", function() {
+    logPageChange(3);
+    window.alert("Thank you for your participation in the study! Please inform the researcher that you are done with both tasks.");
+    document.body.textContent = "";
+  });
 });

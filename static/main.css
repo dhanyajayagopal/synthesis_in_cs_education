@@ -18,6 +18,10 @@ body {
   padding-bottom: 30px;
 }
 
+section h2:first-child {
+  padding-top: 20px;
+}
+
 code {
   white-space: pre;
 }
@@ -66,6 +70,15 @@ button span {
 
 #full .hide-full {
   display: none !important;
+}
+
+/* Page control */
+
+.page-control {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 1em;
 }
 
 /* Trees */

@@ -11,6 +11,8 @@ body = json.loads(sys.stdin.read())
 with open("logs/log" + os.environ["id"] + ".txt", "a") as f:
     f.write(str(datetime.now()) \
                 + "," \
+                + str(body["group"]) \
+                + "," \
                 + str(body["action"]) \
                 + "," \
                 + str(body["state"]) \
