@@ -4,9 +4,12 @@ import runner
 import common
 
 def run_function(testInput, insert):
-    return common.node_to_js(
-        insert(common.node_from_js(testInput[0]), int(testInput[1])),
-        "insert"
-    )
+    tree = testInput[0]
+    key = int(testInput[1])
+
+    if key < 0:
+        return ""
+
+    return common.node_to_js(insert(common.node_from_js(tree), key), "insert")
 
 runner.run(run_function, "insert", "tree")

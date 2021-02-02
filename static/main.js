@@ -271,7 +271,8 @@ window.addEventListener("load", function() {
               ioTable,
               exerciseModule.testInputs,
               Array(exerciseModule.testInputs.length).fill(""),
-              "text"
+              "text",
+              Array(exerciseModule.testInputs.length).fill("")
             );
           }
         } else if (serverResponse.code === 1) {
@@ -279,7 +280,8 @@ window.addEventListener("load", function() {
             ioTable,
             exerciseModule.testInputs,
             Array(exerciseModule.testInputs.length).fill("Evaluation timed out."),
-            "text"
+            "text",
+            Array(exerciseModule.testInputs.length).fill("")
           );
         }
       })

@@ -4,9 +4,12 @@ import runner
 import common
 
 def run_function(testInput, search):
-    return common.bool_to_js(
-        search(common.node_from_js(testInput[0]), int(testInput[1])),
-        "search"
-    )
+    tree = testInput[0]
+    key = testInput[1]
+
+    if key < 0:
+        return ""
+
+    return common.bool_to_js(search(common.node_from_js(tree), key), "search")
 
 runner.run(run_function, "search", "code")
