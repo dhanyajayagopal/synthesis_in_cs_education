@@ -9,4 +9,3 @@ Dhanya:
 
 Justin:
   - Edit tutorial text
-  - Make multiple pages
