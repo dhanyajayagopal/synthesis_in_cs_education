@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 from http.server import *
+import os
+import sys
 import subprocess
 import json
 
@@ -98,4 +100,10 @@ def run():
     httpd.serve_forever()
 
 if __name__ == "__main__":
+    if "id" not in os.environ:
+        sys.stderr.write(
+            "[ERROR] You must set a participant id by running:\n\n    make serve id=NUMBER\n\n"
+        )
+        sys.exit(1)
+
     run()
