@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = true;
+const debug = false;
 
 // URL Handling
 
@@ -13,7 +13,7 @@ function makeUrl(url) {
   if (debug) {
     return "http://localhost:9090/" + url;
   }
-  return "http://" + ngrokUrl + ".ngrok.io/";
+  return "http://" + ngrokUrl + ".ngrok.io/" + url;
 }
 
 // Demonstration state
