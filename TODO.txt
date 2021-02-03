@@ -1,11 +1,5 @@
 Dhanya:
   - Make GitHub public and create TinyURL
-  - Explain algorithm in prose for user
-  - Make examples only have depth 3
-  - Come up with some negative examples for search()
-  - Come up with more test inputs
-      - static/search-inputs.js
-      - static/insert-inputs.js
 
 Justin:
   - Edit tutorial text
