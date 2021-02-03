@@ -5,11 +5,14 @@ import common
 
 def run_function(testInput, search):
     tree = testInput[0]
-    key = testInput[1]
+    key = int(testInput[1])
 
     if key < 0:
-        return ""
+        return common.error_from_negative_key(key)
 
-    return common.bool_to_js(search(common.node_from_js(tree), key), "search")
+    return (
+        common.bool_to_js(search(common.node_from_js(tree), key), "search"),
+        "code"
+    )
 
-runner.run(run_function, "search", "code")
+runner.run(run_function, "search")

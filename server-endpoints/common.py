@@ -45,3 +45,11 @@ def bool_to_js(b, func_name):
         return '"True"'
     else:
         return '"False"'
+
+def error_from_negative_key(code):
+    if code == -1:
+        return ('"No value for &ldquo;key&rdquo; provided."', "error")
+    if code == -2:
+        return ('"Invalid input. Please make sure your value for &ldquo;key&rdquo; is a number."', "error")
+    else:
+        return ('"Invalid input. Please make sure your value for &ldquo;key&rdquo; is a non-negative integer."', "error")

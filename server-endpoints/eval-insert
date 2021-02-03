@@ -8,8 +8,11 @@ def run_function(testInput, insert):
     key = int(testInput[1])
 
     if key < 0:
-        return ""
+        return common.error_from_negative_key(key)
 
-    return common.node_to_js(insert(common.node_from_js(tree), key), "insert")
+    return (
+        common.node_to_js(insert(common.node_from_js(tree), key), "insert"),
+        "tree"
+    )
 
-runner.run(run_function, "insert", "tree")
+runner.run(run_function, "insert")

@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = false;
+const debug = true;
 
 // URL Handling
 
@@ -67,13 +67,12 @@ function handleError(error) {
 // Common handlers
 
 function loadWithFormat(kind, outer, inner) {
+  outer.textContent = "";
   if (kind == "text") {
     outer.innerHTML = inner;
   } else if (kind == "code") {
     outer.innerHTML = "<code>" + inner + "</code>";
   } else if (kind == "tree") {
-    outer.textContent = "";
-
     const treeBg = document.createElement("canvas");
     treeBg.classList.add("tree-bg");
     outer.appendChild(treeBg);
@@ -83,31 +82,40 @@ function loadWithFormat(kind, outer, inner) {
     outer.appendChild(treeElement);
 
     Tree.load(outer.children[1], inner, false);
+  } else if (kind == "error") {
+    const container = document.createElement("div");
+    container.classList.add("error");
+    container.innerHTML = inner;
+    outer.appendChild(container);
+  } else if (kind == "python-error") {
+    const header = document.createElement("h3");
+    header.textContent = "Python Error";
+
+    const message = document.createElement("code");
+    message.innerHTML = inner;
+
+    const container = document.createElement("div");
+    container.classList.add("error");
+    container.appendChild(header);
+    container.appendChild(message);
+    outer.appendChild(container);
   }
 }
 
-function fillOutputs(tableElement, inputs, outputs, kind, prints) {
+function fillOutputs(tableElement, outputs, prints) {
   for (let i = 1; i < tableElement.children.length; i++) {
     const row = tableElement.children[i];
     const cell = row.children[row.children.length - 1];
+    const outputEntry = outputs[i - 1]
+    const printEntry = prints[i - 1];
 
-    if (inputs[i - 1][1] === -1) {
-      loadWithFormat("text", cell, 'No value for &ldquo;key&rdquo; provided.');
-      continue;
+    if (outputEntry.code == 0) {
+      loadWithFormat(outputEntry.kind, cell, outputEntry.output);
+    } else if (outputEntry.code == 1) {
+      loadWithFormat("python-error", cell, outputEntry.error);
     }
 
-    if (inputs[i - 1][1] === -2) {
-      loadWithFormat(
-        "text",
-        cell,
-        'Invalid input. Please make sure your value for &ldquo;key&rdquo; is a number.'
-      );
-      continue;
-    }
-
-    loadWithFormat(kind, cell, outputs[i - 1]);
-
-    if (prints[i - 1] != "") {
+    if (printEntry != "") {
       const logEl = document.createElement("div");
       logEl.classList.add("log");
 
@@ -115,7 +123,7 @@ function fillOutputs(tableElement, inputs, outputs, kind, prints) {
       logHeader.textContent = "Your Print Statements";
       logEl.appendChild(logHeader);
 
-      for (const line of prints[i - 1].split(/\n/)) {
+      for (const line of printEntry.split(/\n/)) {
         const lineEl = document.createElement("p");
         lineEl.textContent = line;
         logEl.appendChild(lineEl);
@@ -214,7 +222,6 @@ function onDemonstrationComplete(exerciseName, trace) {
 }
 
 function logPageChange(page) {
-  console.log(page);
   fetch(makeUrl("log"), {
     method: "POST",
     body: JSON.stringify({
@@ -257,32 +264,13 @@ window.addEventListener("load", function() {
       .then(serverResponse => {
         if (serverResponse.code === 0) {
           const resultJson = JSON.parse(serverResponse.result);
-          if (resultJson.code === 0) {
-            fillOutputs(
-              ioTable,
-              exerciseModule.testInputs,
-              resultJson.outputs,
-              resultJson.kind,
-              resultJson.prints
-            );
-          } else {
-            window.alert("Python Error\n\n" + resultJson.error);
-            fillOutputs(
-              ioTable,
-              exerciseModule.testInputs,
-              Array(exerciseModule.testInputs.length).fill(""),
-              "text",
-              Array(exerciseModule.testInputs.length).fill("")
-            );
-          }
-        } else if (serverResponse.code === 1) {
           fillOutputs(
             ioTable,
-            exerciseModule.testInputs,
-            Array(exerciseModule.testInputs.length).fill("Evaluation timed out."),
-            "text",
-            Array(exerciseModule.testInputs.length).fill("")
+            resultJson.outputs,
+            resultJson.prints,
           );
+        } else if (serverResponse.code === 1) {
+          window.alert("Evaluation timed out.");
         }
       })
       .catch(handleError);

@@ -271,47 +271,67 @@ nav button {
   text-align: center;
 }
 
-.io input {
-  width: 50px;
-  font-size: 1em;
-  text-align: center;
-}
+  /* Table structure */
 
-.io h3 {
-  font-size: 1em;
-}
+  .io th {
+    border: 1px solid black;
+  }
 
-.io .log {
-  text-align: left;
-  padding: 0 10px;
-}
+  .io td {
+    border: 1px solid black;
+    position: relative;
+  }
 
-.io .log p {
-  margin-left: 10px;
-}
+  .io td:first-child {
+    width: 370px;
+  }
 
-.io th {
-  border: 1px solid black;
-}
+  .io td:last-child {
+    width: 370px;
+  }
 
-.io td {
-  border: 1px solid black;
-  position: relative;
-}
+  /* Tree input */
 
-.io td:first-child {
-  width: 370px;
-}
+  .io .tree-bg {
+    left: 0;
+  }
 
-.io td:last-child {
-  width: 370px;
-}
+  /* Key input */
 
-.io td > div {
-  width: 100%;
-}
+  .io input {
+    width: 50px;
+    font-size: 1em;
+    text-align: center;
+  }
 
-.io .tree-bg {
-  left: 0;
-}
+  /* Output */
 
+  .io td > code {
+    font-size: 2em;
+  }
+
+  .io h3 {
+    margin-top: 0;
+    font-size: 1em;
+    text-align: left;
+  }
+
+  .io .log,
+  .io .error {
+    padding: 10px;
+  }
+
+  .io .log p,
+  .io .error code {
+    display: block;
+    text-align: left;
+    margin-left: 10px;
+  }
+
+  .io .error {
+    color: #b42022;
+  }
+
+  .io .error code {
+    white-space: normal;
+  }
