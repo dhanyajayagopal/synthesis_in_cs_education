@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = true;
+const debug = false;
 
 // URL Handling
 
