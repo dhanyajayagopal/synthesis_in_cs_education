@@ -366,6 +366,48 @@ Insert.testInputs = [
         "right": null
       }
     }
+  }, -1],
+
+  [{
+    "data": 35,
+    "left": {
+      "data": 20,
+      "left": {
+        "data": 10,
+        "left": null,
+        "right": {
+          "data": 15,
+          "left": {
+            "data": 11,
+            "left": null,
+            "right": null
+          },
+          "right": null
+        },
+      },
+      "right": {
+        "data": 23,
+        "left": {
+          "data": 21,
+          "left": null,
+          "right": null
+        },
+        "right": null
+      }
+    },
+    "right": {
+      "data": 44,
+      "left": {
+        "data": 39,
+        "left": null,
+        "right": {
+          "data": 40,
+          "left": null,
+          "right": null
+        },
+      },
+      "right": null
+    },
   }, -1]
 ]
 
