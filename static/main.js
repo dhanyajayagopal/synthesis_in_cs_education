@@ -136,10 +136,10 @@ function fillOutputs(tableElement, outputs, prints) {
 
 function getApplicationState() {
   const state = {};
-  for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
+  for (const exerciseName of Object.keys(exerciseModules)) {
     state[exerciseName] = {};
-    state[exerciseName].currentTrace = exerciseModule.currentTrace;
     state[exerciseName].code = codeMirrors[exerciseName].getValue();
+    state[exerciseName].traces = traces[exerciseName]
   }
   return state;
 }
@@ -161,7 +161,6 @@ function appendCompletedDemonstrationHTML(exerciseName) {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
   deleteButton.textContent = "Delete";
-  trackButton(exerciseName, deleteButton);
 
   const completedDemonstration = document.createElement("li");
   completedDemonstration.appendChild(demonstrationName);
@@ -175,6 +174,7 @@ function appendCompletedDemonstrationHTML(exerciseName) {
   deleteButton.addEventListener("click", function() {
     completedDemonstration.parentElement.removeChild(completedDemonstration);
     delete traces[exerciseName][counter];
+    logButton(exerciseName, deleteButton);
   });
 }
 
@@ -191,7 +191,6 @@ function appendLatestDemonstrationHTML(exerciseName) {
   const restartButton = document.createElement("button");
   restartButton.classList.add("restart");
   restartButton.textContent = "Restart";
-  trackButton(exerciseName, restartButton);
 
   const latestDemonstration = document.createElement("li");
   latestDemonstration.appendChild(demonstrationName);
@@ -204,6 +203,7 @@ function appendLatestDemonstrationHTML(exerciseName) {
 
   restartButton.addEventListener("click", function() {
     exerciseModules[exerciseName].restart();
+    logButton(exerciseName, restartButton);
   });
 }
 
@@ -234,6 +234,17 @@ function logPageChange(page) {
   });
 }
 
+function logButton(groupName, button) {
+  fetch(makeUrl("log"), {
+    method: "POST",
+    body: JSON.stringify({
+      group: groupName,
+      action: button.classList[0],
+      state: getApplicationState()
+    })
+  });
+}
+
 function trackButton(groupName, button) {
   button.addEventListener("click", function() {
     if (button.classList.length < 1) {
@@ -242,14 +253,7 @@ function trackButton(groupName, button) {
       return;
     }
 
-    fetch(makeUrl("log"), {
-      method: "POST",
-      body: JSON.stringify({
-        group: groupName,
-        action: button.classList[0],
-        state: getApplicationState()
-      })
-    });
+    logButton(groupName, button);
   });
 }
 
