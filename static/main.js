@@ -161,6 +161,7 @@ function appendCompletedDemonstrationHTML(exerciseName) {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
   deleteButton.textContent = "Delete";
+  trackButton(exerciseName, deleteButton);
 
   const completedDemonstration = document.createElement("li");
   completedDemonstration.appendChild(demonstrationName);
@@ -190,6 +191,7 @@ function appendLatestDemonstrationHTML(exerciseName) {
   const restartButton = document.createElement("button");
   restartButton.classList.add("restart");
   restartButton.textContent = "Restart";
+  trackButton(exerciseName, restartButton);
 
   const latestDemonstration = document.createElement("li");
   latestDemonstration.appendChild(demonstrationName);
@@ -229,6 +231,25 @@ function logPageChange(page) {
       action: page,
       state: getApplicationState()
     })
+  });
+}
+
+function trackButton(groupName, button) {
+  button.addEventListener("click", function() {
+    if (button.classList.length < 1) {
+      console.error("Button without class:");
+      console.error(button);
+      return;
+    }
+
+    fetch(makeUrl("log"), {
+      method: "POST",
+      body: JSON.stringify({
+        group: groupName,
+        action: button.classList[0],
+        state: getApplicationState()
+      })
+    });
   });
 }
 
@@ -312,22 +333,7 @@ window.addEventListener("load", function() {
     // Logging
 
     for (const button of section.querySelectorAll("button:not(.page-control)")) {
-      button.addEventListener("click", function() {
-        if (button.classList.length < 1) {
-          console.error("Button without class:");
-          console.error(button);
-          return;
-        }
-
-        fetch(makeUrl("log"), {
-          method: "POST",
-          body: JSON.stringify({
-            group: exerciseName,
-            action: button.classList[0],
-            state: getApplicationState()
-          })
-        });
-      });
+      trackButton(exerciseName, button);
     }
   }
 
