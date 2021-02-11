@@ -222,10 +222,6 @@ nav button {
   flex: 0 0 520px;
 }
 
-#half .info-display .tree {
-  flex: 1;
-}
-
 .demonstrations h3 {
   margin: 0;
   text-align: center;
