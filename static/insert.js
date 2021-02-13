@@ -13,7 +13,6 @@ function log(section, action) {
     "root": root,
     "key": Insert.allInputs[currentIndex][1],
   }
-  console.log(entry);
   currentTrace.push(entry);
 }
 
@@ -102,7 +101,6 @@ Insert.init = function(sec, onDemonstrationComplete) {
     const keyBox = document.createElement("input")
     keyBox.type = "text";
     keyBox.addEventListener("input", function() {
-      console.log(keyBox);
       if (keyBox.value.trim() === "") {
         testInput[1] = -1;
       } else {

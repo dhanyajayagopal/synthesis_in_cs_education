@@ -23,29 +23,48 @@ def capture_stdout(stdout=None):
 def run(run_function, func_name):
     body = json.loads(sys.stdin.read())
 
-    exec(body["code"], globals())
-
     outputs = []
     prints = []
 
-    for testInput in body["testInputs"]:
-        with capture_stdout() as s:
-            try:
-                (output, kind) = run_function(testInput, globals()[func_name])
-                outputs.append(
-                    '{ "code": 0, "output": '
-                        + output
-                        + ', "kind": "'
-                        + kind
-                        + '" }'
-                )
-            except Exception as e:
-                outputs.append(
-                    '{ "code": 1, "error": '
-                        + json.dumps(type(e).__name__ + ": " + str(e))
-                        + ' }'
-                )
-        prints.append(json.dumps(s.getvalue()))
+    try:
+        exec(body["code"], globals())
+    except Exception as e:
+        for testInput in body["testInputs"]:
+            outputs.append(
+                '{ "code": 1, "error": '
+                    + json.dumps(type(e).__name__ + ": " + str(e))
+                    + ' }'
+            )
+            prints.append('""')
+
+    if outputs == []: # No errors
+        for testInput in body["testInputs"]:
+            with capture_stdout() as s:
+                if func_name not in globals():
+                    outputs.append(
+                        '{ "code": 1, "error": '
+                            + '"Please ensure your function is named \''
+                            + func_name
+                            + '\'." }'
+                    )
+                else:
+                    try:
+                        (output, kind) = \
+                            run_function(testInput, globals()[func_name])
+                        outputs.append(
+                            '{ "code": 0, "output": '
+                                + output
+                                + ', "kind": "'
+                                + kind
+                                + '" }'
+                        )
+                    except Exception as e:
+                        outputs.append(
+                            '{ "code": 1, "error": '
+                                + json.dumps(type(e).__name__ + ": " + str(e))
+                                + ' }'
+                        )
+            prints.append(json.dumps(s.getvalue()))
 
     print(
         '{ "outputs": ['

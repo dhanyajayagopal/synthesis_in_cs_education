@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = false;
+const debug = true;
 
 // URL Handling
 
@@ -257,6 +257,39 @@ function trackButton(groupName, button) {
   });
 }
 
+function addCorrectnessHandler(checkButton, exerciseName, callback) {
+  checkButton.addEventListener("click", function() {
+    fetch(makeUrl("check-" + exerciseName), {
+      method: "POST",
+      body: codeMirrors[exerciseName].getValue(),
+    })
+    .then(handleHttpResponse)
+    .then(serverResponse => {
+      if (serverResponse.code === 0) {
+        callback(JSON.parse(serverResponse.result));
+      } else if (serverResponse.code === 1) {
+        window.alert("Evaluation timed out.");
+      }
+    })
+    .catch(handleError);
+  });
+}
+
+function correctnessCallback(checkButton, finishButton, output) {
+  return (isCorrect => {
+    if (isCorrect) {
+      checkButton.disabled = true;
+      finishButton.disabled = false;
+      output.classList.add("correct");
+      output.textContent =
+        "Your solution is correct! When you're ready, please move on to the next task."
+    } else {
+      output.textContent =
+        "Your solution is not correct yet.";
+    }
+  });
+}
+
 // Main
 
 window.addEventListener("load", function() {
@@ -359,9 +392,11 @@ window.addEventListener("load", function() {
   beginTask1.style.display = "block";
   reviewTask1.style.display = "none";
   finishTask1.style.display = "block";
+  finishTask1.disabled = true;
 
   returnTask2.style.display = "none";
   finishTask2.style.display = "block";
+  finishTask2.disabled = true;
 
   beginTask1.addEventListener("click", function() {
     logPageChange(1);
@@ -401,4 +436,26 @@ window.addEventListener("load", function() {
     window.alert("Thank you for your participation in the study! Please inform the researcher that you are done with both tasks.");
     document.body.textContent = "";
   });
+
+  // Checking for correctness
+
+  const checkTask1 = task1.querySelector(".check-correct");
+  const checkTask1Output = task1.querySelector(".check-correct-output");
+
+  const checkTask2 = task2.querySelector(".check-correct");
+  const checkTask2Output = task2.querySelector(".check-correct-output");
+
+  addCorrectnessHandler(
+    checkTask1,
+    "search",
+    correctnessCallback(checkTask1, finishTask1, checkTask1Output)
+  );
+
+  addCorrectnessHandler(
+    checkTask2,
+    "insert",
+    correctnessCallback(checkTask2, finishTask2, checkTask2Output)
+  );
 });
+
+// function addCorrectnessHandler(checkButton, exerciseName, callback) {

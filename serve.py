@@ -12,6 +12,8 @@ ENDPOINTS = [
     "eval-search",
     "synthesize-insert",
     "synthesize-search",
+    "check-insert",
+    "check-search",
 ]
 
 PORT = 9090

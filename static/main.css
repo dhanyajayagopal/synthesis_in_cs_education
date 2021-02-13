@@ -46,6 +46,13 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: default;
+  background-color: #CCCCCC;
+  border-bottom-color: #AAAAAA;
+  color: #888888;
+}
+
 button span {
   font-weight: normal;
   display: block;
@@ -79,6 +86,11 @@ button span {
   padding: 20px;
   margin-top: 20px;
   font-size: 1em;
+}
+
+.page-control-group {
+  display: flex;
+  gap: 20px;
 }
 
 /* Trees */
@@ -185,7 +197,9 @@ nav button {
   font-size: 1em;
 }
 
-.run {
+.run,
+.check-correct
+{
   width: 100%;
   background-color: #27c650;
   border-bottom-color: #4ba663;
@@ -263,7 +277,7 @@ nav button {
 
 .io {
   width: 100%;
-  margin-top: 20px;
+  margin: 20px 0;
   text-align: center;
 }
 
@@ -331,3 +345,23 @@ nav button {
   .io .error code {
     white-space: normal;
   }
+
+/* Correctness checking */
+
+.check-correct-output:empty {
+  display: none;
+}
+
+.check-correct-output {
+  background-color: #EEEE88;
+  border: 4px dotted rgba(0, 0, 0, 0.5);
+  color: #000000;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.check-correct-output.correct {
+  background-color: #b1ef8d;
+}

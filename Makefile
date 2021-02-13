@@ -1,6 +1,6 @@
 .PHONY: versions
 versions:
-	./make-versions.sh
+	bash scripts/make-versions.sh
 
 .PHONY: serve
 serve:

@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+import sys
+import correctness as c
+from common import Node
+
+code = sys.stdin.read()
+
+try:
+    exec(code, globals())
+
+    if c.check(c.true_search, search, False):
+        print("true")
+    else:
+        print("false")
+except:
+    print("false")
