@@ -22,6 +22,17 @@ section h2:first-child {
   padding-top: 20px;
 }
 
+.center-code {
+  text-align: center;
+}
+
+.center-code > div {
+  display: inline-block;
+  text-align: left;
+  padding: 10px 30px;
+  border: 1px solid #000000;
+}
+
 code {
   white-space: pre;
 }
