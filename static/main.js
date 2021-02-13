@@ -304,6 +304,12 @@ window.addEventListener("load", function() {
       section.querySelector("textarea"),
       { lineNumbers: true
       , mode: "python"
+      , indentUnit: 4
+      , extraKeys: {
+          "Tab": function(cm) {
+            cm.replaceSelection("    ", "end");
+          }
+        }
       }
     );
 
