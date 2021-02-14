@@ -7,3 +7,4 @@ Justin:
   - Edit tutorial text
       - Think about "click here" description
       - Describe what a demonstration is
+  - Make example binary trees use canvas
