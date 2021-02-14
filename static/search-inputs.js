@@ -22,7 +22,7 @@ Search.allInputs = [
       "left": null,
       "right": null
     },
-  }, 4],
+  }, 2],
 
   [{
     "data": 8,
@@ -60,7 +60,7 @@ Search.allInputs = [
         "right": null
       }
     },
-  }, 12],
+  }, 7],
 
   [{
     "data": 50,
@@ -71,11 +71,7 @@ Search.allInputs = [
         "left": null,
         "right": {
           "data": 14,
-          "left": {
-            "data": 12,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -96,17 +92,13 @@ Search.allInputs = [
         "left": null,
         "right": {
           "data": 72,
-          "left": {
-            "data": 67,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
       "right": null
     },
-  }, 76],
+  }, 30],
 
   [{
     "data": 7,
@@ -160,7 +152,7 @@ Search.allInputs = [
         },
       },
     },
-  }, 2],
+  }, 11],
 
   [{
     "data": 5,
@@ -220,7 +212,7 @@ Search.allInputs = [
         "right": null
       }
     },
-  }, 1],
+  }, 5],
 
   [{
     "data": 50,
@@ -231,11 +223,7 @@ Search.allInputs = [
         "left": null,
         "right": {
           "data": 14,
-          "left": {
-            "data": 8,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -256,17 +244,13 @@ Search.allInputs = [
         "left": null,
         "right": {
           "data": 68,
-          "left": {
-            "data": 67,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
       "right": null
     },
-  }, 68],
+  }, 54],
 
   [{
     "data": 7,
