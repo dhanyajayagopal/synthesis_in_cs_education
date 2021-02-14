@@ -71,11 +71,7 @@ Insert.allInputs = [
         "left": null,
         "right": {
           "data": 14,
-          "left": {
-            "data": 12,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -96,11 +92,7 @@ Insert.allInputs = [
         "left": null,
         "right": {
           "data": 72,
-          "left": {
-            "data": 67,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -212,15 +204,15 @@ Insert.allInputs = [
       "left": null,
       "right": {
         "data": 12,
-        "left": {
+        "left": null,
+        "right": {
           "data": 13,
           "left": null,
           "right": null
-        },
-        "right": null
+        }
       }
     },
-  }, 0],
+  }, 15],
 
   [{
     "data": 50,
@@ -231,11 +223,7 @@ Insert.allInputs = [
         "left": null,
         "right": {
           "data": 14,
-          "left": {
-            "data": 8,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -256,17 +244,13 @@ Insert.allInputs = [
         "left": null,
         "right": {
           "data": 68,
-          "left": {
-            "data": 67,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
       "right": null
     },
-  }, 73],
+  }, 2],
 
 
   [{
@@ -302,7 +286,7 @@ Insert.allInputs = [
           "right": null
         },
         "right": {
-          "data": 13,
+          "data": 10,
           "left": null,
           "right": null
         },
@@ -310,7 +294,7 @@ Insert.allInputs = [
       "right": {
         "data": 15,
         "left": {
-          "data": 10,
+          "data": 13,
           "left": null,
           "right": null
         },
@@ -377,11 +361,7 @@ Insert.testInputs = [
         "left": null,
         "right": {
           "data": 15,
-          "left": {
-            "data": 11,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -408,7 +388,45 @@ Insert.testInputs = [
       },
       "right": null
     },
-  }, -1]
+  }, -1],
+
+  [{
+    "data": 17,
+    "left": {
+      "data": 6,
+      "left": {
+        "data": 2,
+        "left": null,
+        "right": null
+      },
+      "right": null
+    },
+    "right": {
+      "data": 30,
+      "left": {
+        "data": 21,
+        "left": {
+          "data": 19,
+          "left": null,
+          "right": null
+        },
+        "right": {
+          "data": 28,
+          "left": null,
+          "right": null
+        },
+      },
+      "right": {
+        "data": 45,
+        "left": {
+          "data": 41,
+          "left": null,
+          "right": null
+        },
+        "right": null
+      }
+    },
+  }, -1],
 ]
 
 })(window.Insert = window.Insert || {});

@@ -360,11 +360,7 @@ Search.testInputs = [
         "left": null,
         "right": {
           "data": 15,
-          "left": {
-            "data": 11,
-            "left": null,
-            "right": null
-          },
+          "left": null,
           "right": null
         },
       },
@@ -391,7 +387,45 @@ Search.testInputs = [
       },
       "right": null
     },
-  }, -1]
+  }, -1],
+
+  [{
+    "data": 17,
+    "left": {
+      "data": 6,
+      "left": {
+        "data": 2,
+        "left": null,
+        "right": null
+      },
+      "right": null
+    },
+    "right": {
+      "data": 30,
+      "left": {
+        "data": 21,
+        "left": {
+          "data": 19,
+          "left": null,
+          "right": null
+        },
+        "right": {
+          "data": 28,
+          "left": null,
+          "right": null
+        },
+      },
+      "right": {
+        "data": 45,
+        "left": {
+          "data": 41,
+          "left": null,
+          "right": null
+        },
+        "right": null
+      }
+    },
+  }, -1],
 ];
 
 })(window.Search = window.Search || {});
