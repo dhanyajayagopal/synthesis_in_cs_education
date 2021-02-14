@@ -204,12 +204,12 @@ Search.allInputs = [
       "left": null,
       "right": {
         "data": 12,
-        "left": {
+        "left": null,
+        "right": {
           "data": 13,
           "left": null,
           "right": null
-        },
-        "right": null
+        }
       }
     },
   }, 5],
@@ -285,7 +285,7 @@ Search.allInputs = [
           "right": null
         },
         "right": {
-          "data": 13,
+          "data": 10,
           "left": null,
           "right": null
         },
@@ -293,7 +293,7 @@ Search.allInputs = [
       "right": {
         "data": 15,
         "left": {
-          "data": 10,
+          "data": 13,
           "left": null,
           "right": null
         },
@@ -304,7 +304,7 @@ Search.allInputs = [
         },
       },
     },
-  }, 15]
+  }, 10]
 ];
 
 Search.testInputs = [

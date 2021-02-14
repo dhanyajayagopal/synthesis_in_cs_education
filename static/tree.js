@@ -8,6 +8,25 @@ function center(node, relative) {
   }
 }
 
+function _isBst(node, min, max) {
+  if (node == null) {
+    return true;
+  }
+
+  if (node.data < min || node.data > max) {
+    return false;
+  }
+
+  return (
+    _isBst(node.left, min, node.data - 1)
+      && _isBst(node.right, node.data + 1, max)
+  );
+}
+
+Tree.isBst = function(tree) {
+  return _isBst(tree, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+}
+
 Tree.toHtml = function recur(tree, selectableLeaves) {
   if (tree === null) {
     if (selectableLeaves) {

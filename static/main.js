@@ -298,6 +298,22 @@ window.addEventListener("load", function() {
   for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
     const section = document.getElementById(exerciseName);
 
+    // Ensure module inputs are BSTs
+
+    for (
+      const [tree, _] of
+      exerciseModule.allInputs.concat(exerciseModule.testInputs)
+    ) {
+      if (!Tree.isBst(tree)) {
+        console.error(
+          "WARNING! '"
+            + exerciseName
+            + "' has an input that is not a BST:"
+        );
+        console.error(tree);
+      }
+    }
+
     // Running code
 
     codeMirrors[exerciseName] = CodeMirror.fromTextArea(
