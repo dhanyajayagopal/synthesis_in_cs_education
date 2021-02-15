@@ -293,6 +293,102 @@ function correctnessCallback(checkButton, finishButton, output) {
 // Main
 
 window.addEventListener("load", function() {
+  // Example trees
+
+  const exampleTree1 = {
+    "data": 1,
+    "left": {
+      "data": 2,
+      "left": {
+        "data": 4,
+        "left": {
+          "data": 8,
+          "left": null,
+          "right": null
+        },
+        "right": null
+      },
+      "right": {
+        "data": 5,
+        "left": null,
+        "right": null
+      }
+    },
+    "right": {
+      "data": 3,
+      "left": {
+        "data": 6,
+        "left": null,
+        "right": null
+      },
+      "right": {
+        "data": 7,
+        "left": null,
+        "right": null
+      }
+    }
+  };
+
+  const exampleTree2 = {
+    "data": 8,
+    "left": {
+      "data": 3,
+      "left": {
+        "data": 1,
+        "left": null,
+        "right": {
+          "data": 2,
+          "left": null,
+          "right": null
+        }
+      },
+      "right": {
+        "data": 6,
+        "left": {
+          "data": 4,
+          "left": null,
+          "right": null
+        },
+        "right": {
+          "data": 7,
+          "left": null,
+          "right": null
+        }
+      }
+    },
+    "right": {
+      "data": 10,
+      "left": null,
+      "right": {
+        "data": 14,
+        "left": {
+          "data": 13,
+          "left": null,
+          "right": null
+        },
+        "right": null
+      }
+    }
+  };
+
+  Tree.load(
+    document.getElementById("example-1a"),
+    exampleTree1,
+    true
+  );
+
+  Tree.load(
+    document.getElementById("example-1b"),
+    exampleTree1,
+    false
+  );
+
+  Tree.load(
+    document.getElementById("example-2"),
+    exampleTree2,
+    false
+  );
+
   // Interaction
 
   for (const [exerciseName, exerciseModule] of Object.entries(exerciseModules)) {
@@ -302,7 +398,10 @@ window.addEventListener("load", function() {
 
     for (
       const [tree, _] of
-      exerciseModule.allInputs.concat(exerciseModule.testInputs)
+        ( exerciseModule.allInputs
+            .concat(exerciseModule.testInputs)
+            .concat([[exampleTree2, -1]])
+        )
     ) {
       if (!Tree.isBst(tree)) {
         console.error(

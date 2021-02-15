@@ -27,7 +27,7 @@ section h2:first-child {
 }
 
 .center-code > div {
-  display: inline-block;
+  display: block;
   text-align: left;
   padding: 10px 30px;
   border: 1px solid #000000;
@@ -74,6 +74,11 @@ button span {
   border: 1px solid #CCCCCC;
   font-size: 14px;
   margin-bottom: 20px;
+}
+
+b.def {
+  background-color: #FFFF88;
+  font-weight: bold;
 }
 
 /* Experimental groups */

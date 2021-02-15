@@ -4,24 +4,52 @@
       <h2>Introduction to Binary Trees</h2>
 
       <p>
-        A binary tree is a tree in which each node has exactly two children,
-        either (or both) of which may be empty. For example, the following is a
-        binary tree:
+        A
+        <b class="def">binary tree</b>
+        is a data structure made up of
+        <b class="def">nodes</b>,
+        each of which has a data value associated with it.
+        Each node has exactly two child subtrees: a
+        <b class="def">left child</b>
+        and a
+        <b class="def">right child</b>,
+        either (or both) of which may be empty.
+        We refer to the top-most node of a binary tree as its
+        <b class="def">root</b>.
+        For example, this diagram depicts a binary tree:
       </p>
 
-      <img src=https://s3.ap-south-1.amazonaws.com/s3.studytonight.com/curious/uploads/pictures/1551968508-58156.png
-           style="height:200px;">
+      <div>
+        <canvas class="tree-bg">
+        </canvas>
+
+        <div class="tree" id="example-1a">
+        </div>
+      </div>
 
       <p>
-        Note that some of the nodes above are drawn with
-        <b>only one child or no children at all</b>.
-        In these cases, one or both children are empty. Note that we always draw
-        one child to the left and one child to the right. As a result, if one
-        child is empty, we can always tell which child is empty and which child
-        is not.
-        <b>We thus call the two children the left child and the right child.</b>
-        We can implement a single node of a binary tree as a data structure and
-        use it to store data. The implementation is as follows:
+        In the example above, the node containing 1 is the root. It has two
+        children: the node containing 2 and the node containing 3. The left
+        child of the node containing 4 is the node containing 8, and the right
+        child of the node containing 4 is empty.
+      </p>
+
+      <p>
+        Sometimes, for convenience, we draw binary trees without explicitly
+        depicting empty children. The example above can thus also be drawn as
+        follows:
+      </p>
+
+      <div>
+        <canvas class="tree-bg">
+        </canvas>
+
+        <div class="tree" id="example-1b">
+        </div>
+      </div>
+
+      <p>
+        We can implement a binary tree in Python as follows:
       </p>
 
       <div class="center-code">
@@ -35,17 +63,39 @@
       </div>
 
       <p>
-        In a binary tree, the
-        <b>only invariant is that each node has a value, a left child, and a
-          right child.</b>
+        To construct the binary tree drawn above, we
+        could use the following code:
       </p>
+
+      <div class="center-code">
+        <div>
+          <code>node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node4 = Node(4)
+node5 = Node(5)
+node6 = Node(6)
+node7 = Node(7)
+node8 = Node(8)
+
+node4.left = node8
+node2.left = node4
+node2.right = node5
+
+node3.left = node6
+node3.right = node7
+
+node1.left = node2
+node1.right = node3</code>
+        </div>
+      </div>
 
       <h2>Introduction to Binary Search Trees (BSTs)</h2>
 
       <p>
-        In a binary <i>search</i> tree (BST), there is an additional invariant.
-        A binary search tree is ordered, so there are three factors that must
-        hold:
+        A
+        <b class="def">binary <i><u>search</u></i> tree (BST)</b>
+        is a binary tree with three invariants:
       </p>
 
       <ol>
@@ -57,20 +107,33 @@
       <p>
         For example, here is a binary search tree:
       </p>
-        <img src=https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1200px-Binary_search_tree.svg.png
-             style="height:200px;">
+
+      <div>
+        <canvas class="tree-bg">
+        </canvas>
+
+        <div class="tree" id="example-2">
+        </div>
+      </div>
+
+      <p>
+        If you look at, for example, the node containing 3, you will see that
+        all values to its left are less than 3 (1 and 2) and all values to its
+        right are greater than 3 (4, 6, and 7). This pattern must be true of all
+        nodes in a binary search tree.
+      </p>
 
       <h2>Why are binary search trees important?</h2>
 
       <p>
-        The reason binary search trees are important is that the following
-        operations can be implemented efficiently using a BST:
+        Binary search trees are important because there are efficient algorithms
+        that support the following operations:
       </p>
 
       <ul>
-        <li>Insert a value into the tree.</li>
-        <li>Determine whether a value is in the tree.</li>
-        <li>Remove a value from the tree.</li>
+        <li>Inserting a value into a BST.</li>
+        <li>Determining whether a value is in a BST.</li>
+        <li>Removing a value from a BST.</li>
       </ul>
     </section>
 
