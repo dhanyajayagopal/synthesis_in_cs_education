@@ -2,8 +2,3 @@ Dhanya:
   - Ensure surveys are properly formatted / randomized
   - Write a script/schedule for the experimenter to follow exactly during the
     procedure
-
-Justin:
-  - Edit tutorial text
-      - Think about "click here" description
-      - Describe what a demonstration is
