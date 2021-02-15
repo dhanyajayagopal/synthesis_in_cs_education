@@ -169,8 +169,8 @@ node1.right = node3</code>
       <h2>Task 1: Searching in a BST</h2>
 
       <p>
-        Using the invariants of a BST, we can efficiently traverse the tree
-        to search it for a particular value.
+        Using the BST invariants, we can efficiently traverse a BST to search
+        it for a particular value.
       </p>
 
       <div class="hide-control">
@@ -255,7 +255,7 @@ node1.right = node3</code>
       </div>
 
       <p class="hide-full hide-half">
-        Implement the <code>search</code> function below.  You can click the
+        Implement the <code>search</code> function below. You can click the
         &ldquo;Run Code on Inputs Below&rdquo; button to run your code on some
         sample inputs. (The use of <code>print</code> statements is also
         supported.)
@@ -292,11 +292,11 @@ def search(root, key):
       <div class="check-correct-output"></div>
 
       <button class="page-control" id="return-task-2">
-        To return to Task 2, click here. &nbsp; &#11157;
+        Return to Task 2 &nbsp; &#11157;
       </button>
 
       <button class="page-control" id="finish-task-1">
-        Click here to continue to Task 2. &nbsp; &#11157;
+        Continue to Task 2 &nbsp; &#11157;
       </button>
     </section>
 
@@ -304,20 +304,33 @@ def search(root, key):
       <h2>Task 2: Inserting into a BST</h2>
 
       <p>
-        Understanding how to insert into a given binary search tree involves
-        finding the correct spot for the new value.
+        Using the BST invariants, we can efficiently traverse a BST to insert a
+        new value into it.
       </p>
 
       <div class="hide-control">
         <p>
-          First, use the buttons below to demonstrate how to complete the given
-          task. Click the &ldquo;Next Tree&rdquo; button to provide additional
-          demonstrations.
+          First, use the buttons below to demonstrate how you believe the
+          <b>BST insertion algorithm</b> should work to achieve the given task.
         </p>
 
         <p class="hide-half">
-          Once you have successfully completed a demonstration, click the
-          &ldquo;Demonstration Finished&rdquo; button.
+          You can then click the &ldquo;Generate Code Based on Completed
+          Demonstrations&rdquo; to have the computer generate code that matches
+          the demonstrations you give.
+          <b>
+            This will delete any code that you have written in the text box
+            below.
+          </b>
+        </p>
+
+        <p class="hide-half">
+          <b>Note:</b>
+          If your demonstrations are incorrect or do not handle all the
+          necessary cases, the generated code may be incorrect or incomplete.
+          At any time, you can restart or delete demonstrations using the
+          buttons in the &ldquo;Your Demonstrations&rdquo; list to the right of
+          the tree.
         </p>
 
         <p class="task">
@@ -364,15 +377,18 @@ def search(root, key):
         </div>
 
         <p>
-          When you're done, implement the <code>insert</code> function.
-          You can click the Run button below to run your code on some sample
-          inputs.
+          When you're done, implement the <code>insert</code> function below.
+          You can click the &ldquo;Run Code on Inputs Below&rdquo; button to run
+          your code on some sample inputs. (The use of <code>print</code>
+          statements is also supported.)
         </p>
       </div>
 
       <p class="hide-full hide-half">
-        Implement the <code>insert</code> function. You can click the Run
-        button below to run your code on some sample inputs.
+        Implement the <code>insert</code> function below. You can click the
+        &ldquo;Run Code on Inputs Below&rdquo; button to run your code on some
+        sample inputs. (The use of <code>print</code> statements is also
+        supported.)
       </p>
 
       <textarea>
@@ -394,6 +410,16 @@ def insert(root, key):
         </tr>
       </table>
 
+      <p>
+        To check your solution, click the &ldquo;Check My Solution&rdquo;
+        button. If it correct, you will be able to complete the session.
+      </p>
+
+      <p>
+        If you wish, you can also review Task 1.
+        However, your main priority should be to complete Task 2.
+      </p>
+
       <button class="check-correct">
         Check My Solution
       </button>
@@ -402,11 +428,11 @@ def insert(root, key):
 
       <div class="page-control-group">
         <button class="page-control" id="review-task-1">
-          &#11013; &nbsp; To review Task 1, click here.
+          &#11013; &nbsp; Review Task 1
         </button>
 
         <button class="page-control" id="finish-task-2">
-          Click here to complete the session. &nbsp; &#11157;
+          Complete the Session &nbsp; &#11157;
         </button>
       </div>
     </section>
