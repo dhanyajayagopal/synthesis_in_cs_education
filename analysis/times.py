@@ -3,6 +3,7 @@
 import os
 import time
 import matplotlib.pyplot as plt
+import scipy.stats as stats
 
 ################################################################################
 # Helpers
@@ -91,3 +92,8 @@ axs[0].set(ylabel="Time (min)")
 axs[1].set_title("Time on Task 2 (Insert)")
 axs[1].boxplot(condition_times_2, labels=labels)
 fig.savefig("results/times.png", dpi=600)
+
+# Print ANOVAs
+
+print("Task 1 Times ANOVA:", stats.f_oneway(*condition_times_1))
+print("Task 2 Times ANOVA:", stats.f_oneway(*condition_times_2))
