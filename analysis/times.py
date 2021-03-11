@@ -2,6 +2,7 @@
 
 import os
 import time
+import matplotlib.pyplot as plt
 
 ################################################################################
 # Helpers
@@ -46,6 +47,8 @@ LOG_DIRECTORY = "../logs/"
 EXCLUDED_PARTICIPANT_IDS = [28]
 CONDITIONS = get_conditions()
 
+# Gather data
+
 data = []
 
 for filename in os.listdir(LOG_DIRECTORY):
@@ -59,9 +62,32 @@ for filename in os.listdir(LOG_DIRECTORY):
                     + extract_data(f)
                 )
 
-print("% Generated on", time.strftime("%Y-%m-%d at %H:%M:%S %Z"))
-print(
-    "Participant ID, Time to Complete Task 1 (s), Time to Complete Task 2 (s)"
-)
-for row in sorted(data):
-    print(*row, sep=", ", end="\n")
+# Generate CSV
+
+with open("results/times.csv", "w") as f:
+    f.write("% Generated on " + time.strftime("%Y-%m-%d at %H:%M:%S %Z") + "\n")
+    f.write("Participant ID,Time to Complete Task 1 (s),Time to Complete Task 2 (s)\n")
+
+    for row in sorted(data):
+        f.write(",".join(map(str, row)) + "\n")
+
+# Generate plot
+
+labels = ["Control", "Half", "Full"]
+condition_times_1 = [[], [], []]
+condition_times_2 = [[], [], []]
+
+for (_, condition, t1, t2) in data:
+    index = labels.index(condition)
+    if t1 is not None:
+        condition_times_1[index].append(t1 / 60)
+    if t2 is not None:
+        condition_times_2[index].append(t2 / 60)
+
+fig, axs = plt.subplots(1, 2, sharey=True)
+axs[0].set_title("Time on Task 1 (Search)")
+axs[0].boxplot(condition_times_1, labels=labels)
+axs[0].set(ylabel="Time (min)")
+axs[1].set_title("Time on Task 2 (Insert)")
+axs[1].boxplot(condition_times_2, labels=labels)
+fig.savefig("results/times.png", dpi=600)
