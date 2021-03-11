@@ -6,6 +6,15 @@ import time
 ################################################################################
 # Helpers
 
+def get_conditions():
+    conditions = {}
+    with open("conditions.csv") as f:
+        next(f)
+        for line in f:
+            [ participant_id, condition ] = line.rstrip().split(",")
+            conditions[int(participant_id)] = condition
+    return conditions
+
 def parse_time(time_string):
     [integer_part, fractional_part] = time_string.split(".")
     base_epoch = time.mktime(time.strptime(integer_part, "%Y-%m-%d %H:%M:%S"))
@@ -35,6 +44,7 @@ def extract_data(lines):
 
 LOG_DIRECTORY = "../logs/"
 EXCLUDED_PARTICIPANT_IDS = [28]
+CONDITIONS = get_conditions()
 
 data = []
 
@@ -44,7 +54,10 @@ for filename in os.listdir(LOG_DIRECTORY):
         participant_id = int(filename[3:filename.index(".")])
         if participant_id not in EXCLUDED_PARTICIPANT_IDS:
             with open(LOG_DIRECTORY + filename) as f:
-                data.append((participant_id,) + extract_data(f.readlines()))
+                data.append(
+                    (participant_id, CONDITIONS[participant_id])
+                    + extract_data(f)
+                )
 
 print("% Generated on", time.strftime("%Y-%m-%d at %H:%M:%S %Z"))
 print(
