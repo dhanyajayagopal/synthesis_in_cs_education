@@ -7,7 +7,7 @@ import scipy.stats as stats
 import numpy
 
 ################################################################################
-# Helpers
+# Data wrangling helpers
 
 # Conditions
 
@@ -92,10 +92,11 @@ participant_ids = sorted(conditions.keys())
 assert sorted(amount_learned.keys()) == participant_ids
 assert sorted(times.keys()) == participant_ids
 
-# Generate CSV
+# Generate main CSV
 
 with open(RESULTS_DIR + "all.csv", "w") as f:
     f.write("% Generated on " + time.strftime("%Y-%m-%d at %H:%M:%S %Z") + "\n")
+    f.write("% Excluded participant IDs: " + ", ".join(map(str, EXCLUDED)) + "\n")
     f.write("Participant ID,Condition,Time to Complete Task 1 (s),Time to Complete Task 2 (s),Question 1,Question 2,Question 3\n")
 
     for pid in participant_ids:
