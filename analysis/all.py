@@ -180,3 +180,53 @@ print("Q3 Control == 0: p =", stats.ttest_1samp(q3_data[0], 0).pvalue)
 print("Q3 Half    == 0: p =", stats.ttest_1samp(q3_data[1], 0).pvalue)
 print("Q3 Full    == 0: p =", stats.ttest_1samp(q3_data[2], 0).pvalue)
 print()
+
+# Amount learned vs. time taken
+
+
+for question in range(3):
+    fig, ax = plt.subplots(1, 1)
+    xs = {"Control": [], "Half": [], "Full": []}
+    ys = {"Control": [], "Half": [], "Full": []}
+
+    for pid in participant_ids:
+        if times[pid][0] == None or times[pid][1] == None:
+            continue
+
+        xs[conditions[pid]].append((times[pid][0] + times[pid][1]) / 60)
+        ys[conditions[pid]].append(amount_learned[pid][question])
+
+    ax.set_title("Question " + str(question + 1))
+    for (label, color, marker) in [
+        ("Control", "r", "o"),
+        ("Half", "g", "^"),
+        ("Full", "b", "s")
+    ]:
+        ax.scatter(
+            xs[label],
+            ys[label],
+            label=label,
+            color=color,
+            marker=marker
+        )
+
+        ax.legend(loc="upper right")
+        ax.grid(True)
+
+        ax.set(xlabel="Time Taken (min)")
+        ax.set(ylabel="Amount Learned")
+
+        if question == 0:
+            ax.set_ylim((-5, 5))
+        else:
+            ax.set_ylim((-2, 2))
+
+    fig.savefig(
+        RESULTS_DIR
+            + "amount-learned-vs-time-q"
+            + str(question + 1)
+            + ".png",
+        dpi=600
+    )
+
+print("Done!")
