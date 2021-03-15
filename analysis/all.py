@@ -183,7 +183,6 @@ print()
 
 # Amount learned vs. time taken
 
-
 for question in range(3):
     fig, ax = plt.subplots(1, 1)
     xs = {"Control": [], "Half": [], "Full": []}
