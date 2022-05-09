@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+
+import pbd
+
+pbd.fill_sketch_with_io(
+    '# Inserts a new node with the value "key" into the given binary search tree ("root").\n# You can assume "key" does not appear in "root".\ndef insert(root, key):\n',
+    [
+        ("insert", ["return Node(key)"]),
+        ("move-left", ["root.left = insert(root.left, key)", "return root"]),
+        ("move-right", ["root.right = insert(root.right, key)", "return root"]),
+    ]
+)

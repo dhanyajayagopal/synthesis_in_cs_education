@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import runner
+import common
+
+def run_function(testInput, insert):
+    tree = testInput[0]
+    key = int(testInput[1])
+
+    if key < 0:
+        return common.error_from_negative_key(key)
+
+    return (
+        common.node_to_js(insert(common.node_from_js(tree), key), "insert"),
+        "tree"
+    )
+
+runner.run(run_function, "insert")

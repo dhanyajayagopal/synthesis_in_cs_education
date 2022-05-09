@@ -1,0 +1,416 @@
+    <h1>Binary Search Trees</h1>
+
+    <section id="intro">
+      <h2>Introduction to Binary Trees</h2>
+
+      <p>
+        A
+        <b class="def">binary tree</b>
+        is a data structure made up of
+        <b class="def">nodes</b>,
+        each of which has a data value associated with it.
+        Each node has exactly two child subtrees: a
+        <b class="def">left child</b>
+        and a
+        <b class="def">right child</b>,
+        either (or both) of which may be empty.
+        We refer to the top-most node of a binary tree as its
+        <b class="def">root</b>.
+        For example, this diagram depicts a binary tree:
+      </p>
+
+      <div>
+        <canvas class="tree-bg">
+        </canvas>
+
+        <div class="tree" id="example-1a">
+        </div>
+      </div>
+
+      <p>
+        In the example above, the node containing 1 is the root. It has two
+        children: the node containing 2 and the node containing 3. The left
+        child of the node containing 4 is the node containing 8, and the right
+        child of the node containing 4 is empty.
+      </p>
+
+      <p>
+        Sometimes, for convenience, we draw binary trees without explicitly
+        depicting empty children. The example above can thus also be drawn as
+        follows:
+      </p>
+
+      <div>
+        <canvas class="tree-bg">
+        </canvas>
+
+        <div class="tree" id="example-1b">
+        </div>
+      </div>
+
+      <p>
+        We can implement a binary tree in Python as follows:
+      </p>
+
+      <div class="center-code">
+        <div>
+          <code>class Node:
+    def __init__(self, v):
+        self.left = None
+        self.right = None
+        self.val = v</code>
+        </div>
+      </div>
+
+      <p>
+        To construct the binary tree drawn above, we could then use the
+        following code:
+      </p>
+
+      <div class="center-code">
+        <div>
+          <code>node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node4 = Node(4)
+node5 = Node(5)
+node6 = Node(6)
+node7 = Node(7)
+node8 = Node(8)
+
+node4.left = node8
+node2.left = node4
+node2.right = node5
+
+node3.left = node6
+node3.right = node7
+
+node1.left = node2
+node1.right = node3</code>
+        </div>
+      </div>
+
+      <h2>Introduction to Binary Search Trees (BSTs)</h2>
+
+      <p>
+        A
+        <b class="def">binary <i>search</i> tree (BST)</b>
+        is a binary tree with three invariants:
+      </p>
+
+      <ol>
+        <li>All values in the tree are unique.</li>
+        <li>Each node value is <b>greater</b> than all values in its <b>left</b> child.</li>
+        <li>Each node value is <b>less</b> than all values in its <b>right</b> child.</li>
+      </ol>
+
+      <p>
+        For example, here is a binary search tree:
+      </p>
+
+      <div>
+        <canvas class="tree-bg">
+        </canvas>
+
+        <div class="tree" id="example-2">
+        </div>
+      </div>
+
+      <p>
+        If you look at, for example, the node containing 3, you will see that
+        all values to its left are less than 3 (1 and 2) and all values to its
+        right are greater than 3 (4, 6, and 7). This pattern must be true of all
+        nodes in a binary search tree.
+      </p>
+
+      <h2>Why are binary search trees important?</h2>
+
+      <p>
+        Binary search trees are important because there are efficient algorithms
+        that support the following operations:
+      </p>
+
+      <ul>
+        <li>Determining whether a value is in a BST.</li>
+        <li>Inserting a value into a BST.</li>
+        <li>Removing a value from a BST.</li>
+      </ul>
+    </section>
+
+    <button class="page-control" id="begin-task-1">
+      When you're ready to begin Task 1, click here.
+    </button>
+
+    <section id="search">
+      <h2>Task 1: Searching in a BST</h2>
+
+      <p>
+        Using the BST invariants, we can efficiently traverse a BST to search
+        it for a particular value.
+      </p>
+
+      <div class="hide-control">
+        <p>
+          First, use the buttons below to demonstrate how you believe the
+          <b>BST search algorithm</b> should work to achieve the given task.
+        </p>
+
+        <p class="hide-half">
+          You can then click the &ldquo;Generate Code Based on Completed
+          Demonstrations&rdquo; to have the computer generate code that matches
+          the demonstrations you give.
+          <b>
+            This will delete any code that you have written in the text box
+            below.
+          </b>
+        </p>
+
+        <p class="hide-half">
+          <b>Note:</b>
+          If your demonstrations are incorrect or do not handle all the
+          necessary cases, the generated code may be incorrect or incomplete.
+          At any time, you can restart or delete demonstrations using the
+          buttons in the &ldquo;Your Demonstrations&rdquo; list to the right of
+          the tree.
+        </p>
+
+        <p class="task">
+          <b>Task:</b> Search for <span class="search-val"></span> in the BST.
+        </p>
+
+        <nav>
+          <ul>
+            <li>
+              <button class="move-left">
+                Move Left
+              </button>
+            </li>
+            <li>
+              <button class="move-right">
+                Move Right
+              </button>
+            </li>
+            <li>
+              <button class="return-true finish">
+                Return True
+              </button>
+            </li>
+            <li>
+              <button class="return-false finish">
+                Return False
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="info-display">
+          <canvas class="tree-bg">
+          </canvas>
+
+          <div class="tree">
+          </div>
+
+          <div class="demonstrations">
+            <h3>Your Demonstrations</h3>
+
+            <ol>
+            </ol>
+
+            <button class="synthesize hide-half">
+              Generate Code Based on Completed Demonstrations
+            </button>
+          </div>
+        </div>
+
+        <p>
+          When you're done, implement the <code>search</code> function below.
+          You can click the &ldquo;Run Code on Inputs Below&rdquo; button to run
+          your code on some sample inputs. (The use of <code>print</code>
+          statements is also supported.)
+        </p>
+      </div>
+
+      <p class="hide-full hide-half">
+        Implement the <code>search</code> function below. You can click the
+        &ldquo;Run Code on Inputs Below&rdquo; button to run your code on some
+        sample inputs. (The use of <code>print</code> statements is also
+        supported.)
+      </p>
+
+      <textarea>
+# Returns True if "key" can be found in the given binary search tree ("root").
+# Otherwise, returns False.
+def search(root, key):
+    # vvvvv Write your code here. vvvvv
+    return False</textarea>
+
+      <button class="run">
+        Run Code on Inputs Below
+      </button>
+
+      <table class="io">
+        <tr>
+          <th>Tree</th>
+          <th>Key</th>
+          <th>Output of Your <code>search</code> Function</th>
+        </tr>
+      </table>
+
+      <p>
+        To check your solution, click the &ldquo;Check My Solution&rdquo;
+        button. If it correct, you will be able to advance to the next section.
+      </p>
+
+      <button class="check-correct">
+        Check My Solution
+      </button>
+
+      <div class="check-correct-output"></div>
+
+      <button class="page-control" id="return-task-2">
+        Return to Task 2 &nbsp; &#11157;
+      </button>
+
+      <button class="page-control" id="finish-task-1">
+        Continue to Task 2 &nbsp; &#11157;
+      </button>
+    </section>
+
+    <section id="insert">
+      <h2>Task 2: Inserting into a BST</h2>
+
+      <p>
+        Using the BST invariants, we can efficiently traverse a BST to insert a
+        new value into it.
+      </p>
+
+      <div class="hide-control">
+        <p>
+          First, use the buttons below to demonstrate how you believe the
+          <b>BST insertion algorithm</b> should work to achieve the given task.
+        </p>
+
+        <p class="hide-half">
+          You can then click the &ldquo;Generate Code Based on Completed
+          Demonstrations&rdquo; to have the computer generate code that matches
+          the demonstrations you give.
+          <b>
+            This will delete any code that you have written in the text box
+            below.
+          </b>
+        </p>
+
+        <p class="hide-half">
+          <b>Note:</b>
+          If your demonstrations are incorrect or do not handle all the
+          necessary cases, the generated code may be incorrect or incomplete.
+          At any time, you can restart or delete demonstrations using the
+          buttons in the &ldquo;Your Demonstrations&rdquo; list to the right of
+          the tree.
+        </p>
+
+        <p class="task">
+          <b>Task:</b> Insert <span class="insert-val"></span> into the BST.
+        </p>
+
+        <nav>
+          <ul>
+            <li>
+              <button class="move-left">
+                Move Left
+              </button>
+            </li>
+            <li>
+              <button class="move-right">
+                Move Right
+              </button>
+            </li>
+            <li>
+              <button class="insert finish">
+                Insert <span class="insert-val"></span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="info-display">
+          <canvas class="tree-bg">
+          </canvas>
+
+          <div class="tree">
+          </div>
+
+          <div class="demonstrations hide-half">
+            <h3>Your Demonstrations</h3>
+
+            <ol>
+            </ol>
+
+            <button class="synthesize">
+              Generate Code Based on Completed Demonstrations
+            </button>
+          </div>
+        </div>
+
+        <p>
+          When you're done, implement the <code>insert</code> function below.
+          You can click the &ldquo;Run Code on Inputs Below&rdquo; button to run
+          your code on some sample inputs. (The use of <code>print</code>
+          statements is also supported.)
+        </p>
+      </div>
+
+      <p class="hide-full hide-half">
+        Implement the <code>insert</code> function below. You can click the
+        &ldquo;Run Code on Inputs Below&rdquo; button to run your code on some
+        sample inputs. (The use of <code>print</code> statements is also
+        supported.)
+      </p>
+
+      <textarea>
+# Inserts a new node with the value "key" into the given binary search tree ("root").
+# You can assume "key" does not appear in "root".
+def insert(root, key):
+    # vvvvv Write your code here. vvvvv
+    return root</textarea>
+
+      <button class="run">
+        Run Code on Inputs Below
+      </button>
+
+      <table class="io">
+        <tr>
+          <th>Tree</th>
+          <th>Key</th>
+          <th>Output of Your <code>insert</code> Function</th>
+        </tr>
+      </table>
+
+      <p>
+        To check your solution, click the &ldquo;Check My Solution&rdquo;
+        button. If it correct, you will be able to complete the session.
+      </p>
+
+      <p>
+        If you wish, you can also review Task 1.
+        However, your main priority should be to complete Task 2.
+      </p>
+
+      <button class="check-correct">
+        Check My Solution
+      </button>
+
+      <div class="check-correct-output"></div>
+
+      <div class="page-control-group">
+        <button class="page-control" id="review-task-1">
+          &#11013; &nbsp; Review Task 1
+        </button>
+
+        <button class="page-control" id="finish-task-2">
+          Complete the Session &nbsp; &#11157;
+        </button>
+      </div>
+    </section>
+  </body>
+</html>

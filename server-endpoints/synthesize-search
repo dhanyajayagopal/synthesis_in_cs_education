@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import pbd
+
+pbd.fill_sketch_with_io(
+    '# Returns True if "key" can be found in the given binary search tree ("root").\n# Otherwise, returns False.\ndef search(root, key):\n',
+    [
+        ("return-false", ["return False"]),
+        ("return-true", ["return True"]),
+        ("move-left", ["return search(root.left, key)"]),
+        ("move-right", ["return search(root.right, key)"]),
+    ]
+)
