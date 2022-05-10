@@ -126,9 +126,14 @@ axs[1].set_title("Portion 2 (Insertion)")
 axs[1].boxplot(condition_times_2, labels=time_labels)
 fig.savefig(RESULTS_DIR + "times.pdf", dpi=600)
 
-# Print time ANOVAs
+# Print time means, ANOVAs, and HSD
 
-print("Task time ANOVAs")
+t1_avg = [np.average(condition_times_1[0]), np.average(condition_times_1[1]), np.average(condition_times_1[2])]
+t2_avg = [np.average(condition_times_2[0]), np.average(condition_times_2[1]), np.average(condition_times_2[2])]
+
+print()
+print("Portion 1 Mean Time in Minutes (Control, Half, Full):", t1_avg)
+print("Portion 2 Mean Time in Minutes (Control, Half, Full):", t2_avg)
 print()
 print("Task 1 Times ANOVA:", stats.f_oneway(*condition_times_1))
 print("Task 2 Times ANOVA:", stats.f_oneway(*condition_times_2))
@@ -186,17 +191,20 @@ fig.tight_layout()
 
 fig.savefig(RESULTS_DIR + "learned.pdf", dpi=600)
 
-# Amount learned ANOVAs
+# Print amount learned means and ANOVAs
 
 q1_anova = stats.f_oneway(*q1_data)
 q2_anova = stats.f_oneway(*q2_data)
 q3_anova = stats.f_oneway(*q3_data)
 
-print("Amount learned ANOVAs")
 print()
-print("Q1 ANOVA:", q1_anova)
-print("Q2 ANOVA:", q2_anova)
-print("Q3 ANOVA:", q3_anova)
+print("Q1 Mean Amount Learned (Control, Half, Full):", q1_avg)
+print("Q2 Mean Amount Learned (Control, Half, Full):", q2_avg)
+print("Q3 Mean Amount Learned (Control, Half, Full):", q3_avg)
+print()
+print("Q1 Amount Learned ANOVA:", q1_anova)
+print("Q2 Amount Learned ANOVA:", q2_anova)
+print("Q3 Amount Learned ANOVA:", q3_anova)
 print()
 
 # Amount learned vs. time taken
