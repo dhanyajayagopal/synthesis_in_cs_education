@@ -5,6 +5,7 @@ import time
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
+import pandas as pd
 
 ################################################################################
 # Data wrangling helpers
@@ -254,4 +255,30 @@ for question in range(3):
         dpi=600
     )
 
-print("Done!")
+print("Done with original graphs!")
+
+################################################################################
+# Line graphs for pre-post
+
+T = pd.read_csv("raw/combined.csv")
+
+import warnings
+warnings.filterwarnings("ignore")
+print("Ignoring warnings...")
+
+for group in ["Control", "Half", "Full"]:
+    S = T[T.Group == group]
+    for i in range(1, 4):
+        q = "Q" + str(i)
+        data = S[["ID", q + "_Pre", q + "_Post"]].set_index("ID").transpose()
+
+        fig, ax = plt.subplots(1, 1)
+        ax.set_title(q + " Scores (" + group + ")")
+        ax.set(ylabel="Score")
+        ax.set_xticklabels(["Pre", "Post"])
+        if i > 1:
+            ax.set_yticks([0, 1])
+        ax.plot(data)
+        fig.savefig(RESULTS_DIR + q + group + "_line.pdf", dpi=600)
+
+print("Done with everything!")
